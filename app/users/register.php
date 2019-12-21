@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
+$isEmailValid = true;
+
 if (isset($_POST['first-name'],
 $_POST['last-name'],
 $_POST['email'],
@@ -16,28 +18,56 @@ $_POST['confirm-password'])) {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
 
-    $user = fetchEmail($pdo, $email);
+    $statement = $pdo->prepare("SELECT email FROM users WHERE email = :email");
+
+    $emailExists = fetchUser($statement, $email);
+
+    //Check if given email is valid
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $isEmailValid = false;
+    };
 
     $isFirstNameEmpty = isEmpty($firstName);
     $isLastNameEmpty = isEmpty($lastName);
     $isEmailEmpty = isEmpty($email);
 
-    $isEmailValid = true;
+    $_SESSION['register'] = [];
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $isEmailValid = false;
-    };
+    if (!$isFirstNameEmpty) {
+        $_SESSION['register']['first-name'] = $firstName;
+    }
+
+    if (!$isLastNameEmpty) {
+        $_SESSION['register']['last-name'] = $lastName;
+    }
 
     if (
         $isFirstNameEmpty ||
         $isLastNameEmpty ||
         $isEmailEmpty ||
         !$isEmailValid ||
-        $user ||
+        $emailExists ||
         $password !== $confirmPassword ||
         strlen($password) < 8
     ) {
         $_SESSION['errors'] = [];
+
+        if (!$isEmailValid) {
+            $emailValidationError = 'The email is not valid.';
+            handleErrors('emailValidation', $emailValidationError);
+
+            redirect('/register.php');
+        } else if ($emailExists) {
+            $emailError = 'The email is already registered.';
+            handleErrors('email', $emailError);
+
+            redirect('/register.php');
+        } else {
+            unsetErrorType('emailValidation');
+            unsetErrorType('email');
+
+            $_SESSION['register']['email'] = $email;
+        }
 
         if (
             $isFirstNameEmpty ||
@@ -46,19 +76,10 @@ $_POST['confirm-password'])) {
         ) {
             $blankError = 'Please fill in all the fields.';
             handleErrors('blank', $blankError);
+
+            redirect('/register.php');
         } else {
             unsetErrorType('blank');
-        }
-
-        if (!$isEmailValid) {
-            $emailValidationError = 'The email is not valid.';
-            handleErrors('emailValidation', $emailValidationError);
-        } else if ($user) {
-            $emailError = 'The email is already registered.';
-            handleErrors('email', $emailError);
-        } else {
-            unsetErrorType('emailValidation');
-            unsetErrorType('email');
         }
 
         if (strlen($password) < 8) {
@@ -72,9 +93,10 @@ $_POST['confirm-password'])) {
             unsetErrorType('password');
         }
 
-        redirect('/signup.php');
+        redirect('/register.php');
     }
 
+    unset($_SESSION['register']);
     unset($_SESSION['errors']);
 
     $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -89,6 +111,8 @@ $_POST['confirm-password'])) {
         ':email' => $email,
         ':password' => $hash,
     ]);
+
+    $_SESSION['user']['id'] = $pdo->lastInsertId();
 
     redirect('/');
 }

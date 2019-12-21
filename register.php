@@ -1,7 +1,7 @@
 <?php require __DIR__ . '/views/header.php'; ?>
 
 <section>
-    <h1>Sign up</h1>
+    <h1>Register</h1>
 
     <?php if (isset($_SESSION['errors'])) : ?>
         <?php $errors = $_SESSION['errors'] ?>
@@ -10,22 +10,22 @@
         <?php endforeach; ?>
     <?php endif; ?>
 
-    <form action="app/users/signup.php" method="post">
+    <form action="app/users/register.php" method="post">
         <div class="form-group">
             <label for="first-name">First name</label>
-            <input type="text" name="first-name" placeholder="First name" required>
+            <input type="text" name="first-name" placeholder="First name" value="<?php echo getInput('first-name'); ?>" required>
         </div>
         <!--/form-group-->
 
         <div class="form-group">
             <label for="last-name">Last name</label>
-            <input type="text" name="last-name" placeholder="Last name" required>
+            <input type="text" name="last-name" placeholder="Last name" value="<?php echo getInput('last-name'); ?>" required>
         </div>
         <!--/form-group-->
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" name="email" placeholder="Email" required>
+            <input type="email" name="email" placeholder="Email" value="<?php echo getInput('email'); ?>" required>
         </div>
         <!--/form-group-->
 

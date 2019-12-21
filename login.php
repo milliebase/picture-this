@@ -3,6 +3,10 @@
 <article>
     <h1>Login</h1>
 
+    <?php if (isset($_SESSION['errors']['login'])) : ?>
+        <p><?php echo $_SESSION['errors']['login']; ?></p>
+    <?php endif; ?>
+
     <form action="app/users/login.php" method="post">
         <div class="form-group">
             <label for="email">Email</label>

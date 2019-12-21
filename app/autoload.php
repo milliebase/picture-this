@@ -22,3 +22,5 @@ $pdo = new PDO($config['database_path']);
 
 // Clear error messages
 unsetErrors();
+
+unsetRegister();

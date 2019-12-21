@@ -9,10 +9,11 @@
         <li>
             <a href="/about.php">About</a>
         </li><!-- /nav-item -->
-
-        <li>
-            <a href="/signup.php">Sign Up</a>
-        </li><!-- /nav-item -->
+        <?php if (!isset($_SESSION['user'])) : ?>
+            <li>
+                <a href="/register.php">Register</a>
+            </li><!-- /nav-item -->
+        <?php endif; ?>
 
         <?php if (isset($_SESSION['user'])) : ?>
             <li>
