@@ -24,24 +24,7 @@ if (isset($_FILES['avatar'])) {
         $newAvatar = "$avatarId.$fileEnd";
     }
 
-    if ($avatar['type'] !== 'image/png' && $avatar['type'] !== 'image/jpeg') {
-        $_SESSION['errors'] = [];
-
-        $unvalidFiletypeError = 'The filetype must be a .jpg, .jpeg or .png.';
-        handleErrors('unvalid-filetype', $unvalidFiletypeError);
-
-        redirect('/settings.php');
-    }
-
-
-    if ($avatar['size'] >= 2097152) {
-        $_SESSION['errors'] = [];
-
-        $largeFileError = 'The file can\'t exceed 2 MB.';
-        handleErrors('large-file', $largeFileError);
-
-        redirect('/settings.php');
-    }
+    handleImageErrors($avatar, '2097152', 'settings.php');
 
     move_uploaded_file($avatar['tmp_name'], __DIR__ . "/../../avatars/$newAvatar");
 

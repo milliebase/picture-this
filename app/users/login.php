@@ -15,9 +15,7 @@ if (isset($_POST['email'], $_POST['password'])) {
         $_SESSION['errors'] = [];
 
         $loginError = 'The email or password was incorrect.';
-        handleErrors('login', $loginError);
-
-        redirect('/login.php');
+        handleErrors('login', $loginError, 'login.php');
     }
 
     unset($_SESSION['errors']);

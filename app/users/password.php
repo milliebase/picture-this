@@ -15,16 +15,14 @@ if (isset($_POST['current-password'], $_POST['new-password'], $_POST['confirm-pa
         $_SESSION['errors'] = [];
 
         $passwordError = 'The password was incorrect.';
-        handleErrors('current-password', $passwordError);
-
-        redirect('/settings.php');
+        handleErrors('current-password', $passwordError, 'settings.php');
     }
 
     if (
         $newPassword !== $confirmPassword ||
         strlen($newPassword) < 8
     ) {
-        newPasswordErrors($newPassword, $confirmPassword);
+        handlePasswordErrors($newPassword, $confirmPassword);
         redirect('/settings.php');
     }
 

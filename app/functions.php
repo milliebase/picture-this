@@ -62,7 +62,8 @@ if (!function_exists('unsetErrors')) {
         if (
             $_SERVER['REQUEST_URI'] !== '/register.php' &&
             $_SERVER['REQUEST_URI'] !== '/login.php' &&
-            $_SERVER['REQUEST_URI'] !== '/settings.php'
+            $_SERVER['REQUEST_URI'] !== '/settings.php' &&
+            $_SERVER['REQUEST_URI'] !== '/store.php'
         ) {
             unset($_SESSION['errors']);
         }
@@ -101,32 +102,48 @@ if (!function_exists('handleErrors')) {
      *
      * @param string $errorType
      * @param string $errorMessage
+     * @param string $file
      * @return void
      */
-    function handleErrors(string $errorType, string $errorMessage)
+    function handleErrors(string $errorType, string $errorMessage, $file)
     {
-        foreach ($_SESSION['errors'] as $sessionError) {
-            if ($sessionError === $errorMessage) {
-                redirect('/signup.php');
-            }
-        }
-
         $_SESSION['errors'][$errorType] = $errorMessage;
+        redirect("/$file");
     }
 }
 
-if (!function_exists('newPasswordErrors')) {
-    function newPasswordErrors($password, $confirmPassword)
+if (!function_exists('handlePasswordErrors')) {
+    function handlePasswordErrors($password, $confirmPassword)
     {
         if (strlen($password) < 8) {
             $shortPasswordError = 'The password should at least be 8 characters long.';
-            handleErrors('short-password', $shortPasswordError);
+            $_SESSION['errors']['short-password'] = $shortPasswordError;
         } else if ($password !== $confirmPassword) {
             $passwordError = 'The passwords do not match.';
-            handleErrors('password', $passwordError);
+            $_SESSION['errors']['password'] = $passwordError;
         } else {
             unsetErrorType('short-password');
             unsetErrorType('password');
+        }
+    }
+}
+
+if (!function_exists('handleImageErrors')) {
+    function handleImageErrors($image, $imageSize, $file)
+    {
+        if ($image['type'] !== 'image/png' && $image['type'] !== 'image/jpeg') {
+            $_SESSION['errors'] = [];
+
+            $unvalidFiletypeError = 'The filetype must be a .jpg, .jpeg or .png.';
+            handleErrors('unvalid-filetype', $unvalidFiletypeError, $file);
+        }
+
+
+        if ($image['size'] >= $imageSize) {
+            $_SESSION['errors'] = [];
+
+            $largeFileError = 'The file can\'t exceed 2 MB.';
+            handleErrors('large-file', $largeFileError, $file);
         }
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 $isEmailValid = true;
+$file = 'register.php';
 
 if (isset($_POST['first-name'],
 $_POST['last-name'],
@@ -54,14 +55,10 @@ $_POST['confirm-password'])) {
 
         if (!$isEmailValid) {
             $emailValidationError = 'The email is not valid.';
-            handleErrors('emailValidation', $emailValidationError);
-
-            redirect('/register.php');
+            handleErrors('emailValidation', $emailValidationError, $file);
         } else if ($emailExists) {
             $emailError = 'The email is already registered.';
-            handleErrors('email', $emailError);
-
-            redirect('/register.php');
+            handleErrors('email', $emailError, $file);
         } else {
             unsetErrorType('emailValidation');
             unsetErrorType('email');
@@ -75,16 +72,13 @@ $_POST['confirm-password'])) {
             $isEmailEmpty
         ) {
             $blankError = 'Please fill in all the fields.';
-            handleErrors('blank', $blankError);
-
-            redirect('/register.php');
+            handleErrors('blank', $blankError, $file);
         } else {
             unsetErrorType('blank');
         }
 
-        newPasswordErrors($password, $confirmPassword);
-
-        redirect('/register.php');
+        handlePasswordErrors($password, $confirmPassword);
+        redirect("/$file");
     }
 
     unset($_SESSION['register']);
