@@ -15,14 +15,21 @@
             </li><!-- /nav-item -->
         <?php endif; ?>
 
-        <?php if (isset($_SESSION['user'])) : ?>
+        <?php if (validateUser()) : ?>
+            <li>
+                <a href="/settings.php">Settings</a>
+            </li>
+
             <li>
                 <a href="app/users/logout.php">Logout</a>
             </li>
+
         <?php else : ?>
             <li>
                 <a href="/login.php">Login</a>
             </li>
         <?php endif; ?>
     </ul><!-- /navbar-nav -->
+
+    <?php var_dump($_SESSION); ?>
 </nav><!-- /navbar -->

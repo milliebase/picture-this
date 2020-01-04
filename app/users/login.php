@@ -9,7 +9,7 @@ if (isset($_POST['email'], $_POST['password'])) {
 
     $statement = $pdo->prepare("SELECT id, email, password FROM users WHERE email = :email");
 
-    $user = fetchUser($statement, $email);
+    $user = checkEmail($statement, $email);
 
     if (!$user || !password_verify($_POST['password'], $user['password'])) {
         $_SESSION['errors'] = [];

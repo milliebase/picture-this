@@ -18,9 +18,9 @@ $_POST['confirm-password'])) {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
 
-    $statement = $pdo->prepare("SELECT email FROM users WHERE email = :email");
+    $statement = $pdo->prepare('SELECT email FROM users WHERE email = :email');
 
-    $emailExists = fetchUser($statement, $email);
+    $emailExists = checkEmail($statement, $email);
 
     //Check if given email is valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -82,16 +82,7 @@ $_POST['confirm-password'])) {
             unsetErrorType('blank');
         }
 
-        if (strlen($password) < 8) {
-            $shortPasswordError = 'The password should at least be 8 characters long.';
-            handleErrors('shortPassword', $shortPasswordError);
-        } else if ($password !== $confirmPassword) {
-            $passwordError = 'The passwords do not match.';
-            handleErrors('password', $passwordError);
-        } else {
-            unsetErrorType('shortPassword');
-            unsetErrorType('password');
-        }
+        newPasswordErrors($password, $confirmPassword);
 
         redirect('/register.php');
     }

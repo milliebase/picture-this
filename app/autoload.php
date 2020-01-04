@@ -20,7 +20,13 @@ $config = require __DIR__ . '/config.php';
 // Setup the database connection.
 $pdo = new PDO($config['database_path']);
 
-// Clear error messages
+//Clear error messages
 unsetErrors();
 
+//Clear register form
 unsetRegister();
+
+//Fetch user information if validated.
+if (isset($_SESSION['user']['id'])) {
+    $user = fetchUser($pdo, $_SESSION['user']['id']);
+}

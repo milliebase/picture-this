@@ -17,8 +17,15 @@ if (!function_exists('redirect')) {
     }
 }
 
-if (!function_exists('fetchUser')) {
-    function fetchUser(PDOStatement $statement, string $email)
+if (!function_exists('checkEmail')) {
+    /**
+     * Fetch the users emailadress from database.
+     *
+     * @param PDOStatement $statement
+     * @param string $email
+     * @return void
+     */
+    function checkEmail(PDOStatement $statement, string $email)
     {
         $statement->execute([
             ':email' => $email,
@@ -30,13 +37,13 @@ if (!function_exists('fetchUser')) {
 
 if (!function_exists('unsetErrors')) {
     /**
-     * On each page load except signup the error messages will be cleared.
+     * On each page load except 'signup' the error messages will be cleared.
      *
      * @return void
      */
     function unsetErrors()
     {
-        if ($_SERVER['REQUEST_URI'] === '/login.php') {
+        if ($_SERVER['REQUEST_URI'] === '/login.php' && !isset($_SESSION['user']['id'])) {
             if (isset($_SESSION['errors'])) {
                 foreach ($_SESSION['errors'] as $key => $value) {
                     if ($key !== 'login') {
@@ -52,13 +59,22 @@ if (!function_exists('unsetErrors')) {
             }
         }
 
-        if ($_SERVER['REQUEST_URI'] !== '/register.php' && $_SERVER['REQUEST_URI'] !== '/login.php') {
+        if (
+            $_SERVER['REQUEST_URI'] !== '/register.php' &&
+            $_SERVER['REQUEST_URI'] !== '/login.php' &&
+            $_SERVER['REQUEST_URI'] !== '/settings.php'
+        ) {
             unset($_SESSION['errors']);
         }
     }
 }
 
 if (!function_exists('unsetRegister')) {
+    /**
+     * On each page load except 'register' the register form will be cleared.
+     *
+     * @return void
+     */
     function unsetRegister()
     {
         if ($_SERVER['REQUEST_URI'] !== '/register.php')
@@ -67,6 +83,12 @@ if (!function_exists('unsetRegister')) {
 }
 
 if (!function_exists('unsetErrorType')) {
+    /**
+     * Clear the error array of a certain error type.
+     *
+     * @param string $errorType
+     * @return void
+     */
     function unsetErrorType(string $errorType)
     {
         unset($_SESSION['errors'][$errorType]);
@@ -74,6 +96,13 @@ if (!function_exists('unsetErrorType')) {
 }
 
 if (!function_exists('handleErrors')) {
+    /**
+     * Assign an errormessage to the error array depending on which errortype.
+     *
+     * @param string $errorType
+     * @param string $errorMessage
+     * @return void
+     */
     function handleErrors(string $errorType, string $errorMessage)
     {
         foreach ($_SESSION['errors'] as $sessionError) {
@@ -86,7 +115,29 @@ if (!function_exists('handleErrors')) {
     }
 }
 
+if (!function_exists('newPasswordErrors')) {
+    function newPasswordErrors($password, $confirmPassword)
+    {
+        if (strlen($password) < 8) {
+            $shortPasswordError = 'The password should at least be 8 characters long.';
+            handleErrors('short-password', $shortPasswordError);
+        } else if ($password !== $confirmPassword) {
+            $passwordError = 'The passwords do not match.';
+            handleErrors('password', $passwordError);
+        } else {
+            unsetErrorType('short-password');
+            unsetErrorType('password');
+        }
+    }
+}
+
 if (!function_exists('isEmpty')) {
+    /**
+     * Check if string is empty.
+     *
+     * @param string $string
+     * @return boolean
+     */
     function isEmpty(string $string)
     {
         if ($string === '') {
@@ -96,10 +147,43 @@ if (!function_exists('isEmpty')) {
 }
 
 if (!function_exists('getInput')) {
+    /**
+     * Fetch the input type from the register form.
+     *
+     * @param string $inputType
+     * @return void
+     */
     function getInput(string $inputType)
     {
         if (isset($_SESSION['register'][$inputType])) {
             return $_SESSION['register'][$inputType];
         }
+    }
+}
+
+if (!function_exists('validateUser')) {
+    /**
+     * Check if user is logged in.
+     *
+     * @return void
+     */
+    function validateUser()
+    {
+        if (isset($_SESSION['user']['id'])) {
+            return true;
+        }
+    }
+}
+
+if (!function_exists('fetchUser')) {
+    function fetchUser($pdo, $id)
+    {
+        $statement = $pdo->prepare('SELECT * FROM users WHERE id = :id');
+
+        $statement->execute([
+            ':id' => $id,
+        ]);
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }
