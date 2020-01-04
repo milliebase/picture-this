@@ -6,9 +6,6 @@
             <a href="/index.php">Home</a>
         </li><!-- /nav-item -->
 
-        <li>
-            <a href="/about.php">About</a>
-        </li><!-- /nav-item -->
         <?php if (!isset($_SESSION['user'])) : ?>
             <li>
                 <a href="/register.php">Register</a>
@@ -16,6 +13,9 @@
         <?php endif; ?>
 
         <?php if (validateUser()) : ?>
+            <li>
+                <a href="/profile.php">Profile</a>
+            </li><!-- /nav-item -->
             <li>
                 <a href="/settings.php">Settings</a>
             </li>
@@ -32,4 +32,5 @@
     </ul><!-- /navbar-nav -->
 
     <?php var_dump($_SESSION); ?>
+    <?php var_dump($user); ?>
 </nav><!-- /navbar -->

@@ -17,7 +17,6 @@ if (isset($_POST['current-password'], $_POST['new-password'], $_POST['confirm-pa
         $passwordError = 'The password was incorrect.';
         handleErrors('current-password', $passwordError);
 
-        var_dump($_SESSION['errors']);
         redirect('/settings.php');
     }
 

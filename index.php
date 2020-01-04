@@ -2,7 +2,7 @@
 
 <article>
     <?php if (isset($_SESSION['user'])) : ?>
-        <h1>Welcome</h1>
+        <h1>Welcome, <?php echo $user['first_name']; ?></h1>
     <?php else : ?>
         <h1><?php echo $config['title']; ?></h1>
     <?php endif; ?>

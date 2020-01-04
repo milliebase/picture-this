@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+require __DIR__ . '/../autoload.php';
+
+if (isset($_FILES['avatar'])) {
+    $avatar = $_FILES['avatar'];
+    $userId = $user['id'];
+    $currentAvatar = $user['avatar'];
+
+    //Always be sure to give a user the same name to their avatar image, so it gets overwritten instead of saving each one.
+    if ($currentAvatar === null) {
+        $uniqId = uniqid();
+
+        $newAvatar = "$uniqId-$userId";
+    } else {
+        $newAvatar = "$currentAvatar";
+    }
+
+    move_uploaded_file($avatar['tmp_name'], __DIR__ . "/../../avatars/$newAvatar");
+
+    $statement = $pdo->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
+
+    $statement->execute([
+        ':avatar' => $newAvatar,
+        ':id' => $_SESSION['user']['id'],
+    ]);
+
+    redirect('/settings.php');
+}

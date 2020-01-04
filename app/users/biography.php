@@ -14,7 +14,5 @@ if (isset($_POST['biography'])) {
         ':id' => $_SESSION['user']['id'],
     ]);
 
-    $statement->fetch(PDO::FETCH_ASSOC);
-
     redirect('/settings.php');
 }
