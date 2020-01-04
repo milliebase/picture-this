@@ -6,10 +6,13 @@
     <article class="settings--avatar">
         <h2>Change profile picture</h2>
 
-        <?php if ($user['avatar'] !== null) : ?>
-            <img src="avatars/<?php echo $user['avatar'] ?>" alt="Avatar image" class="settings--avatar--image">
-        <?php else : ?>
-            <img src="assets/images/avatar.png" alt="Avatar image" class="settings--avatar--image">
+        <img src="<?php echo ($user['avatar'] !== null) ? "avatars/" . $user['avatar'] : 'assets/images/avatar.png'; ?>" alt="Avatar image" class="settings--avatar--image">
+
+        <?php if (isset($_SESSION['errors']['unvalid-filetype'])) : ?>
+            <p><?php echo $_SESSION['errors']['unvalid-filetype']; ?></p>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['errors']['large-file'])) : ?>
+            <p><?php echo $_SESSION['errors']['large-file']; ?></p>
         <?php endif; ?>
 
         <form action="app/users/avatar.php" method="post" enctype="multipart/form-data" class="form settings--avatar--form">

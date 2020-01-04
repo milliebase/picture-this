@@ -13,8 +13,6 @@ if (isset($_POST['email'])) {
         $changeEmailError = 'The email is not a valid emailadress.';
         handleErrors('change-email', $changeEmailError);
 
-        var_dump($_SESSION);
-
         redirect('/settings.php');
     }
 
@@ -24,8 +22,6 @@ if (isset($_POST['email'])) {
         ':email' => $email,
         ':id' => $_SESSION['user']['id'],
     ]);
-
-    $statement->fetch(PDO::FETCH_ASSOC);
 
     redirect('/settings.php');
 }

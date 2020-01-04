@@ -16,21 +16,25 @@
             <li>
                 <a href="/profile.php">Profile</a>
             </li><!-- /nav-item -->
+
+            <li>
+                <a href="/posts.php">Add posts</a>
+            </li><!-- /nav-item -->
+
             <li>
                 <a href="/settings.php">Settings</a>
-            </li>
+            </li><!-- /nav-item -->
 
             <li>
                 <a href="app/users/logout.php">Logout</a>
-            </li>
+            </li><!-- /nav-item -->
 
         <?php else : ?>
             <li>
                 <a href="/login.php">Login</a>
-            </li>
+            </li><!-- /nav-item -->
         <?php endif; ?>
     </ul><!-- /navbar-nav -->
 
     <?php var_dump($_SESSION); ?>
-    <?php var_dump($user); ?>
 </nav><!-- /navbar -->
