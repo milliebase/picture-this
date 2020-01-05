@@ -10,23 +10,31 @@ $file = 'register.php';
 if (isset($_POST['first-name'],
 $_POST['last-name'],
 $_POST['email'],
+$_POST['username'],
 $_POST['password'],
 $_POST['confirm-password'])) {
     $firstName = trim(filter_var($_POST['first-name'], FILTER_SANITIZE_STRING));
     $lastName = trim(filter_var($_POST['last-name'], FILTER_SANITIZE_STRING));
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+    $username = trim(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
 
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
 
     $statement = $pdo->prepare('SELECT email FROM users WHERE email = :email');
 
-    $emailExists = checkEmail($statement, $email);
+    $emailExists = checkIfExists($statement, ':email', $email);
 
     //Check if given email is valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $isEmailValid = false;
     };
+
+    $statement = $pdo->prepare('SELECT username FROM users WHERE username = :username');
+
+    $usernameExists = checkIfExists($statement, ':username', $username);
+
+    $usernamePatternMatches = preg_match('/^[a-z0-9_\.]{5,}$/', $username);
 
     $isFirstNameEmpty = isEmpty($firstName);
     $isLastNameEmpty = isEmpty($lastName);
@@ -43,11 +51,13 @@ $_POST['confirm-password'])) {
     }
 
     if (
+        !$isEmailValid ||
+        $emailExists ||
+        $usernameExists ||
+        $usernamePatternMatches === 0 ||
         $isFirstNameEmpty ||
         $isLastNameEmpty ||
         $isEmailEmpty ||
-        !$isEmailValid ||
-        $emailExists ||
         $password !== $confirmPassword ||
         strlen($password) < 8
     ) {
@@ -64,6 +74,18 @@ $_POST['confirm-password'])) {
             unsetErrorType('email');
 
             $_SESSION['register']['email'] = $email;
+        }
+
+        if ($usernameExists) {
+            $usernameError = 'The username is already taken.';
+            handleErrors('username', $usernameError, $file);
+        } else if ($usernamePatternMatches === 0) {
+            $usernameCharError = 'Usernames can only contain letters, numbers, underscores and periods. The username should be at least 5 characters long.';
+            handleErrors('username-char', $usernameCharError, $file);
+        } else {
+            unsetErrorType('username-char');
+            unsetErrorType('username');
+            $_SESSION['register']['username'] = $username;
         }
 
         if (
@@ -87,13 +109,14 @@ $_POST['confirm-password'])) {
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
     $statement = $pdo->prepare('INSERT INTO
-    users (first_name, last_name, email, password)
-    VALUES (:firstName, :lastName, :email, :password)');
+    users (first_name, last_name, email, username, password)
+    VALUES (:firstName, :lastName, :email, :username, :password)');
 
     $statement->execute([
         ':firstName' => $firstName,
         ':lastName' => $lastName,
         ':email' => $email,
+        ':username' => $username,
         ':password' => $hash,
     ]);
 

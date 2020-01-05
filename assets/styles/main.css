@@ -3,6 +3,10 @@
   height: 200px;
 }
 
+.profile {
+  width: 100%;
+}
+
 .profile--header {
   width: 100%;
   display: flex;
@@ -19,4 +23,22 @@
 
 .create-posts img {
   width: 500px;
+}
+
+.profile-feed {
+  width: 100%;
+}
+
+.feed--post {
+  width: 100%;
+  padding: 5%;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.feed--post img {
+  width: 100%;
+}
+
+.hidden {
+  display: none;
 }

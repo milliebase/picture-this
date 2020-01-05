@@ -30,6 +30,12 @@
         <!--/form-group-->
 
         <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Username" value="<?php echo getInput('username'); ?>" required>
+        </div>
+        <!--/form-group-->
+
+        <div class="form-group">
             <label for="password">Password</label>
             <input type="password" name="password" placeholder="Password" required>
         </div>

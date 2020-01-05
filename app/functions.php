@@ -17,18 +17,19 @@ if (!function_exists('redirect')) {
     }
 }
 
-if (!function_exists('checkEmail')) {
+if (!function_exists('checkIfExists')) {
     /**
-     * Fetch the users emailadress from database.
+     * Checks if users input already exists in database
      *
      * @param PDOStatement $statement
-     * @param string $email
+     * @param string $type
+     * @param string $
      * @return void
      */
-    function checkEmail(PDOStatement $statement, string $email)
+    function checkIfExists(PDOStatement $statement, string $type, string $userInput)
     {
         $statement->execute([
-            ':email' => $email,
+            "$type" => $userInput,
         ]);
 
         return $statement->fetch(PDO::FETCH_ASSOC);
@@ -222,5 +223,25 @@ if (!function_exists('fetchUser')) {
         ]);
 
         return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+}
+
+/*************************POSTS********************/
+if (!function_exists('getImagePosts')) {
+    function getImagePosts($pdo, $id)
+    {
+        $statement = $pdo->prepare('SELECT posts.id, image, description, date
+        FROM posts
+        INNER JOIN users
+        ON posts.user_id = users.id
+        WHERE users.id = :id
+        ORDER by date DESC');
+
+
+        $statement->execute([
+            ':id' => $id,
+        ]);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
