@@ -59,11 +59,23 @@ if (!function_exists('unsetErrors')) {
             }
         }
 
+        if ($_SERVER['REQUEST_URI'] === '/settings.php') {
+            if (isset($_SESSION['errors']['create-post'])) {
+                unset($_SESSION['errors']);
+            }
+        }
+
+        if ($_SERVER['REQUEST_URI'] === 'create-post/.php') {
+            if (isset($_SESSION['errors']['avatar'])) {
+                unset($_SESSION['errors']);
+            }
+        }
+
         if (
             $_SERVER['REQUEST_URI'] !== '/register.php' &&
             $_SERVER['REQUEST_URI'] !== '/login.php' &&
             $_SERVER['REQUEST_URI'] !== '/settings.php' &&
-            $_SERVER['REQUEST_URI'] !== '/store.php'
+            $_SERVER['REQUEST_URI'] !== '/create-post.php'
         ) {
             unset($_SESSION['errors']);
         }
@@ -105,9 +117,17 @@ if (!function_exists('handleErrors')) {
      * @param string $file
      * @return void
      */
-    function handleErrors(string $errorType, string $errorMessage, $file)
+    function handleErrors(string $errorType, string $errorMessage, string $file)
     {
         $_SESSION['errors'][$errorType] = $errorMessage;
+        redirect("/$file");
+    }
+}
+
+if (!function_exists('handlePageErrors')) {
+    function handlePageErrors(string $errorType, string $errorMessage, string $file, string $errorPage)
+    {
+        $_SESSION['errors'][$errorPage][$errorType] = $errorMessage;
         redirect("/$file");
     }
 }
@@ -129,13 +149,13 @@ if (!function_exists('handlePasswordErrors')) {
 }
 
 if (!function_exists('handleImageErrors')) {
-    function handleImageErrors($image, $imageSize, $file)
+    function handleImageErrors($image, $imageSize, $file, $errorPage)
     {
         if ($image['type'] !== 'image/png' && $image['type'] !== 'image/jpeg') {
             $_SESSION['errors'] = [];
 
             $unvalidFiletypeError = 'The filetype must be a .jpg, .jpeg or .png.';
-            handleErrors('unvalid-filetype', $unvalidFiletypeError, $file);
+            handlePageErrors('unvalid-filetype', $unvalidFiletypeError, $file, $errorPage);
         }
 
 
@@ -143,7 +163,7 @@ if (!function_exists('handleImageErrors')) {
             $_SESSION['errors'] = [];
 
             $largeFileError = 'The file can\'t exceed 2 MB.';
-            handleErrors('large-file', $largeFileError, $file);
+            handlePageErrors('large-file', $largeFileError, $file, $errorPage);
         }
     }
 }
