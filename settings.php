@@ -8,11 +8,11 @@
 
         <img src="<?php echo ($user['avatar'] !== null) ? "avatars/" . $user['avatar'] : 'assets/images/avatar.png'; ?>" alt="Avatar image" class="settings--avatar--image">
 
-        <?php if (isset($_SESSION['errors']['unvalid-filetype'])) : ?>
-            <p><?php echo $_SESSION['errors']['unvalid-filetype']; ?></p>
+        <?php if (isset($_SESSION['errors']['avatar']['unvalid-filetype'])) : ?>
+            <p><?php echo $_SESSION['errors']['avatar']['unvalid-filetype']; ?></p>
         <?php endif; ?>
-        <?php if (isset($_SESSION['errors']['large-file'])) : ?>
-            <p><?php echo $_SESSION['errors']['large-file']; ?></p>
+        <?php if (isset($_SESSION['errors']['avatar']['large-file'])) : ?>
+            <p><?php echo $_SESSION['errors']['avatar']['large-file']; ?></p>
         <?php endif; ?>
 
         <form action="app/users/avatar.php" method="post" enctype="multipart/form-data" class="form settings--avatar--form">
