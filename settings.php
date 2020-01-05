@@ -6,7 +6,7 @@
     <article class="settings--avatar">
         <h2>Change profile picture</h2>
 
-        <img src="<?php echo ($user['avatar'] !== null) ? "avatars/" . $user['avatar'] : 'assets/images/avatar.png'; ?>" alt="Avatar image" class="settings--avatar--image">
+        <img src="<?php echo ($user['avatar'] !== null) ? "avatars/" . $user['avatar'] : 'assets/images/avatar.png'; ?>" id="avatar-image" alt="Avatar image" class="settings--avatar--image">
 
         <?php if (isset($_SESSION['errors']['avatar']['unvalid-filetype'])) : ?>
             <p><?php echo $_SESSION['errors']['avatar']['unvalid-filetype']; ?></p>

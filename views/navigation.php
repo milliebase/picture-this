@@ -18,7 +18,7 @@
             </li><!-- /nav-item -->
 
             <li>
-                <a href="/posts.php">Add posts</a>
+                <a href="/create-post.php">Add posts</a>
             </li><!-- /nav-item -->
 
             <li>
