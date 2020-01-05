@@ -24,7 +24,7 @@ if (isset($_FILES['avatar'])) {
         $newAvatar = "$avatarId.$fileEnd";
     }
 
-    handleImageErrors($avatar, '2097152', 'settings.php');
+    handleImageErrors($avatar, '2097152', 'settings.php', 'avatar');
 
     move_uploaded_file($avatar['tmp_name'], __DIR__ . "/../../avatars/$newAvatar");
 
