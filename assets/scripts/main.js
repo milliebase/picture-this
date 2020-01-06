@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ *Preview the chosen image from form before submitting.
+ */
 const readImgURL = function(reader, chosenImage, preview) {
     reader.onload = e => {
         preview.src = e.target.result;
@@ -29,43 +32,3 @@ if (window.location.pathname === "/settings.php") {
 
     readImgURL(reader, chooseAvatar, previewAvatar);
 }
-
-//Script for edit post
-const postInformations = document.querySelectorAll(".post__information");
-
-postInformations.forEach(postInformation => {
-    const information = postInformation.children[1];
-    const editPostButton = postInformation.children[1].lastElementChild;
-    const editMode = postInformation.children[2];
-    const editForm = postInformation.children[2].firstElementChild;
-
-    editPostButton.addEventListener("click", () => {
-        information.classList.toggle("hidden");
-        editMode.classList.toggle("hidden");
-    });
-
-    editForm.addEventListener("submit", event => {
-        event.preventDefault();
-
-        const formData = new FormData(editForm);
-
-        fetch("app/posts/update.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.json())
-            .then(post => {
-                console.log(post);
-            });
-
-        information.classList.toggle("hidden");
-        editMode.classList.toggle("hidden");
-    });
-
-    const deleteButton = document.querySelector(".delete__button");
-
-    deleteButton.addEventListener("submit", event => {
-        information.classList.toggle("hidden");
-        editMode.classList.toggle("hidden");
-    });
-});

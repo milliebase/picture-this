@@ -6,7 +6,7 @@
             <a href="/index.php">Home</a>
         </li><!-- /nav-item -->
 
-        <?php if (!isset($_SESSION['user'])) : ?>
+        <?php if (!validateUser()) : ?>
             <li>
                 <a href="/register.php">Register</a>
             </li><!-- /nav-item -->

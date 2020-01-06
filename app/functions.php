@@ -245,3 +245,37 @@ if (!function_exists('getImagePosts')) {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+
+if (!function_exists('getAmountLikes')) {
+    function getAmountLikes($pdo, $postId)
+    {
+        $statement = $pdo->prepare('SELECT post_likes.post_id
+        FROM posts
+        INNER JOIN post_likes
+        ON posts.id = post_likes.post_id
+        WHERE post_likes.post_id = :post_id');
+
+        $statement->execute([
+            ':post_id' => $postId,
+        ]);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+if (!function_exists('isLiked')) {
+    function isLiked($pdo, $userId, $postId)
+    {
+        $statement = $pdo->prepare('SELECT *
+        FROM post_likes
+        WHERE user_id = :user_id
+        AND post_id = :post_id');
+
+        $statement->execute([
+            ':user_id' => $userId,
+            ':post_id' => $postId,
+        ]);
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+}

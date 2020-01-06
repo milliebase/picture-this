@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/views/header.php';
 
-if (isset($_SESSION['user']['id'])) {
+if (validateUser()) {
     $user = fetchUser($pdo, $_SESSION['user']['id']);
 } else {
     redirect('/login.php');
@@ -22,7 +22,7 @@ if (isset($_SESSION['user']['id'])) {
     </article>
 
     <article class="profile__feed">
-        <?php $posts = getImagePosts($pdo, $_SESSION['user']['id']); ?>
+        <?php $posts = getImagePosts($pdo, $user['id']); ?>
 
         <?php if (empty($posts)) : ?>
             <p>There are no posts yet.</p>
@@ -33,16 +33,30 @@ if (isset($_SESSION['user']['id'])) {
                 <img src="uploads/<?php echo $post['image']; ?>" alt="<?php echo $post['description']; ?>" loading="lazy">
 
                 <div class="post__information">
-                    <p><?php echo $post['date']; ?></p>
-                    <div class="information">
+                    <div class="post__details">
+                        <p><?php echo $post['date']; ?></p>
+
+                        <form method="post" class="like__form">
+                            <input type="hidden" name="liked-post-id" value="<?php echo $post['id']; ?>">
+                            <button type="submit" class="like__button <?php echo (isLiked($pdo, $user['id'], $post['id'])) ? 'like__button--liked' : 'like__button--unliked' ;?>"></button>
+                            <p>
+                                <?php
+                                $likes = count(getAmountLikes($pdo, $post['id']));
+                                echo $likes;
+                                ?>
+                            </p>
+                        </form>
+                    </div>
+
+                    <div class="post__description">
                         <p><?php echo $post['description']; ?></p>
 
                         <button class="btn btn-primary">Edit post</button>
                     </div>
                     <!--/information-->
 
-                    <div class="edit-mode hidden">
-                        <form method="post" class="edit-mode__form">
+                    <div class="post__edit hidden">
+                        <form method="post" class="edit__form">
                             <label for="description-edit">Edit your description</label>
                             <br>
                             <textarea name="description-edit" cols="30" rows="10"><?php echo $post['description'] ?></textarea>

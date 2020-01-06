@@ -42,3 +42,19 @@
 .hidden {
   display: none;
 }
+
+.like__button {
+  width: 50px;
+  height: 50px;
+  border: none;
+}
+
+.like__button--unliked {
+  background-image: url("../images/like.svg");
+  background-size: 100%;
+}
+
+.like__button--liked {
+  background-image: url("../images/liked.svg");
+  background-size: 100%;
+}
