@@ -1,3 +1,9 @@
+<?php
+
+$user = fetchUser($pdo, $_SESSION['user']['id']);
+
+?>
+
 <nav>
     <a href="#"><?php echo $config['title']; ?></a>
 
@@ -14,7 +20,7 @@
 
         <?php if (validateUser()) : ?>
             <li>
-                <a href="/profile.php">Profile</a>
+                <a href="/profile.php?username=<?php echo $user['username']; ?>">Profile</a>
             </li><!-- /nav-item -->
 
             <li>
@@ -37,4 +43,5 @@
     </ul><!-- /navbar-nav -->
 
     <?php var_dump($_SESSION); ?>
+    <?php var_dump($_GET); ?>
 </nav><!-- /navbar -->

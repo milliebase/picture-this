@@ -6,36 +6,40 @@ postInformations.forEach(postInformation => {
 
     //Variables for when editform is unactive
     const description = postInformation.children[1];
-    const editPostButton = postInformation.children[1].lastElementChild;
 
-    //Variables for when editform is active
-    const editMode = postInformation.children[2];
-    const editForm = postInformation.children[2].firstElementChild;
+    if (postInformation.childNodes.length > 2) {
+        const editPostButton = postInformation.children[1].lastElementChild;
 
-    //Toggle between hiding and showing editform
-    editPostButton.addEventListener("click", () => {
-        postDetails.classList.toggle("hidden");
-        description.classList.toggle("hidden");
-        editMode.classList.toggle("hidden");
-    });
+        //Variables for when editform is active
+        const editMode = postInformation.children[2];
+        const editForm = postInformation.children[2].firstElementChild;
 
-    //Handle update of description
-    editForm.addEventListener("submit", event => {
-        event.preventDefault();
+        //Toggle between hiding and showing editform
+        editPostButton.addEventListener("click", () => {
+            postDetails.classList.toggle("hidden");
+            description.classList.toggle("hidden");
+            editMode.classList.toggle("hidden");
+        });
 
-        const formData = new FormData(editForm);
+        //Handle update of description
+        editForm.addEventListener("submit", event => {
+            event.preventDefault();
 
-        fetch("app/posts/update.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.json())
-            .then(post => {
-                description.firstElementChild.textContent = post.description;
-            });
+            const formData = new FormData(editForm);
 
-        postDetails.classList.toggle("hidden");
-        description.classList.toggle("hidden");
-        editMode.classList.toggle("hidden");
-    });
+            fetch("app/posts/update.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(post => {
+                    description.firstElementChild.textContent =
+                        post.description;
+                });
+
+            postDetails.classList.toggle("hidden");
+            description.classList.toggle("hidden");
+            editMode.classList.toggle("hidden");
+        });
+    }
 });

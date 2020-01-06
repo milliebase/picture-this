@@ -226,6 +226,20 @@ if (!function_exists('fetchUser')) {
     }
 }
 
+if (!function_exists('fetchUserByUsername')) {
+    function fetchUserByUsername($pdo, $username)
+    {
+        $statement = $pdo->prepare('SELECT id, first_name, last_name, avatar, biography, username
+        FROM users WHERE username = :username');
+
+        $statement->execute([
+            ':username' => $username,
+        ]);
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+}
+
 /*************************POSTS********************/
 if (!function_exists('getImagePosts')) {
     function getImagePosts($pdo, $id)
