@@ -25,8 +25,3 @@ unsetErrors();
 
 //Clear register form
 unsetRegister();
-
-//Fetch user information if validated.
-if (isset($_SESSION['user']['id'])) {
-    $user = fetchUser($pdo, $_SESSION['user']['id']);
-}

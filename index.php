@@ -1,4 +1,12 @@
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__ . '/views/header.php';
+
+if (isset($_SESSION['user']['id'])) {
+    $user = fetchUser($pdo, $_SESSION['user']['id']);
+} else {
+    redirect('/login.php');
+}
+
+?>
 
 <article>
     <?php if (isset($_SESSION['user'])) : ?>

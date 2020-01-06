@@ -1,12 +1,19 @@
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__ . '/views/header.php';
+
+if (isset($_SESSION['user']['id'])) {
+    $user = fetchUser($pdo, $_SESSION['user']['id']);
+} else {
+    redirect('/login.php');
+}
+?>
 
 <section class="settings">
     <h1>Settings</h1>
 
-    <article class="settings--avatar">
+    <article class="settings__avatar">
         <h2>Change profile picture</h2>
 
-        <img src="<?php echo ($user['avatar'] !== null) ? "avatars/" . $user['avatar'] : 'assets/images/avatar.png'; ?>" id="avatar-image" alt="Avatar image" class="settings--avatar--image">
+        <img src="<?php echo ($user['avatar'] !== null) ? "avatars/" . $user['avatar'] : 'assets/images/avatar.png'; ?>" id="avatar-image" alt="Avatar image">
 
         <?php if (isset($_SESSION['errors']['avatar']['unvalid-filetype'])) : ?>
             <p><?php echo $_SESSION['errors']['avatar']['unvalid-filetype']; ?></p>
@@ -25,7 +32,7 @@
         </form>
     </article>
 
-    <article class="settings--biography">
+    <article class="settings__biography">
         <h2>Edit biography</h2>
 
         <form action="app/users/biography.php" method="post" class="form settings--biography--form">
@@ -37,7 +44,7 @@
         </form>
     </article>
 
-    <article class="settings--email">
+    <article class="settings__email">
         <h2>Change email</h2>
 
         <p>Current email adress: <?php echo $user['email']; ?></p>
@@ -46,7 +53,7 @@
             <p><?php echo $_SESSION['errors']['change-email']; ?></p>
         <?php endif; ?>
 
-        <form action="app/users/email.php" method="post" class="form form--new-email">
+        <form action="app/users/email.php" method="post" class="form form__new-email">
             <div class="form-group">
                 <label for="email">Update email adress</label>
                 <input class="form-control" type="email" name="email" placeholder="Type in your new emailadress" required>
@@ -56,10 +63,10 @@
         </form>
     </article>
 
-    <article class="settings--password">
+    <article class="settings__password">
         <h2>Change password</h2>
 
-        <form action="app/users/password.php" method="post" class="form form--new-password">
+        <form action="app/users/password.php" method="post" class="form form__new-password">
             <div class="form-group">
                 <?php if (isset($_SESSION['errors']['current-password'])) : ?>
                     <p><?php echo $_SESSION['errors']['current-password']; ?></p>

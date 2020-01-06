@@ -1,4 +1,11 @@
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__ . '/views/header.php';
+
+if (isset($_SESSION['user']['id'])) {
+    $user = fetchUser($pdo, $_SESSION['user']['id']);
+} else {
+    redirect('/login.php');
+}
+?>
 
 <section class="create-posts">
 
@@ -8,7 +15,7 @@
         <img src="assets/images/empty-image.svg" id="preview" alt="An image placeholder">
     </div>
 
-    <form action="app/posts/store.php" method="post" enctype="multipart/form-data" class="form create-post--form">
+    <form action="app/posts/store.php" method="post" enctype="multipart/form-data" class="form create-post__form">
         <div class="form-group">
             <label for="post-image">Choose an image</label>
 
