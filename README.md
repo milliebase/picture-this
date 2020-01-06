@@ -35,7 +35,7 @@ __Minimum requirement for the assignment:__
 
 - [x] As a user I should be able to delete my posts.
 
-- [ ] As a user I should be able to like posts.
+- [x] As a user I should be able to like posts.
 
 - [x] As a user I should be able to remove likes from posts.
 
