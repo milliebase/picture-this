@@ -51,7 +51,7 @@ if (isset($_SESSION['user']['id'])) {
                             <button type="submit" name="save" class="btn btn-primary">Save</button>
                         </form>
                     </div>
-                    <!--/edit--active-->
+                    <!--/edit-mode-->
                 </div>
                 <!--/post__information-->
             </div>
