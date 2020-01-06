@@ -11,22 +11,24 @@ if (isset($_FILES['avatar'])) {
     $userId = $user['id'];
     $currentAvatar = $user['avatar'];
 
-    $fileName = $avatar['name'];
-    $fileNameArray = explode('.', $fileName);
-    $fileEnd = array_pop($fileNameArray);
+    $newFileName = $avatar['name'];
+    $newFileNameArray = explode('.', $newFileName);
+    $newFileEnd = array_pop($newFileNameArray);
 
     //Always be sure to give a user the same name to their avatar image, so it gets overwritten instead of saving each one.
     if ($currentAvatar === null) {
         $uniqId = uniqid();
 
-        $newAvatar = "$uniqId-$userId.$fileEnd";
+        $newAvatar = "$uniqId-$userId.$newFileEnd";
     } else {
         $currentAvatarArray = explode('.', $currentAvatar);
         $avatarId = $currentAvatarArray[0];
-        $newAvatar = "$avatarId.$fileEnd";
+        $newAvatar = "$avatarId.$newFileEnd";
     }
 
     handleImageErrors($avatar, '2097152', 'settings.php', 'avatar');
+
+    unlink(__DIR__ . "/../../avatars/$currentAvatar");
 
     move_uploaded_file($avatar['tmp_name'], __DIR__ . "/../../avatars/$newAvatar");
 
