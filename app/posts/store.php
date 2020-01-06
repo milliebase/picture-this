@@ -6,6 +6,7 @@ require __DIR__ . '/../autoload.php';
 
 // In this file we store/insert new posts in the database.
 if (isset($_FILES['post-image'], $_POST['description'])) {
+    $user = fetchUser($pdo, $_SESSION['user']['id']);
     $userId = $user['id'];
 
     $postImage = $_FILES['post-image'];

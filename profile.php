@@ -41,14 +41,18 @@ if (isset($_SESSION['user']['id'])) {
                     </div>
                     <!--/information-->
 
-                    <div class="edit-mode">
-                        <form action="app/posts/update.php" method="post" class="edit-mode__form hidden">
+                    <div class="edit-mode hidden">
+                        <form method="post" class="edit-mode__form">
                             <label for="description-edit">Edit your description</label>
                             <br>
                             <textarea name="description-edit" cols="30" rows="10"><?php echo $post['description'] ?></textarea>
                             <input type="hidden" name="id" value="<?php echo $post['id'] ?>">
                             <br>
                             <button type="submit" name="save" class="btn btn-primary">Save</button>
+                        </form>
+
+                        <form action="app/posts/delete.php?post_id=<?php echo $post['id']; ?>" method="post" class="delete__form">
+                            <button type="submit" name="delete" class="delete__button btn btn-primary">Delete post</button>
                         </form>
                     </div>
                     <!--/edit-mode-->

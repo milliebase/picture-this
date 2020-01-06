@@ -5,6 +5,8 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (isset($_FILES['avatar'])) {
+    $user = fetchUser($pdo, $_SESSION['user']['id']);
+
     $avatar = $_FILES['avatar'];
     $userId = $user['id'];
     $currentAvatar = $user['avatar'];

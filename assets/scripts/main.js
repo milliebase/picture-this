@@ -36,11 +36,12 @@ const postInformations = document.querySelectorAll(".post__information");
 postInformations.forEach(postInformation => {
     const information = postInformation.children[1];
     const editPostButton = postInformation.children[1].lastElementChild;
-    const editForm = postInformation.children[2].lastElementChild;
+    const editMode = postInformation.children[2];
+    const editForm = postInformation.children[2].firstElementChild;
 
     editPostButton.addEventListener("click", () => {
         information.classList.toggle("hidden");
-        editForm.classList.toggle("hidden");
+        editMode.classList.toggle("hidden");
     });
 
     editForm.addEventListener("submit", event => {
@@ -58,6 +59,13 @@ postInformations.forEach(postInformation => {
             });
 
         information.classList.toggle("hidden");
-        editForm.classList.toggle("hidden");
+        editMode.classList.toggle("hidden");
+    });
+
+    const deleteButton = document.querySelector(".delete__button");
+
+    deleteButton.addEventListener("submit", event => {
+        information.classList.toggle("hidden");
+        editMode.classList.toggle("hidden");
     });
 });
