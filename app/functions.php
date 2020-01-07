@@ -293,3 +293,18 @@ if (!function_exists('isLiked')) {
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }
+
+/*************************FOLLOWING/USERS********************/
+if (!function_exists('isFollowing')) {
+    function isFollowing($pdo, $userId, $followId)
+    {
+        $statement = $pdo->prepare('SELECT * FROM user_follows WHERE user_id = :user_id AND follow_id = :follow_id');
+
+        $statement->execute([
+            ':user_id' => $userId,
+            ':follow_id' => $followId
+        ]);
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+}

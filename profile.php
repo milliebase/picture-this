@@ -31,6 +31,16 @@ if (isset($_GET['username'])) {
                 <h2><?php echo $profile['username']; ?></h2>
                 <p><?php echo $profile['first_name'] . ' ' . $profile['last_name']; ?></p>
                 <p> <?php echo $profile['biography']; ?></p>
+
+
+                <?php if ($profile['id'] !== $user['id']) : ?>
+                    <form method="post" class="follow__form">
+                        <input type="hidden" name="profile-id" value="<?php echo $profile['id']; ?>">
+                        <button type="submit" class="follow__button btn btn-primary">
+                            <?php echo (!isFollowing($pdo, $user['id'], $profile['id']) ? 'Follow' : 'Unfollow'); ?>
+                        </button>
+                    </form>
+                <?php endif; ?>
             </div>
         </article>
 

@@ -7,7 +7,7 @@ postInformations.forEach(postInformation => {
     //Variables for when editform is unactive
     const description = postInformation.children[1];
 
-    if (postInformation.childNodes.length > 2) {
+    if (postInformation.children.length > 2) {
         const editPostButton = postInformation.children[1].lastElementChild;
 
         //Variables for when editform is active
