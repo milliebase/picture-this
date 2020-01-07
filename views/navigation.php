@@ -1,7 +1,7 @@
 <?php
-
-$user = fetchUser($pdo, $_SESSION['user']['id']);
-
+if (validateUser()) {
+    $user = fetchUser($pdo, $_SESSION['user']['id']);
+}
 ?>
 
 <nav>
