@@ -22,15 +22,12 @@ if (isset($_POST['profile-id'])) {
 
             header('Content-Type: application/json');
 
-            echo json_encode('follow');
+            $followers = getAmountFollowers($pdo, $profileId);
+
+            echo json_encode((int) $followers);
         } else {
             $statement = $pdo->prepare('DELETE FROM user_follows
             WHERE user_id = :user_id AND follow_id = :follow_id');
-
-            if (!$statement) {
-                die(var_dump($pdo->errorInfo()));
-            }
-
 
             $statement->execute([
                 ':user_id' => $userId,
@@ -39,7 +36,9 @@ if (isset($_POST['profile-id'])) {
 
             header('Content-Type: application/json');
 
-            echo json_encode('unfollow');
+            $followers = getAmountFollowers($pdo, $profileId);
+
+            echo json_encode($followers);
         }
     }
 }

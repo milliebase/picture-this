@@ -1,24 +1,30 @@
 const followForm = document.querySelector(".follow__form");
 
-followForm.addEventListener("submit", event => {
-    event.preventDefault();
+if (typeof followForm != "undefined" && followForm != null) {
+    followForm.addEventListener("submit", event => {
+        event.preventDefault();
 
-    const formData = new FormData(followForm);
+        const formData = new FormData(followForm);
 
-    fetch("app/users/follow.php", {
-        method: "POST",
-        body: formData
-    })
-        .then(response => response.json())
-        .then(isFollowing => {
-            console.log(isFollowing);
+        fetch("app/users/follow.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json())
+            .then(follows => {
+                const followButton = document.querySelector(".follow__button");
 
-            const followButton = document.querySelector(".follow__button");
+                const followersNumber = document.querySelector(
+                    ".followers__number"
+                );
 
-            if (isFollowing === "follow") {
-                followButton.textContent = "Unfollow";
-            } else if (isFollowing === "unfollow") {
-                followButton.textContent = "Follow";
-            }
-        });
-});
+                if (follows > Number(followersNumber.textContent)) {
+                    followButton.textContent = "Unfollow";
+                    followersNumber.textContent = follows;
+                } else if (follows < Number(followersNumber.textContent)) {
+                    followButton.textContent = "Follow";
+                    followersNumber.textContent = follows;
+                }
+            });
+    });
+}

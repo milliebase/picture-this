@@ -38,5 +38,5 @@ if (isset($_FILES['post-image'], $_POST['description'])) {
         ':date' => $date,
     ]);
 
-    redirect('/profile.php');
+    redirect('/profile.php?username=' . $user['username']);
 }

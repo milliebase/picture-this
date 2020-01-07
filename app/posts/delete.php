@@ -5,6 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (isset($_POST['delete'], $_GET['post_id'])) {
+    $user = fetchUser($pdo, $_SESSION['user']['id']);
     $postId = trim(filter_var($_GET['post_id'], FILTER_SANITIZE_NUMBER_INT));
     $userId = $_SESSION['user']['id'];
 
@@ -27,4 +28,4 @@ if (isset($_POST['delete'], $_GET['post_id'])) {
     ]);
 }
 
-redirect('/profile.php');
+redirect('/profile.php?username=' . $user['username']);

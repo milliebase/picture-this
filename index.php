@@ -17,4 +17,15 @@ if (validateUser()) {
     <p>This is the home page.</p>
 </article>
 
+<section class="main__feed">
+    <?php $posts = getMainFeedPosts($pdo, $user['id']); ?>
+
+    <?php if (empty($posts)) : ?>
+        <p>There are no posts to show yet. Hurry up and post!</p>
+    <?php endif; ?>
+
+    <?php require __DIR__ . '/posts.php'; ?>
+
+</section>
+
 <?php require __DIR__ . '/views/footer.php'; ?>

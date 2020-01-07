@@ -58,3 +58,14 @@
   background-image: url("../images/liked.svg");
   background-size: 100%;
 }
+
+.follow {
+  display: flex;
+}
+
+.follow__item {
+  width: 150px;
+  height: 60px;
+  background-color: pink;
+  margin-right: 10px;
+}

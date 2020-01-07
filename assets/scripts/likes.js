@@ -26,7 +26,7 @@ likeForms.forEach(likeForm => {
             .then(likes => {
                 //Update likes
                 let currentLikes = likeForm.lastElementChild;
-                currentLikes.textContent = likes.length;
+                currentLikes.textContent = likes[0];
             });
     });
 });

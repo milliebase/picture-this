@@ -244,7 +244,7 @@ if (!function_exists('fetchUserByUsername')) {
 if (!function_exists('getImagePosts')) {
     function getImagePosts($pdo, $id)
     {
-        $statement = $pdo->prepare('SELECT posts.id, image, description, date
+        $statement = $pdo->prepare('SELECT posts.id, image, description, date, username
         FROM posts
         INNER JOIN users
         ON posts.user_id = users.id
@@ -260,10 +260,54 @@ if (!function_exists('getImagePosts')) {
     }
 }
 
+if (!function_exists('sortByDate')) {
+    function sortByDate($a, $b)
+    {
+        return ($a['id'] < $b['id']);
+    }
+}
+
+
+if (!function_exists('getMainFeedPosts')) {
+    function getMainFeedPosts($pdo, $userId)
+    {
+        $statement = $pdo->prepare('SELECT DISTINCT follow_id
+        FROM user_follows
+        WHERE user_id=?');
+
+        $statement->execute([$userId]);
+
+        $follows = $statement->fetchAll(PDO::FETCH_COLUMN);
+
+        $follows[] = $userId;
+
+        $statement = $pdo->prepare('SELECT posts.id, user_id, image, description, date, username
+        FROM posts
+        INNER JOIN users
+        ON posts.user_id = users.id
+        WHERE user_id=?');
+
+        foreach ($follows as $follow) {
+            $statement->execute([$follow]);
+
+            $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($posts as $post) {
+                $allPosts[] = $post;
+            }
+        }
+
+        usort($allPosts, 'sortByDate');
+
+        return $allPosts;
+    }
+}
+
+
 if (!function_exists('getAmountLikes')) {
     function getAmountLikes($pdo, $postId)
     {
-        $statement = $pdo->prepare('SELECT post_likes.post_id
+        $statement = $pdo->prepare('SELECT COUNT(post_likes.post_id)
         FROM posts
         INNER JOIN post_likes
         ON posts.id = post_likes.post_id
@@ -273,7 +317,7 @@ if (!function_exists('getAmountLikes')) {
             ':post_id' => $postId,
         ]);
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_COLUMN);
     }
 }
 
@@ -306,5 +350,35 @@ if (!function_exists('isFollowing')) {
         ]);
 
         return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+}
+
+if (!function_exists('getAmountFollowings')) {
+    function getAmountFollowings($pdo, $userId)
+    {
+        $statement = $pdo->prepare('SELECT COUNT(user_id)
+        FROM user_follows
+        WHERE user_id=?');
+
+        $statement->execute([$userId]);
+
+        $following = $statement->fetch(PDO::FETCH_COLUMN);
+
+        return $following;
+    }
+}
+
+if (!function_exists('getAmountFollowers')) {
+    function getAmountFollowers($pdo, $userId)
+    {
+        $statement = $pdo->prepare('SELECT COUNT(follow_id)
+        FROM user_follows
+        WHERE follow_id=?');
+
+        $statement->execute([$userId]);
+
+        $followers = $statement->fetch(PDO::FETCH_COLUMN);
+
+        return $followers;
     }
 }
