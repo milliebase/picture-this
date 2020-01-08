@@ -33,51 +33,6 @@ function checkIfExists(PDOStatement $statement, string $type, string $userInput)
 }
 
 /**
- * On each page load except 'signup' the error messages will be cleared.
- *
- * @return void
- */
-function unsetErrors()
-{
-    if ($_SERVER['REQUEST_URI'] === '/login.php' && !isset($_SESSION['user']['id'])) {
-        if (isset($_SESSION['errors'])) {
-            foreach ($_SESSION['errors'] as $key => $value) {
-                if ($key !== 'login') {
-                    unset($_SESSION['errors'][$key]);
-                }
-            }
-        }
-    }
-
-    if ($_SERVER['REQUEST_URI'] === '/register.php') {
-        if (isset($_SESSION['errors']['login'])) {
-            unset($_SESSION['errors']['login']);
-        }
-    }
-
-    if ($_SERVER['REQUEST_URI'] === '/settings.php') {
-        if (isset($_SESSION['errors']['create-post'])) {
-            unset($_SESSION['errors']);
-        }
-    }
-
-    if ($_SERVER['REQUEST_URI'] === 'create-post/.php') {
-        if (isset($_SESSION['errors']['avatar'])) {
-            unset($_SESSION['errors']);
-        }
-    }
-
-    if (
-        $_SERVER['REQUEST_URI'] !== '/register.php' &&
-        $_SERVER['REQUEST_URI'] !== '/login.php' &&
-        $_SERVER['REQUEST_URI'] !== '/settings.php' &&
-        $_SERVER['REQUEST_URI'] !== '/create-post.php'
-    ) {
-        unset($_SESSION['errors']);
-    }
-}
-
-/**
  * On each page load except 'register' the register form will be cleared.
  *
  * @return void
@@ -88,69 +43,41 @@ function unsetRegister()
         unset($_SESSION['register']);
 }
 
-/**
- * Clear the error array of a certain error type.
- *
- * @param string $errorType
- * @return void
- */
-function unsetErrorType(string $errorType)
+function showErrors()
 {
-    unset($_SESSION['errors'][$errorType]);
+    if (isset($_SESSION['errors'])) {
+        foreach ($_SESSION['errors'] as $error) {
+            echo $error;
+        }
+        unset($_SESSION['errors']);
+    }
 }
-
-/**
- * Assign an errormessage to the error array depending on which errortype.
- *
- * @param string $errorType
- * @param string $errorMessage
- * @param string $file
- * @return void
- */
-function handleErrors(string $errorType, string $errorMessage, string $file)
-{
-    $_SESSION['errors'][$errorType] = $errorMessage;
-    redirect("/$file");
-}
-
-function handlePageErrors(string $errorType, string $errorMessage, string $file, string $errorPage)
-{
-    $_SESSION['errors'][$errorPage][$errorType] = $errorMessage;
-    redirect("/$file");
-}
-
 
 function handlePasswordErrors($password, $confirmPassword)
 {
+    $_SESSION['errors'] = [];
+
     if (strlen($password) < 8) {
-        $shortPasswordError = 'The password should at least be 8 characters long.';
-        $_SESSION['errors']['short-password'] = $shortPasswordError;
+        $_SESSION['errors'][] = 'The password should at least be 8 characters long.';
     } else if ($password !== $confirmPassword) {
-        $passwordError = 'The passwords do not match.';
-        $_SESSION['errors']['password'] = $passwordError;
+        $_SESSION['errors'][] = 'The passwords do not match.';
     } else {
-        unsetErrorType('short-password');
-        unsetErrorType('password');
+        unset($_SESSION['errors']);
     }
 }
 
-
-
-function handleImageErrors($image, $imageSize, $file, $errorPage)
+function handleImageErrors($image, $imageSize, $file)
 {
-    if ($image['type'] !== 'image/png' && $image['type'] !== 'image/jpeg') {
-        $_SESSION['errors'] = [];
+    $_SESSION['errors'] = [];
 
-        $unvalidFiletypeError = 'The filetype must be a .jpg, .jpeg or .png.';
-        handlePageErrors('unvalid-filetype', $unvalidFiletypeError, $file, $errorPage);
+    if ($image['type'] !== 'image/png' && $image['type'] !== 'image/jpeg') {
+        $_SESSION['errors'][] = 'The filetype must be a .jpg, .jpeg or .png.';
+        redirect("/$file");
     }
 
-
     if ($image['size'] >= $imageSize) {
-        $_SESSION['errors'] = [];
-
-        $largeFileError = 'The file can\'t exceed 2 MB.';
-        handlePageErrors('large-file', $largeFileError, $file, $errorPage);
+        $_SESSION['errors'][] = 'The file can\'t exceed 2 MB.';
+        redirect("/$file");
     }
 }
 
@@ -191,8 +118,6 @@ function validateUser()
         return true;
     }
 }
-
-
 
 function fetchUser($pdo, $id)
 {
@@ -281,8 +206,6 @@ function getMainFeedPosts($pdo, $userId)
         return $allPosts;
     }
 }
-
-
 
 function getAmountLikes($pdo, $postId)
 {

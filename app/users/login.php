@@ -14,8 +14,8 @@ if (isset($_POST['email'], $_POST['password'])) {
     if (!$user || !password_verify($_POST['password'], $user['password'])) {
         $_SESSION['errors'] = [];
 
-        $loginError = 'The email or password was incorrect.';
-        handleErrors('login', $loginError, 'login.php');
+        $_SESSION['errors'][] = 'The email or password was incorrect.';
+        redirect('/login.php');
     }
 
     unset($_SESSION['errors']);

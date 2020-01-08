@@ -5,7 +5,6 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 $isEmailValid = true;
-$file = 'register.php';
 
 if (isset($_POST['first-name'],
 $_POST['last-name'],
@@ -64,27 +63,26 @@ $_POST['confirm-password'])) {
         $_SESSION['errors'] = [];
 
         if (!$isEmailValid) {
-            $emailValidationError = 'The email is not valid.';
-            handleErrors('emailValidation', $emailValidationError, $file);
+            $_SESSION['errors'][] = 'The email is not valid.';
+            redirect('/register.php');
         } else if ($emailExists) {
-            $emailError = 'The email is already registered.';
-            handleErrors('email', $emailError, $file);
+            $_SESSION['errors'][] = 'The email is already registered.';
+            redirect('/register.php');
         } else {
-            unsetErrorType('emailValidation');
-            unsetErrorType('email');
+            unset($_SESSION['errors']);
 
             $_SESSION['register']['email'] = $email;
         }
 
         if ($usernameExists) {
-            $usernameError = 'The username is already taken.';
-            handleErrors('username', $usernameError, $file);
+            $_SESSION['errors'][] = 'The username is already taken.';
+            redirect('/register.php');
         } else if ($usernamePatternMatches === 0) {
-            $usernameCharError = 'Usernames can only contain letters, numbers, underscores and periods. The username should be at least 5 characters long.';
-            handleErrors('username-char', $usernameCharError, $file);
+            $_SESSION['errors'][] = 'Usernames can only contain letters, numbers, underscores and periods. The username should be at least 5 characters long.';
+            redirect('/register.php');
         } else {
-            unsetErrorType('username-char');
-            unsetErrorType('username');
+            unset($_SESSION['errors']);
+
             $_SESSION['register']['username'] = $username;
         }
 
@@ -93,14 +91,14 @@ $_POST['confirm-password'])) {
             $isLastNameEmpty ||
             $isEmailEmpty
         ) {
-            $blankError = 'Please fill in all the fields.';
-            handleErrors('blank', $blankError, $file);
+            $_SESSION['errors'][] = 'Please fill in all the fields.';
+            redirect('/register.php');
         } else {
-            unsetErrorType('blank');
+            unset($_SESSION['errors']);
         }
 
         handlePasswordErrors($password, $confirmPassword);
-        redirect("/$file");
+        redirect("/register.php");
     }
 
     unset($_SESSION['register']);

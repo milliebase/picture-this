@@ -1,0 +1,82 @@
+.login,
+.login__header,
+.login__holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  justify-content: space-evenly;
+}
+
+h1 {
+  font-family: "Concert One", cursive;
+  text-transform: uppercase;
+  font-size: 2em;
+  color: #fca1af;
+  margin: 0;
+}
+
+.login__header {
+  width: 100%;
+}
+
+.login__header img {
+  width: 40%;
+}
+
+.login__holder {
+  width: 95%;
+  height: 50%;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  padding: 0 5% 10%;
+}
+
+.login__form,
+.login__form__input-holder,
+.form__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.login__form {
+  width: 100%;
+  height: 100%;
+  justify-content: space-evenly;
+  padding: 5%;
+}
+
+.login__form .error__text {
+  height: 20%;
+}
+
+.login__form__input-holder {
+  height: 60%;
+  justify-content: space-evenly;
+  margin-bottom: 15%;
+}
+
+.login__form input[type="email"],
+.login__form input[type="password"] {
+  padding: 15px 5px;
+  line-height: 20px;
+  border: none;
+  border-bottom: 4px solid #fca1af;
+  font-size: 1em;
+  color: #fca1af;
+}
+
+.login__form input[type="email"]:focus,
+.login__form input[type="password"]:focus {
+  outline: none;
+}
+
+.login__holder .form__text p {
+  margin: 0;
+  font-size: 0.7em;
+}

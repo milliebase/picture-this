@@ -10,8 +10,8 @@ if (isset($_POST['email'])) {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['errors'] = [];
 
-        $changeEmailError = 'The email is not a valid emailadress.';
-        handleErrors('change-email', $changeEmailError, 'settings.php');
+        $_SESSION['errors'][] = 'The email is not a valid emailadress.';
+        redirect('/settings.php');
     }
 
     $statement = $pdo->prepare('UPDATE users SET email = :email WHERE id = :id');

@@ -26,7 +26,7 @@ if (isset($_FILES['avatar'])) {
         $newAvatar = "$avatarId.$newFileEnd";
     }
 
-    handleImageErrors($avatar, '2097152', 'settings.php', 'avatar');
+    handleImageErrors($avatar, '2097152', 'settings.php');
 
     unlink(__DIR__ . "/../../avatars/$currentAvatar");
 

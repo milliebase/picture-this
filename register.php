@@ -3,12 +3,9 @@
 <section>
     <h1>Register</h1>
 
-    <?php if (isset($_SESSION['errors'])) : ?>
-        <?php $errors = $_SESSION['errors'] ?>
-        <?php foreach ($errors as $error) : ?>
-            <p><?php echo $error; ?></p>
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <div class="error__text">
+        <p><?php showErrors(); ?></p>
+    </div>
 
     <form action="app/users/register.php" method="post">
         <div class="form-group">

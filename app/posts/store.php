@@ -18,7 +18,7 @@ if (isset($_FILES['post-image'], $_POST['filter'], $_POST['description'])) {
     date_default_timezone_set('Europe/Berlin');
     $date = date('H:i:s - j M, Y');
 
-    handleImageErrors($postImage, '10485760', 'create-post.php', 'create-post');
+    handleImageErrors($postImage, '10485760', 'create-post.php');
     unset($_SESSION['errors']);
 
     $uniqId = uniqid();

@@ -4,9 +4,9 @@ if (validateUser()) {
 }
 ?>
 
-<nav>
-    <ul>
-        <?php if (validateUser()) : ?>
+<?php if (validateUser()) : ?>
+    <nav>
+        <ul>
             <li>
                 <a href="/index.php">Home</a>
             </li><!-- /nav-item -->
@@ -26,6 +26,8 @@ if (validateUser()) {
             <li>
                 <a href="app/users/logout.php">Logout</a>
             </li><!-- /nav-item -->
-        <?php endif; ?>
-    </ul><!-- /navbar-nav -->
-</nav><!-- /navbar -->
+        </ul><!-- /navbar-nav -->
+    </nav><!-- /navbar -->
+
+    <?php var_dump($_SESSION); ?>
+<?php endif; ?>

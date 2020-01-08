@@ -15,11 +15,16 @@ if (validateUser()) {
 
         <img src="<?php echo ($user['avatar'] !== null) ? "avatars/" . $user['avatar'] : 'assets/images/avatar.png'; ?>" id="avatar-image" alt="Avatar image">
 
-        <?php if (isset($_SESSION['errors']['avatar']['unvalid-filetype'])) : ?>
-            <p><?php echo $_SESSION['errors']['avatar']['unvalid-filetype']; ?></p>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['errors']['avatar']['large-file'])) : ?>
-            <p><?php echo $_SESSION['errors']['avatar']['large-file']; ?></p>
+        <?php if (isset($_SESSION['errors'])) : ?>
+            <?php foreach ($_SESSION['errors'] as $error) : ?>
+                <?php
+                echo $error;
+                ?>
+            <?php
+            endforeach;
+            unset($_SESSION['errors']);
+            ?>
+            <p><? ?></p>
         <?php endif; ?>
 
         <form action="app/users/avatar.php" method="post" enctype="multipart/form-data" class="form settings--avatar--form">
@@ -45,15 +50,16 @@ if (validateUser()) {
     </article>
 
     <article class="settings__email">
+        <div class="error__text">
+            <p><?php showErrors(); ?></p>
+        </div>
+
         <h2>Change email</h2>
 
         <p>Current email adress: <?php echo $user['email']; ?></p>
 
-        <?php if (isset($_SESSION['errors']['change-email'])) : ?>
-            <p><?php echo $_SESSION['errors']['change-email']; ?></p>
-        <?php endif; ?>
-
         <form action="app/users/email.php" method="post" class="form form__new-email">
+
             <div class="form-group">
                 <label for="email">Update email adress</label>
                 <input class="form-control" type="email" name="email" placeholder="Type in your new emailadress" required>
@@ -68,21 +74,12 @@ if (validateUser()) {
 
         <form action="app/users/password.php" method="post" class="form form__new-password">
             <div class="form-group">
-                <?php if (isset($_SESSION['errors']['current-password'])) : ?>
-                    <p><?php echo $_SESSION['errors']['current-password']; ?></p>
-                <?php endif; ?>
+
                 <label for="current-password">Current password</label>
                 <input class="form-control" type="password" name="current-password" placeholder="Type in your current password" required>
             </div><!-- /form-group -->
 
             <div class="form-group">
-                <?php if (isset($_SESSION['errors']['password'])) : ?>
-                    <p><?php echo $_SESSION['errors']['password']; ?></p>
-                <?php endif; ?>
-
-                <?php if (isset($_SESSION['errors']['short-password'])) : ?>
-                    <p><?php echo $_SESSION['errors']['short-password']; ?></p>
-                <?php endif; ?>
 
                 <label for="new-password">New password</label>
                 <input class="form-control" type="password" name="new-password" placeholder="Type in your new password" required>
