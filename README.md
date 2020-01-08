@@ -39,6 +39,13 @@ __Minimum requirement for the assignment:__
 
 - [x] As a user I should be able to remove likes from posts.
 
+__Extra features:__
+- [x] As a user I should be able to follow and unfollow other users.
+
+- [x] As a user I should be able to view a list of posts by users I follow.
+
+- [x] As a user I'm able to add filters to my images.
+
 ## Installation
 1. To be able to play this game, clone this repository to your directory through the terminal.
 ```
