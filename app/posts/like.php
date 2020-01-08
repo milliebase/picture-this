@@ -15,8 +15,8 @@ if (isset($_POST['liked-post-id'])) {
         VALUES (:user_id, :post_id)');
 
         $statement->execute([
-            ':user_id' => $likerId,
-            ':post_id' => $likedPostId,
+            'user_id' => $likerId,
+            'post_id' => $likedPostId,
         ]);
 
         $likes = getAmountLikes($pdo, $likedPostId);
@@ -29,8 +29,8 @@ if (isset($_POST['liked-post-id'])) {
         WHERE user_id = :user_id AND post_id = :post_id');
 
         $statement->execute([
-            ':user_id' => $likerId,
-            ':post_id' => $likedPostId,
+            'user_id' => $likerId,
+            'post_id' => $likedPostId,
         ]);
 
         $likes = getAmountLikes($pdo, $likedPostId);

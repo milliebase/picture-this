@@ -96,6 +96,21 @@ if (validateUser()) {
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </article>
+
+    <article class="delete-account">
+        <button class="delete-account__button">Delete account</button>
+
+        <div class="delete-account__modal hidden">
+            <form action="app/users/delete-account.php" method="post" class="form delete-account__form">
+                <div class="form-group">
+                    <label>Are you sure you want to delete your account?</label>
+                    <button type="submit" name="delete-account" class="btn btn-primary">Yes</button>
+                </div>
+                <!--/form-group-->
+            </form>
+            <button class="delete-account__cancel">Cancel</button>
+        </div>
+    </article>
 </section>
 
 <?php require __DIR__ . '/views/footer.php'; ?>
