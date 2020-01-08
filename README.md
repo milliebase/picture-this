@@ -46,6 +46,8 @@ __Extra features:__
 
 - [x] As a user I'm able to add filters to my images.
 
+- [x] As a user I'm able to delete my account along with all posts and comments.
+
 ## Installation
 1. To be able to play this game, clone this repository to your directory through the terminal.
 ```
