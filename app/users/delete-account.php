@@ -9,23 +9,12 @@ if (isset($_POST['delete-account'])) {
 
     //Fetch all post ids from user
     $statement = $pdo->prepare('SELECT id FROM posts WHERE user_id = :id');
-
-    if (!$statement) {
-        die(var_dump($pdo->errorInfo()));
-    }
-
-    $statement->execute([
-        'id' => $userId,
-    ]);
+    executeWithId($userId);
 
     $posts = $statement->fetch(PDO::FETCH_ASSOC);
 
     //Delete all likes for posts from user
     $statement = $pdo->prepare('DELETE FROM post_likes WHERE post_id = :id');
-
-    if (!$statement) {
-        die(var_dump($pdo->errorInfo()));
-    }
 
     foreach ($posts as $post) {
         $statement->execute([
@@ -35,47 +24,19 @@ if (isset($_POST['delete-account'])) {
 
     //Delete all likes done by user
     $statement = $pdo->prepare('DELETE FROM post_likes WHERE user_id = :id');
-
-    if (!$statement) {
-        die(var_dump($pdo->errorInfo()));
-    }
-
-    $statement->execute([
-        'id' => $userId,
-    ]);
+    executeWithId($userId);
 
     //Deletes users posts
     $statement = $pdo->prepare('DELETE FROM posts WHERE user_id = :id');
-
-    if (!$statement) {
-        die(var_dump($pdo->errorInfo()));
-    }
-
-    $statement->execute([
-        'id' => $userId,
-    ]);
+    executeWithId($userId);
 
     //Delete all followings
     $statement = $pdo->prepare('DELETE FROM user_follows WHERE user_id = :id OR follow_id = :id');
-
-    if (!$statement) {
-        die(var_dump($pdo->errorInfo()));
-    }
-
-    $statement->execute([
-        'id' => $userId,
-    ]);
+    executeWithId($userId);
 
     //Deletes user
     $statement = $pdo->prepare('DELETE FROM users WHERE id = :id');
-
-    if (!$statement) {
-        die(var_dump($pdo->errorInfo()));
-    }
-
-    $statement->execute([
-        'id' => $userId,
-    ]);
+    executeWithId($userId);
 
     session_destroy();
 

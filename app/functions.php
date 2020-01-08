@@ -364,3 +364,12 @@ function getFilters($pdo)
 
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
+
+
+/*********************EXECUTE*************/
+function executeWithId($id)
+{
+    $statement->execute([
+        'id' => $id,
+    ]);
+}
