@@ -7,25 +7,20 @@ const readImgURL = function(reader, chosenImage, preview) {
     reader.onload = e => {
         preview.src = e.target.result;
 
-        const filterHolder = document.querySelector(".filter__holder");
-        filterHolder.classList.toggle("hidden");
-
         const filterButtons = document.querySelectorAll(".filter__button");
         filterButtons.forEach(filterButton => {
             filterButton.style.backgroundImage = `url('${e.target.result}')`;
-
-            filterButton.addEventListener("click", e => {
-                if (preview.classList.length > 0) {
-                    preview.classList.remove(preview.classList[0]);
-                }
-                preview.classList.toggle(e.currentTarget.classList[1]);
-            });
         });
     };
 
     chosenImage.addEventListener("change", e => {
         const image = e.target.files[0];
         reader.readAsDataURL(image);
+
+        if (typeof filterButton != "undefined" && filterButton != null) {
+            const filterButton = document.querySelector(".filter__button");
+            filterButton.classList.toggle("hidden");
+        }
     });
 };
 

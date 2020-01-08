@@ -1,6 +1,6 @@
 <?php foreach ($posts as $post) : ?>
     <article class="post">
-        <img src="uploads/<?php echo $post['image']; ?>" alt="<?php echo $post['description']; ?>" loading="lazy">
+        <img src="uploads/<?php echo $post['image']; ?>" alt="<?php echo $post['description']; ?>" class="<?php echo $post['filter']; ?>" loading="lazy">
 
         <div class="post__information">
             <div class="post__details">
@@ -22,13 +22,13 @@
                 <a href="profile.php?username=<?php echo $post['username'] ?>"><?php echo $post['username']; ?></a>
                 <p><?php echo $post['description']; ?></p>
 
-                <?php if ($post['id'] === $user['id']) : ?>
+                <?php if ($post['user_id'] === $user['id']) : ?>
                     <button class="btn btn-primary">Edit post</button>
                 <?php endif; ?>
             </div>
             <!--/information-->
 
-            <?php if ($post['id'] === $user['id']) : ?>
+            <?php if ($post['user_id'] === $user['id']) : ?>
                 <div class="post__edit hidden">
                     <form method="post" class="edit__form">
                         <label for="description-edit">Edit your description</label>

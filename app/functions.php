@@ -244,12 +244,12 @@ if (!function_exists('fetchUserByUsername')) {
 if (!function_exists('getImagePosts')) {
     function getImagePosts($pdo, $id)
     {
-        $statement = $pdo->prepare('SELECT posts.id, image, description, date, username
+        $statement = $pdo->prepare('SELECT posts.id, user_id, image, description, date, filter, username
         FROM posts
         INNER JOIN users
         ON posts.user_id = users.id
         WHERE users.id = :id
-        ORDER by date DESC');
+        ORDER by posts.id DESC');
 
 
         $statement->execute([
@@ -281,7 +281,7 @@ if (!function_exists('getMainFeedPosts')) {
 
         $follows[] = $userId;
 
-        $statement = $pdo->prepare('SELECT posts.id, user_id, image, description, date, username
+        $statement = $pdo->prepare('SELECT posts.id, user_id, image, description, date, filter, username
         FROM posts
         INNER JOIN users
         ON posts.user_id = users.id
@@ -380,5 +380,18 @@ if (!function_exists('getAmountFollowers')) {
         $followers = $statement->fetch(PDO::FETCH_COLUMN);
 
         return $followers;
+    }
+}
+
+
+/***********************FILTERS*************/
+if (!function_exists('getFilters')) {
+    function getFilters($pdo)
+    {
+        $statement = $pdo->prepare('SELECT * FROM filters');
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }

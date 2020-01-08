@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://localhost:8000/create-post.php -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Picture this</title>
+
+    <link rel="stylesheet" href="./-_files/sanitize.css">
+    <link rel="stylesheet" href="./-_files/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./-_files/main.css">
+    <link rel="stylesheet" href="./-_files/instagram.css">
+<script data-dapp-detection="">
+(function() {
+  let alreadyInsertedMetaTag = false
+
+  function __insertDappDetected() {
+    if (!alreadyInsertedMetaTag) {
+      const meta = document.createElement('meta')
+      meta.name = 'dapp-detected'
+      document.head.appendChild(meta)
+      alreadyInsertedMetaTag = true
+    }
+  }
+
+  if (window.hasOwnProperty('web3')) {
+    // Note a closure can't be used for this var because some sites like
+    // www.wnyc.org do a second script execution via eval for some reason.
+    window.__disableDappDetectionInsertion = true
+    // Likely oldWeb3 is undefined and it has a property only because
+    // we defined it. Some sites like wnyc.org are evaling all scripts
+    // that exist again, so this is protection against multiple calls.
+    if (window.web3 === undefined) {
+      return
+    }
+    if (!window.web3.currentProvider ||
+        !window.web3.currentProvider.isMetaMask) {
+      __insertDappDetected()
+    }
+  } else {
+    var oldWeb3 = window.web3
+    Object.defineProperty(window, 'web3', {
+      configurable: true,
+      set: function (val) {
+        if (!window.__disableDappDetectionInsertion)
+          __insertDappDetected()
+        oldWeb3 = val
+      },
+      get: function () {
+        if (!window.__disableDappDetectionInsertion)
+          __insertDappDetected()
+        return oldWeb3
+      }
+    })
+  }
+})()</script></head>
+
+<body>
+    
+<nav>
+    <a href="http://localhost:8000/create-post.php#">Picture this</a>
+
+    <ul>
+        <li>
+            <a href="http://localhost:8000/index.php">Home</a>
+        </li><!-- /nav-item -->
+
+        
+                    <li>
+                <a href="http://localhost:8000/profile.php?username=kalle">Profile</a>
+            </li><!-- /nav-item -->
+
+            <li>
+                <a href="http://localhost:8000/create-post.php">Add posts</a>
+            </li><!-- /nav-item -->
+
+            <li>
+                <a href="http://localhost:8000/settings.php">Settings</a>
+            </li><!-- /nav-item -->
+
+            <li>
+                <a href="http://localhost:8000/app/users/logout.php">Logout</a>
+            </li><!-- /nav-item -->
+
+            </ul><!-- /navbar-nav -->
+
+    array(1) {
+  ["user"]=&gt;
+  array(1) {
+    ["id"]=&gt;
+    string(2) "29"
+  }
+}
+    array(0) {
+}
+</nav><!-- /navbar -->
+
+    <div class="container py-5">
+
+<section class="create-posts">
+
+    <h2>Create a new post</h2>
+
+    <form action="http://localhost:8000/app/posts/store.php" method="post" enctype="multipart/form-data" class="form create-post__form">
+        <div class="form-group">
+            <label for="post-image">Choose an image</label>
+
+            
+            <input class="form-control" type="file" accept="image/jpeg,image/png" name="post-image" id="post-image" required="">
+        </div><!-- /form-group -->
+
+        <div class="preview">
+            <img src="./-_files/empty-image.svg" id="preview" alt="An image placeholder">
+        </div>
+
+        
+            
+                            <p>1977</p>
+                <div class="form-group filter__holder" style="display: inlineblock;">
+                    <label>
+                        <input type="radio" name="filter" value="1977" checked="">
+                        <div class="filter__button filter-1977"></div>
+                    </label>
+                </div>
+                            <p>Brooklyn</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Brooklyn" checked="">
+                        <div class="filter__button filter-brooklyn"></div>
+                    </label>
+                </div>
+                            <p>Gingham</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Gingham" checked="">
+                        <div class="filter__button ilter-gingham"></div>
+                    </label>
+                </div>
+                            <p>Ginza</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Ginza" checked="">
+                        <div class="filter__button filter-ginza"></div>
+                    </label>
+                </div>
+                            <p>Hudson</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Hudson" checked="">
+                        <div class="filter__button filter-hudson"></div>
+                    </label>
+                </div>
+                            <p>Inkwell</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Inkwell" checked="">
+                        <div class="filter__button filter-inkwell"></div>
+                    </label>
+                </div>
+                            <p>Lo-fi</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Lo-fi" checked="">
+                        <div class="filter__button filter-lofi"></div>
+                    </label>
+                </div>
+                            <p>Ludwig</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Ludwig" checked="">
+                        <div class="filter__button filter-ludwig"></div>
+                    </label>
+                </div>
+                            <p>Mayfair</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Mayfair" checked="">
+                        <div class="filter__button filter-mayfair"></div>
+                    </label>
+                </div>
+                            <p>Nashville</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Nashville" checked="">
+                        <div class="filter__button filter-nashville"></div>
+                    </label>
+                </div>
+                            <p>Sierra</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Sierra" checked="">
+                        <div class="filter__button filter-sierra"></div>
+                    </label>
+                </div>
+                            <p>Slumber</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Slumber" checked="">
+                        <div class="filter__button filter-slumber"></div>
+                    </label>
+                </div>
+                            <p>Sutro</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Sutro" checked="">
+                        <div class="filter__button filter-sutro"></div>
+                    </label>
+                </div>
+                            <p>Toaster</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Toaster" checked="">
+                        <div class="filter__button filter-toaster"></div>
+                    </label>
+                </div>
+                            <p>Valencia</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Valencia" checked="">
+                        <div class="filter__button filter-valencia"></div>
+                    </label>
+                </div>
+                            <p>Willow</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="Willow" checked="">
+                        <div class="filter__button filter-willow"></div>
+                    </label>
+                </div>
+                            <p>X-Pro II</p>
+                <div class="form-group filter__holder">
+                    <label>
+                        <input type="radio" name="filter" value="X-Pro II" checked="">
+                        <div class="filter__button filter-xpro-ii"></div>
+                    </label>
+                </div>
+                    </form>
+
+
+        <div class="form-group">
+            <label for="description">Add a description</label>
+            <br>
+            <textarea name="description" id="description" cols="50" rows="10" placeholder="Write your image text here"></textarea>
+        </div><!-- /form-group -->
+
+        <button type="submit" class="btn btn-primary">Share post</button>
+    
+
+</section>
+
+</div><!-- /container -->
+
+<script src="./-_files/main.js"></script>
+<script src="./-_files/filters.js"></script>
+<script src="./-_files/edit-post.js"></script>
+<script src="./-_files/likes.js"></script>
+<script src="./-_files/follow.js"></script>
+
+
+
+</body></html>

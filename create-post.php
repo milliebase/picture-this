@@ -11,10 +11,6 @@ if (validateUser()) {
 
     <h2>Create a new post</h2>
 
-    <div class="preview">
-        <img src="assets/images/empty-image.svg" id="preview" alt="An image placeholder">
-    </div>
-
     <form action="app/posts/store.php" method="post" enctype="multipart/form-data" class="form create-post__form">
         <div class="form-group">
             <label for="post-image">Choose an image</label>
@@ -27,6 +23,25 @@ if (validateUser()) {
 
             <input class="form-control" type="file" accept="image/jpeg,image/png" name="post-image" id="post-image" required>
         </div><!-- /form-group -->
+
+        <div class="preview">
+            <img src="assets/images/empty-image.svg" id="preview" alt="An image placeholder">
+        </div>
+
+
+        <div class="filter__holder hidden">
+            <?php $filters = getFilters($pdo); ?>
+            <?php foreach ($filters as $filter) : ?>
+                <div class="filter">
+                    <p><?php echo $filter['filter_name']; ?></p>
+                    <label>
+                        <input type="radio" name="filter" value="<?php echo $filter['filter_class']; ?>">
+                        <div class="filter__button <?php echo $filter['filter_class']; ?>"></div>
+                    </label>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
 
         <div class="form-group">
             <label for="description">Add a description</label>
