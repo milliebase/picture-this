@@ -1,31 +1,18 @@
 <?php require __DIR__ . '/views/header.php';
-
-if (validateUser()) {
-    $user = fetchUser($pdo, $_SESSION['user']['id']);
-} else {
-    redirect('/login.php');
-}
+$user = authenticateUser($pdo);
 ?>
 
 <section class="settings">
     <h1>Settings</h1>
 
+    <div class="error__text">
+        <p><?php showErrors(); ?></p>
+    </div>
+
     <article class="settings__avatar">
         <h2>Change profile picture</h2>
 
         <img src="<?php echo ($user['avatar'] !== null) ? "avatars/" . $user['avatar'] : 'assets/images/avatar.png'; ?>" id="avatar-image" alt="Avatar image">
-
-        <?php if (isset($_SESSION['errors'])) : ?>
-            <?php foreach ($_SESSION['errors'] as $error) : ?>
-                <?php
-                echo $error;
-                ?>
-            <?php
-            endforeach;
-            unset($_SESSION['errors']);
-            ?>
-            <p><? ?></p>
-        <?php endif; ?>
 
         <form action="app/users/avatar.php" method="post" enctype="multipart/form-data" class="form settings--avatar--form">
             <div class="form-group">

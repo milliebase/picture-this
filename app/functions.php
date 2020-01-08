@@ -112,10 +112,14 @@ function getInput(string $inputType)
  *
  * @return void
  */
-function validateUser()
+function authenticateUser($pdo)
 {
     if (isset($_SESSION['user']['id'])) {
-        return true;
+        $user = fetchUser($pdo, $_SESSION['user']['id']);
+
+        return $user;
+    } else {
+        redirect('/login.php');
     }
 }
 

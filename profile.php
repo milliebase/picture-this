@@ -1,14 +1,10 @@
 <?php require __DIR__ . '/views/header.php';
 
-if (validateUser()) {
-    $user = fetchUser($pdo, $_SESSION['user']['id']);
-} else {
-    redirect('/login.php');
-}
+$user = authenticateUser($pdo);
 
 if (isset($_GET['username'])) {
-    $profile = trim(filter_var($_GET['username'], FILTER_SANITIZE_STRING));
-    $profile = fetchUserByUsername($pdo, $_GET['username']);
+    $username = trim(filter_var($_GET['username'], FILTER_SANITIZE_STRING));
+    $profile = fetchUserByUsername($pdo, $username);
 }
 
 ?>

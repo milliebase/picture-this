@@ -1,4 +1,11 @@
-<?php require __DIR__ . '/views/header.php'; ?>
+<?php require __DIR__ . '/views/header.php';
+
+//Prevent logged in user to reach this page
+if (isset($_SESSION['user']['id'])) {
+    redirect('/');
+}
+
+?>
 
 <section>
     <h1>Register</h1>

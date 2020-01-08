@@ -1,10 +1,6 @@
-<?php
-if (validateUser()) {
-    $user = fetchUser($pdo, $_SESSION['user']['id']);
-}
-?>
+<?php if (isset($_SESSION['user']['id'])) : ?>
+    <?php $user = fetchUser($pdo, $_SESSION['user']['id']); ?>
 
-<?php if (validateUser()) : ?>
     <nav>
         <ul>
             <li>
@@ -28,6 +24,4 @@ if (validateUser()) {
             </li><!-- /nav-item -->
         </ul><!-- /navbar-nav -->
     </nav><!-- /navbar -->
-
-    <?php var_dump($_SESSION); ?>
 <?php endif; ?>

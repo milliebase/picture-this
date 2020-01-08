@@ -1,10 +1,6 @@
 <?php require __DIR__ . '/views/header.php';
 
-if (validateUser()) {
-    $user = fetchUser($pdo, $_SESSION['user']['id']);
-} else {
-    redirect('/login.php');
-}
+$user = authenticateUser($pdo);
 
 ?>
 

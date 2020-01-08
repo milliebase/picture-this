@@ -1,26 +1,19 @@
 <?php require __DIR__ . '/views/header.php';
 
-if (validateUser()) {
-    $user = fetchUser($pdo, $_SESSION['user']['id']);
-} else {
-    redirect('/login.php');
-}
+$user = authenticateUser($pdo);
 ?>
 
 <section class="create-posts">
 
     <h2>Create a new post</h2>
 
+    <div class="error__text">
+        <p><?php showErrors(); ?></p>
+    </div>
+
     <form action="app/posts/store.php" method="post" enctype="multipart/form-data" class="form create-post__form">
         <div class="form-group">
             <label for="post-image">Choose an image</label>
-
-            <?php if (isset($_SESSION['errors']['create-post'])) : ?>
-                <?php foreach ($_SESSION['errors']['create-post'] as $error) : ?>
-                    <p><?php echo $error; ?></p>
-                <?php endforeach; ?>
-            <?php endif; ?>
-
             <input class="form-control" type="file" accept="image/jpeg,image/png" name="post-image" id="post-image" required>
         </div><!-- /form-group -->
 
