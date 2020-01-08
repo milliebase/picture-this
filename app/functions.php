@@ -367,7 +367,7 @@ function getFilters($pdo)
 
 
 /*********************EXECUTE*************/
-function executeWithId($id)
+function executeWithId($statement, $id)
 {
     $statement->execute([
         'id' => $id,

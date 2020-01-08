@@ -9,7 +9,7 @@ if (isset($_POST['delete-account'])) {
 
     //Fetch all post ids from user
     $statement = $pdo->prepare('SELECT id FROM posts WHERE user_id = :id');
-    executeWithId($userId);
+    executeWithId($statement, $userId);
 
     $posts = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -24,19 +24,19 @@ if (isset($_POST['delete-account'])) {
 
     //Delete all likes done by user
     $statement = $pdo->prepare('DELETE FROM post_likes WHERE user_id = :id');
-    executeWithId($userId);
+    executeWithId($statement, $userId);
 
     //Deletes users posts
     $statement = $pdo->prepare('DELETE FROM posts WHERE user_id = :id');
-    executeWithId($userId);
+    executeWithId($statement, $userId);
 
     //Delete all followings
     $statement = $pdo->prepare('DELETE FROM user_follows WHERE user_id = :id OR follow_id = :id');
-    executeWithId($userId);
+    executeWithId($statement, $userId);
 
     //Deletes user
     $statement = $pdo->prepare('DELETE FROM users WHERE id = :id');
-    executeWithId($userId);
+    executeWithId($statement, $userId);
 
     session_destroy();
 
