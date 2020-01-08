@@ -20,6 +20,8 @@
             <small class="form-text text-muted">Please provide the your password (passphrase).</small>
         </div><!-- /form-group -->
 
+        <p>Don't have an account? <a href="/register.php">Register here</a></p>
+
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
 </article>
