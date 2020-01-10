@@ -8,6 +8,10 @@
             </li><!-- /nav-item -->
 
             <li>
+                <a href="/search.php">Search</a>
+            </li><!-- /nav-item -->
+
+            <li>
                 <a href="/profile.php?username=<?php echo $user['username']; ?>">Profile</a>
             </li><!-- /nav-item -->
 

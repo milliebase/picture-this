@@ -33,8 +33,7 @@ postInformations.forEach(postInformation => {
             })
                 .then(response => response.json())
                 .then(post => {
-                    description.firstElementChild.textContent =
-                        post.description;
+                    description.children[1].textContent = post.description;
                 });
 
             postDetails.classList.toggle("hidden");
