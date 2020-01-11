@@ -20,13 +20,17 @@ if (isset($_GET['username'])) {
 
         <article class="profile__header">
             <div>
-                <img src="<?php echo ($profile['avatar'] !== null) ? "avatars/" . $profile['avatar'] : 'assets/images/avatar.png'; ?>" alt="Profile picture">
+                <img src="<?php echo ($profile['avatar'] !== null) ? "/uploads/avatars/" . $profile['avatar'] : 'assets/images/avatar.png'; ?>" alt="Profile picture">
             </div>
 
             <div>
                 <h2><?php echo $profile['username']; ?></h2>
                 <p><?php echo $profile['first_name'] . ' ' . $profile['last_name']; ?></p>
                 <p> <?php echo $profile['biography']; ?></p>
+
+                <?php if ($profile['id'] === $user['id']) : ?>
+                    <a href="/settings.php">Settings</a>
+                <?php endif; ?>
 
                 <div class="follow">
                     <div class="follow__item following">

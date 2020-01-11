@@ -4,20 +4,17 @@ $user = authenticateUser($pdo);
 ?>
 
 <section class="create-posts">
-
-    <h2>Create a new post</h2>
-
     <div class="error__text">
         <p><?php showErrors(); ?></p>
     </div>
 
     <form action="app/posts/store.php" method="post" enctype="multipart/form-data" class="form create-post__form">
-        <div class="form-group">
+        <div class="form__group">
             <label for="post-image">Choose an image</label>
-            <input class="form-control" type="file" accept="image/jpeg,image/png" name="post-image" id="post-image" required>
+            <input type="file" accept="image/jpeg,image/png" name="post-image" id="post-image" required>
         </div><!-- /form-group -->
 
-        <div class="preview">
+        <div class="post__preview">
             <img src="assets/images/empty-image.svg" id="preview" alt="An image placeholder">
         </div>
 

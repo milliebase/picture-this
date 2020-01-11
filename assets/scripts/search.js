@@ -61,6 +61,17 @@ if (typeof searchButton != "undefined" && searchButton != null) {
                     users.forEach(user => {
                         appendUsers(user);
                     });
+                } else {
+                    const div = document.createElement("div");
+
+                    template = `
+                        <img src="/assets/images/users.svg" alt="Icon of users">
+                        <p>No users found</p>
+                    `;
+
+                    div.innerHTML = template;
+
+                    foundUsers.appendChild(div);
                 }
             });
     });

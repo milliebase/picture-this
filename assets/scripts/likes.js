@@ -26,7 +26,12 @@ likeForms.forEach(likeForm => {
             .then(likes => {
                 //Update likes
                 let currentLikes = likeForm.lastElementChild;
-                currentLikes.textContent = likes[0];
+
+                if (likes[0] > 0) {
+                    currentLikes.textContent = `${likes[0]} people likes this`;
+                } else {
+                    currentLikes.textContent = "Nobody has liked this yet";
+                }
             });
     });
 });

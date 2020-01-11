@@ -151,7 +151,7 @@ function fetchUserByUsername($pdo, $username)
 /*************************POSTS********************/
 function getImagePosts($pdo, $id)
 {
-    $statement = $pdo->prepare('SELECT posts.id, user_id, image, description, date, filter, username
+    $statement = $pdo->prepare('SELECT posts.id, user_id, image, description, date, filter, username, avatar
         FROM posts
         INNER JOIN users
         ON posts.user_id = users.id
@@ -182,11 +182,11 @@ function getMainFeedPosts($pdo, $userId)
 
     $statement->execute([$userId]);
 
-    $follows = $statement->fetchAll(PDO::FETCH_COLUMN);
+    $followings = $statement->fetchAll(PDO::FETCH_COLUMN);
 
-    $follows[] = $userId;
+    $followings[] = $userId;
 
-    $statement = $pdo->prepare('SELECT posts.id, user_id, image, description, date, filter, username
+    $statement = $pdo->prepare('SELECT posts.id, user_id, image, description, date, filter, username, avatar
         FROM posts
         INNER JOIN users
         ON posts.user_id = users.id
@@ -194,21 +194,21 @@ function getMainFeedPosts($pdo, $userId)
 
     $allPosts = [];
 
-    foreach ($follows as $follow) {
-        $statement->execute([$follow]);
+    foreach ($followings as $following) {
+        $statement->execute([$following]);
 
         $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($posts as $post) {
             $allPosts[] = $post;
         }
-
-        if (!empty($allPosts)) {
-            usort($allPosts, 'sortByDate');
-        }
-
-        return $allPosts;
     }
+
+    if (!empty($allPosts)) {
+        usort($allPosts, 'sortByDate');
+    }
+
+    return $allPosts;
 }
 
 function getAmountLikes($pdo, $postId)

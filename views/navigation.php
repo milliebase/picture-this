@@ -1,31 +1,31 @@
 <?php if (isset($_SESSION['user']['id'])) : ?>
     <?php $user = fetchUser($pdo, $_SESSION['user']['id']); ?>
 
-    <nav>
-        <ul>
-            <li>
-                <a href="/index.php">Home</a>
-            </li><!-- /nav-item -->
+    <section class="navigation">
+        <nav class="nav__header">
+            <img src="/assets/images/logo_pink.svg" alt="Picture this icon">
+            <h1><?php echo $config['title']; ?></h1>
+        </nav>
 
-            <li>
-                <a href="/search.php">Search</a>
-            </li><!-- /nav-item -->
+        <nav class="nav__bar">
+            <ul class="menu">
+                <li class="menu__item">
+                    <a href="/index.php"><img src="/assets/images/home.svg" alt="Home icon" class="menu__icon"></a>
+                </li><!-- /nav-item -->
 
-            <li>
-                <a href="/profile.php?username=<?php echo $user['username']; ?>">Profile</a>
-            </li><!-- /nav-item -->
+                <li class="menu__item">
+                    <a href="/search.php"><img src="/assets/images/search.svg" alt="Search icon" class="menu__icon"></a>
+                </li><!-- /nav-item -->
 
-            <li>
-                <a href="/create-post.php">Add posts</a>
-            </li><!-- /nav-item -->
+                <li class="menu__item">
+                    <a href="/create-post.php"><img src="/assets/images/add.svg" alt="Add post icon" class="menu__icon"></a>
+                </li><!-- /nav-item -->
 
-            <li>
-                <a href="/settings.php">Settings</a>
-            </li><!-- /nav-item -->
+                <li class="menu__item">
+                    <a href="/profile.php?username=<?php echo $user['username']; ?>"><img src="/assets/images/user.svg" alt="User icon" class="menu__icon"></a>
+                </li><!-- /nav-item -->
+            </ul><!-- /navbar-nav -->
+        </nav><!-- /navbar -->
 
-            <li>
-                <a href="app/users/logout.php">Logout</a>
-            </li><!-- /nav-item -->
-        </ul><!-- /navbar-nav -->
-    </nav><!-- /navbar -->
+    </section>
 <?php endif; ?>

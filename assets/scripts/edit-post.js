@@ -1,44 +1,48 @@
-const postInformations = document.querySelectorAll(".post__information");
+const posts = document.querySelectorAll(".post");
 
-//Loop through all posts
-postInformations.forEach(postInformation => {
-    const postDetails = postInformation.children[0];
+//Loop through all posts and handle edit form.
+posts.forEach(post => {
+    const userSettingsButton = post.querySelector(".post__user--settings");
+    const settingsOverlay = post.querySelector(".settings--overlay");
+    const editPostButton = post.querySelector(".settings--overlay button");
 
-    //Variables for when editform is unactive
-    const description = postInformation.children[1];
+    const informationHolder = post.querySelector(".post__information--holder");
+    const description = post.querySelector(".post__details--description p");
 
-    if (postInformation.children.length > 2) {
-        const editPostButton = postInformation.children[1].lastElementChild;
+    const postEdit = post.querySelector(".post__edit");
 
-        //Variables for when editform is active
-        const editMode = postInformation.children[2];
-        const editForm = postInformation.children[2].firstElementChild;
+    const editForm = post.querySelector(".edit__form");
 
-        //Toggle between hiding and showing editform
-        editPostButton.addEventListener("click", () => {
-            postDetails.classList.toggle("hidden");
-            description.classList.toggle("hidden");
-            editMode.classList.toggle("hidden");
+    if (
+        typeof userSettingsButton != "undefined" &&
+        userSettingsButton != null
+    ) {
+        userSettingsButton.addEventListener("click", () => {
+            settingsOverlay.classList.toggle("hidden");
         });
+    }
 
-        //Handle update of description
+    editPostButton.addEventListener("click", () => {
+        userSettingsButton.classList.toggle("hidden");
+        settingsOverlay.classList.toggle("hidden");
+        informationHolder.classList.toggle("hidden");
+
+        postEdit.classList.toggle("hidden");
+
         editForm.addEventListener("submit", event => {
             event.preventDefault();
-
             const formData = new FormData(editForm);
-
             fetch("app/posts/update.php", {
                 method: "POST",
                 body: formData
             })
                 .then(response => response.json())
                 .then(post => {
-                    description.children[1].textContent = post.description;
+                    description.textContent = post.description;
                 });
 
-            postDetails.classList.toggle("hidden");
-            description.classList.toggle("hidden");
-            editMode.classList.toggle("hidden");
+            informationHolder.classList.toggle("hidden");
+            postEdit.classList.toggle("hidden");
         });
-    }
+    });
 });

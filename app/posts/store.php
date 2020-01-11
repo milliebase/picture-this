@@ -16,7 +16,7 @@ if (isset($_FILES['post-image'], $_POST['filter'], $_POST['description'])) {
 
     //Only works for this timezone at the moment.
     date_default_timezone_set('Europe/Berlin');
-    $date = date('H:i:s - j M, Y');
+    $date = date('H:i j M, Y');
 
     handleImageErrors($postImage, '10485760', 'create-post.php');
     unset($_SESSION['errors']);

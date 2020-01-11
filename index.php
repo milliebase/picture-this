@@ -4,20 +4,15 @@ $user = authenticateUser($pdo);
 
 ?>
 
-<article>
-    <?php if (isset($_SESSION['user'])) : ?>
-        <h1>Welcome, <?php echo $user['first_name']; ?></h1>
-    <?php else : ?>
-        <h1><?php echo $config['title']; ?></h1>
-    <?php endif; ?>
-    <p>This is the home page.</p>
-</article>
-
 <section class="main__feed">
     <?php $posts = getMainFeedPosts($pdo, $user['id']); ?>
 
     <?php if (empty($posts)) : ?>
-        <p>There are no posts to show yet. Hurry up and post!</p>
+        <div class="posts__empty">
+            <p>There are no posts to show yet.</p>
+            <p>Post your own content</p>
+            <p>and start to follow your friends.</p>
+        </div>
     <?php endif; ?>
 
     <?php require __DIR__ . '/posts.php'; ?>

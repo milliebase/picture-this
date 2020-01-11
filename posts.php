@@ -1,53 +1,74 @@
 <?php if ($posts) : ?>
     <?php foreach ($posts as $post) : ?>
-        <article class="post">
-            <img src="uploads/<?php echo $post['image']; ?>" alt="<?php echo $post['description']; ?>" class="<?php echo $post['filter']; ?>" loading="lazy">
+        <div class="post">
+            <div class="post__user">
+                <div class="post__user--username">
+                    <img src="<?php echo ($post['avatar'] !== null) ? "/uploads/avatars/" . $post['avatar'] : 'assets/images/avatar.png'; ?>" alt="<?php echo $post['username']; ?>'s profile picture">
+                    <a href="profile.php?username=<?php echo $post['username'] ?>">
+                        <p><?php echo $post['username']; ?></p>
+                    </a>
+                </div>
+                <!--/post__details--username-->
+
+                <?php if ($post['user_id'] === $user['id']) : ?>
+                    <div class="post__user--settings">
+                        <img src="/assets/images/kebab.svg" alt="Kebab menu icon">
+                    </div>
+                <?php endif; ?>
+            </div>
+            <!--/post__details-->
+
+            <div class="settings--overlay hidden">
+                <button class="button">Edit post</button>
+
+                <form action="app/posts/delete.php?post_id=<?php echo $post['id']; ?>" method="post" class="delete__form">
+                    <button type="submit" name="delete" class="delete__button button">Delete post</button>
+                </form>
+
+            </div>
+
+            <div class="post__image">
+                <img src="uploads/<?php echo $post['image']; ?>" alt="<?php echo $post['description']; ?>" class="<?php echo $post['filter']; ?>" loading="lazy class=" post__image">
+            </div>
 
             <div class="post__information">
-                <div class="post__details">
-                    <p><?php echo $post['date']; ?></p>
+                <div class="post__information--holder">
+                    <div class="post__likes">
+                        <form method="post" class="like__form">
+                            <input type="hidden" name="liked-post-id" value="<?php echo $post['id']; ?>">
+                            <button type="submit" class="like__button <?php echo (isLiked($pdo, $user['id'], $post['id'])) ? 'like__button--liked' : 'like__button--unliked'; ?>"></button>
+                            <p>
+                                <?php
+                                $likes = getAmountLikes($pdo, $post['id']);
+                                echo ($likes[0] > 0) ? "$likes[0] people likes this" : "Nobody has liked this yet";
+                                ?>
+                            </p>
+                        </form>
+                    </div>
+                    <!--/post__likes-->
 
-                    <form method="post" class="like__form">
-                        <input type="hidden" name="liked-post-id" value="<?php echo $post['id']; ?>">
-                        <button type="submit" class="like__button <?php echo (isLiked($pdo, $user['id'], $post['id'])) ? 'like__button--liked' : 'like__button--unliked'; ?>"></button>
-                        <p>
-                            <?php
-                            $likes = getAmountLikes($pdo, $post['id']);
-                            echo $likes[0];
-                            ?>
-                        </p>
-                    </form>
+                    <div class="post__details--description">
+                        <p><?php echo $post['description']; ?></p>
+                    </div>
+                    <!--/post__description-->
+
+                    <div class="post__details--time">
+                        <p><?php echo $post['date']; ?></p>
+                    </div>
                 </div>
-
-                <div class="post__description">
-                    <a href="profile.php?username=<?php echo $post['username'] ?>"><?php echo $post['username']; ?></a>
-                    <p><?php echo $post['description']; ?></p>
-
-                    <?php if ($post['user_id'] === $user['id']) : ?>
-                        <button class="btn btn-primary">Edit post</button>
-                    <?php endif; ?>
-                </div>
-                <!--/information-->
 
                 <?php if ($post['user_id'] === $user['id']) : ?>
                     <div class="post__edit hidden">
                         <form method="post" class="edit__form">
-                            <label for="description-edit">Edit your description</label>
-                            <br>
-                            <textarea name="description-edit" cols="30" rows="10"><?php echo $post['description'] ?></textarea>
+                            <textarea name="description-edit"><?php echo $post['description'] ?></textarea>
                             <input type="hidden" name="id" value="<?php echo $post['id'] ?>">
-                            <br>
-                            <button type="submit" name="save" class="btn btn-primary">Save</button>
-                        </form>
-
-                        <form action="app/posts/delete.php?post_id=<?php echo $post['id']; ?>" method="post" class="delete__form">
-                            <button type="submit" name="delete" class="delete__button btn btn-primary">Delete post</button>
+                            <button type="submit" name="save" class="button">Save</button>
                         </form>
                     </div>
                     <!--/post__edit-->
                 <?php endif; ?>
             </div>
             <!--/post__information-->
-        </article>
+        </div>
     <?php endforeach; ?>
 <?php endif; ?>

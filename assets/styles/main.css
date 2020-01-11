@@ -1,11 +1,26 @@
-body {
-  width: 100vw;
-  height: 100vh;
+.login,
+.register {
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 .container {
-  width: 100%;
+  background-color: rgb(243, 243, 243);
+}
+
+.main__feed,
+.profile,
+.search,
+.create-posts {
+  padding: 19% 3%;
   height: 100%;
+}
+
+a,
+a:visited {
+  font-weight: 900;
+  color: #fca1af;
+  text-decoration: none;
 }
 
 .settings__avatar img {
@@ -31,38 +46,8 @@ body {
   border-radius: 100%;
 }
 
-.create-posts img {
-  width: 500px;
-}
-
 .profile__feed {
   width: 100%;
-}
-
-.post {
-  width: 100%;
-  padding: 5%;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
-}
-
-.post img {
-  width: 100%;
-}
-
-.like__button {
-  width: 50px;
-  height: 50px;
-  border: none;
-}
-
-.like__button--unliked {
-  background-image: url("../images/like.svg");
-  background-size: 100%;
-}
-
-.like__button--liked {
-  background-image: url("../images/liked.svg");
-  background-size: 100%;
 }
 
 .follow {
@@ -147,6 +132,8 @@ h1 {
 }
 
 p,
+a,
+li,
 .form,
 .button,
 .error__text {
@@ -203,8 +190,4 @@ input[type="text"]:focus {
   font-weight: 700;
   margin: 0;
   color: white;
-}
-
-.hidden {
-  display: none;
 }

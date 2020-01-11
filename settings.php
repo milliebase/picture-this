@@ -12,7 +12,7 @@ $user = authenticateUser($pdo);
     <article class="settings__avatar">
         <h2>Change profile picture</h2>
 
-        <img src="<?php echo ($user['avatar'] !== null) ? "avatars/" . $user['avatar'] : 'assets/images/avatar.png'; ?>" id="avatar-image" alt="Avatar image">
+        <img src="<?php echo ($user['avatar'] !== null) ? "/uploads/avatars/" . $user['avatar'] : 'assets/images/avatar.png'; ?>" id="avatar-image" alt="Avatar image">
 
         <form action="app/users/avatar.php" method="post" enctype="multipart/form-data" class="form settings--avatar--form">
             <div class="form-group">
@@ -93,6 +93,8 @@ $user = authenticateUser($pdo);
                 <!--/form-group-->
             </form>
             <button class="delete-account__cancel">Cancel</button>
+
+            <a href="app/users/logout.php">Logout</a>
         </div>
     </article>
 </section>

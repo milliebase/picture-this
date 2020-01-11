@@ -7,7 +7,7 @@ require __DIR__ . '/../app/autoload.php';
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 
     <title><?php echo $config['title']; ?></title>
 
@@ -17,6 +17,9 @@ require __DIR__ . '/../app/autoload.php';
     <link rel="stylesheet" href="/assets/styles/main.css">
     <link rel="stylesheet" href="/assets/styles/login.css">
     <link rel="stylesheet" href="/assets/styles/register.css">
+    <link rel="stylesheet" href="/assets/styles/nav.css">
+    <link rel="stylesheet" href="/assets/styles/posts.css">
+    <link rel="stylesheet" href="/assets/styles/create-posts.css">
     <link rel="stylesheet" href="dist/instagram.css">
 </head>
 

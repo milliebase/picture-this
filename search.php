@@ -6,7 +6,7 @@ $user = authenticateUser($pdo);
 
 <section class="search">
 
-    <form action="app/users/search.php" method="post" class="form search__form">
+    <form method="post" class="form search__form">
         <div class="form__group">
             <label for="search">Search</label>
             <input type="text" name="search" id="search" required>

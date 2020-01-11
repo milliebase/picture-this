@@ -1,0 +1,49 @@
+.nav__bar,
+.nav__header {
+  width: 100%;
+  background-color: white;
+  box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  z-index: 99;
+}
+
+.nav__header {
+  display: flex;
+  padding: 3% 5%;
+  top: 0;
+}
+
+.nav__bar {
+  bottom: 0;
+}
+
+.nav__header h1 {
+  font-size: 1.5em;
+}
+
+.nav__header img {
+  width: 40px;
+  margin-right: 5%;
+}
+
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu__item {
+  width: 40px;
+  height: 40px;
+}
+
+.menu__item a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.menu__icon {
+  width: 60%;
+}

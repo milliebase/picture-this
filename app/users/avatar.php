@@ -28,9 +28,9 @@ if (isset($_FILES['avatar'])) {
 
     handleImageErrors($avatar, '2097152', 'settings.php');
 
-    unlink(__DIR__ . "/../../avatars/$currentAvatar");
+    unlink(__DIR__ . "/../../uploads/avatars/$currentAvatar");
 
-    move_uploaded_file($avatar['tmp_name'], __DIR__ . "/../../avatars/$newAvatar");
+    move_uploaded_file($avatar['tmp_name'], __DIR__ . "/../../uploads/avatars/$newAvatar");
 
     $statement = $pdo->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
 
