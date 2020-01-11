@@ -8,9 +8,11 @@ const readImgURL = function(reader, chosenImage, preview) {
         preview.src = e.target.result;
 
         const filterHolder = document.querySelector(".filter__holder");
-        filterHolder.classList.toggle("hidden");
+
+        filterHolder.classList.remove("hidden");
 
         const filterButtons = document.querySelectorAll(".filter__button");
+
         filterButtons.forEach(filterButton => {
             filterButton.style.backgroundImage = `url('${e.target.result}')`;
 

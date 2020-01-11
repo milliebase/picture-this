@@ -10,14 +10,12 @@ $user = authenticateUser($pdo);
 
     <form action="app/posts/store.php" method="post" enctype="multipart/form-data" class="form create-post__form">
         <div class="form__group">
-            <label for="post-image">Choose an image</label>
             <input type="file" accept="image/jpeg,image/png" name="post-image" id="post-image" required>
         </div><!-- /form-group -->
 
         <div class="post__preview">
             <img src="assets/images/empty-image.svg" id="preview" alt="An image placeholder">
         </div>
-
 
         <div class="filter__holder hidden">
             <?php $filters = getFilters($pdo); ?>
@@ -33,13 +31,12 @@ $user = authenticateUser($pdo);
         </div>
 
 
-        <div class="form-group">
+        <div class="form__group">
             <label for="description">Add a description</label>
-            <br>
             <textarea name="description" id="description" cols="50" rows="10" placeholder="Write your image text here"></textarea>
         </div><!-- /form-group -->
 
-        <button type="submit" class="btn btn-primary">Share post</button>
+        <button type="submit" class="button">Share post</button>
     </form>
 
 </section>

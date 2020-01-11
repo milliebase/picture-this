@@ -9,7 +9,7 @@
 
 .posts__empty {
   margin-top: 5%;
-  height: 90%;
+  height: 100%;
   padding: 5%;
   justify-content: center;
   align-items: center;
@@ -64,14 +64,6 @@
 .post__user--settings img {
   height: 90%;
 }
-
-/* .post__edit--button .button {
-  font-size: 0.8em;
-  font-weight: 400;
-  width: max-content;
-  padding: 8% 30%;
-  margin-top: 2%;
-} */
 
 .settings--overlay {
   width: 94%;
@@ -166,14 +158,4 @@
 .edit__form {
   display: flex;
   flex-direction: column;
-}
-
-.edit__form textarea {
-  border: 1px solid rgba(128, 128, 128, 0.349);
-  border-radius: 10px;
-  resize: none;
-}
-
-.hidden {
-  display: none;
 }
