@@ -3,7 +3,7 @@
 $user = authenticateUser($pdo);
 ?>
 
-<section class="create-posts">
+<section class="create-post">
     <div class="error__text">
         <p><?php showErrors(); ?></p>
     </div>
@@ -18,16 +18,20 @@ $user = authenticateUser($pdo);
         </div>
 
         <div class="filter__holder hidden">
+            <h3>Add a filter</h3>
+
             <?php $filters = getFilters($pdo); ?>
-            <?php foreach ($filters as $filter) : ?>
-                <div class="filter">
-                    <p><?php echo $filter['filter_name']; ?></p>
-                    <label>
-                        <input type="radio" name="filter" value="<?php echo $filter['filter_class']; ?>">
-                        <div class="filter__button <?php echo $filter['filter_class']; ?>"></div>
-                    </label>
-                </div>
-            <?php endforeach; ?>
+            <div class="filters">
+                <?php foreach ($filters as $filter) : ?>
+                    <div class="filter">
+                        <p><?php echo $filter['filter_name']; ?></p>
+                        <label>
+                            <input type="radio" name="filter" value="<?php echo $filter['filter_class']; ?>">
+                            <div class="filter__button <?php echo $filter['filter_class']; ?>"></div>
+                        </label>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
 
 

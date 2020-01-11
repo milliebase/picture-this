@@ -20,9 +20,11 @@ if (typeof followForm != "undefined" && followForm != null) {
 
                 if (follows > Number(followersNumber.textContent)) {
                     followButton.textContent = "Unfollow";
+                    followButton.classList.add("follow__button--unfollow");
                     followersNumber.textContent = follows;
                 } else if (follows < Number(followersNumber.textContent)) {
                     followButton.textContent = "Follow";
+                    followButton.classList.remove("follow__button--unfollow");
                     followersNumber.textContent = follows;
                 }
             });

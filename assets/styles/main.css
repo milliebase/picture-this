@@ -1,21 +1,21 @@
+html,
+body {
+  height: 100%;
+}
+
 .login,
 .register,
 .main__feed,
-.search {
-  min-width: 100vw;
+.search,
+.create-post {
+  width: 100%;
   min-height: 100vh;
+  padding: 19% 3%;
 }
 
 .container {
+  min-height: 100%;
   background-color: rgb(243, 243, 243);
-}
-
-.main__feed,
-.profile,
-.search,
-.create-posts {
-  padding: 19% 3%;
-  height: 100%;
 }
 
 a,
@@ -30,38 +30,6 @@ a:visited {
   height: 200px;
 }
 
-.profile {
-  width: 100%;
-}
-
-.profile__header {
-  width: 100%;
-  display: flex;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  padding: 5%;
-}
-
-.profile__header img {
-  width: 200px;
-  height: 200px;
-  border-radius: 100%;
-}
-
-.profile__feed {
-  width: 100%;
-}
-
-.follow {
-  display: flex;
-}
-
-.follow__item {
-  width: 150px;
-  height: 60px;
-  background-color: pink;
-  margin-right: 10px;
-}
 /*****MAIN CSS****/
 
 h1 {
@@ -77,18 +45,21 @@ h1 {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.205);
   border-radius: 10px;
   text-transform: uppercase;
-  padding: 3% 10%;
+  padding: 6% 10%;
   background-color: white;
-  font-size: 1em;
-  font-weight: 700;
   border: none;
   color: #ffffff;
   background-color: #fca1af;
+  width: 100%;
+  font-weight: 600;
+  font-size: 0.7em;
 }
 
 p,
 a,
 li,
+h2,
+h3,
 .form,
 .button,
 .error__text {
@@ -100,8 +71,6 @@ label {
   font-size: 0.7em;
   color: #fca1af;
 }
-
-/*INPUT FIELDS*/
 
 input[type="email"],
 input[type="password"],
@@ -118,10 +87,7 @@ input[type="file"] {
   border-top-right-radius: 5px;
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="text"]:focus,
-input[type="file"]:focus {
+*:focus {
   outline: none;
 }
 
@@ -153,4 +119,25 @@ textarea {
   font-weight: 700;
   margin: 0;
   color: white;
+}
+
+.posts__empty,
+.profile__empty {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin-top: 5%;
+  height: 100%;
+  padding: 5%;
+  justify-content: center;
+  align-items: center;
+}
+
+.posts__empty p,
+.profile__empty p {
+  width: 80%;
+  text-align: center;
+  margin: 0;
 }

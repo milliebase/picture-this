@@ -1,0 +1,116 @@
+.profile {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile__header,
+.profile__header--stats,
+.profile__header--details {
+  width: 100%;
+  height: 100%;
+}
+
+.profile__header,
+.profile__header--stats,
+.follow,
+.follow__item {
+  display: flex;
+}
+
+.profile__header {
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 5%;
+  margin-bottom: 5%;
+  margin-top: 17%;
+}
+
+.profile__header--stats {
+  justify-content: space-between;
+}
+
+.profile__header--stats img {
+  width: 27%;
+  height: 27%;
+  border-radius: 100%;
+}
+
+.follow {
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  border-radius: 10px;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.follow__item {
+  width: 48%;
+  height: 70%;
+  font-size: 0.8em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5%;
+}
+
+.follow__item:first-child {
+  border-right: 1px solid rgba(128, 128, 128, 0.233);
+}
+
+.follow__item h3,
+.follow__item p {
+  margin: 0;
+}
+
+.follow__item h3 {
+  font-weight: 800;
+}
+
+.profile__header--details {
+  padding: 5% 0 0;
+}
+
+.profile__header--details h2,
+.profile__header--details p {
+  margin: 0;
+}
+
+.profile__header--details h2 {
+  color: #fca1af;
+}
+
+.profile__header--details > p:first-of-type {
+  font-weight: 700;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  padding-bottom: 5%;
+}
+
+.profile__header--details .button {
+  padding: 4%;
+  margin-top: 5%;
+}
+
+.follow__button--unfollow {
+  background-color: rgb(243, 243, 243);
+  color: #fca1af;
+}
+
+.profile__feed {
+  width: 100%;
+  padding: 0 3% 19% 3%;
+}
+
+/****EMPTY POSTS OR USER****/
+.profile__empty {
+  position: relative;
+  top: 80px;
+  width: 90%;
+}
+
+.profile .posts__empty {
+  margin-top: 0;
+}

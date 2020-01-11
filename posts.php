@@ -8,7 +8,7 @@
                         <p><?php echo $post['username']; ?></p>
                     </a>
                 </div>
-                <!--/post__details--username-->
+
 
                 <?php if ($post['user_id'] === $user['id']) : ?>
                     <div class="post__user--settings">
@@ -16,7 +16,7 @@
                     </div>
                 <?php endif; ?>
             </div>
-            <!--/post__details-->
+            <!--/post__user-->
 
             <div class="settings--overlay hidden">
                 <button class="button">Edit post</button>
@@ -24,7 +24,6 @@
                 <form action="app/posts/delete.php?post_id=<?php echo $post['id']; ?>" method="post" class="delete__form">
                     <button type="submit" name="delete" class="delete__button button">Delete post</button>
                 </form>
-
             </div>
 
             <div class="post__image">
@@ -62,13 +61,18 @@
                         <form method="post" class="edit__form">
                             <textarea name="description-edit"><?php echo $post['description'] ?></textarea>
                             <input type="hidden" name="id" value="<?php echo $post['id'] ?>">
-                            <button type="submit" name="save" class="button">Save</button>
+                            <div class=" edit__form--buttons">
+                                <div class="edit__form--submit">
+                                    <button type="submit" name="save" class="button">Save</button>
+                                </div>
+                                <p>Cancel</p>
+                            </div>
                         </form>
                     </div>
-                    <!--/post__edit-->
                 <?php endif; ?>
             </div>
             <!--/post__information-->
         </div>
+        <!--/.post-->
     <?php endforeach; ?>
 <?php endif; ?>

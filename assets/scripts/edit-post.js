@@ -13,6 +13,8 @@ posts.forEach(post => {
 
     const editForm = post.querySelector(".edit__form");
 
+    const editCancelButton = post.querySelector(".edit__form--buttons p");
+
     if (
         typeof userSettingsButton != "undefined" &&
         userSettingsButton != null
@@ -43,6 +45,15 @@ posts.forEach(post => {
 
             informationHolder.classList.toggle("hidden");
             postEdit.classList.toggle("hidden");
+            userSettingsButton.classList.toggle("hidden");
         });
     });
+
+    if (typeof editCancelButton != "undefined" && editCancelButton != null) {
+        editCancelButton.addEventListener("click", () => {
+            informationHolder.classList.toggle("hidden");
+            postEdit.classList.toggle("hidden");
+            userSettingsButton.classList.toggle("hidden");
+        });
+    }
 });

@@ -1,4 +1,7 @@
-.create-posts {
+.create-post,
+.filter__form,
+.filter label,
+.filter__button {
   width: 100%;
   height: 100%;
 }
@@ -18,9 +21,16 @@
   margin-bottom: 8%;
 }
 
+.create-post__form label {
+  font-size: 0.9em;
+  padding-top: 5%;
+  font-weight: 700;
+}
+
 .post__preview {
   display: flex;
   justify-content: center;
+  margin-top: 5%;
 }
 
 .post__preview img {
@@ -30,24 +40,27 @@
 }
 
 .create-post__form .button {
-  width: 100%;
-  font-weight: 400;
-  font-size: 0.7em;
   padding: 4%;
   margin: 5% 0 3%;
 }
 
-.filter__form {
-  width: 100%;
-  height: 100%;
+.filter__holder {
+  height: min-content;
+  margin: 6% 0;
 }
 
-.filter__holder {
+.filter__holder h3 {
+  margin: 0;
+  font-size: 0.9em;
+  color: #fca1af;
+}
+
+.filters {
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;
   height: min-content;
-  margin: 6% 0;
+  margin: 2% 0;
 }
 
 .filter {
@@ -61,14 +74,7 @@
   margin: 0;
 }
 
-.filter label {
-  width: 100%;
-  height: 100%;
-}
-
 .filter__button {
-  width: 100%;
-  height: 100%;
   background-image: url("/assets/images/sample.jpeg");
   background-size: cover;
   background-position: center;
