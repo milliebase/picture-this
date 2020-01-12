@@ -48,6 +48,8 @@ __Extra features:__
 
 - [x] As a user I'm able to delete my account along with all posts and comments.
 
+- [x] As a user I'm able to search for other users.
+
 ## Installation
 1. To be able to play this game, clone this repository to your directory through the terminal.
 ```
