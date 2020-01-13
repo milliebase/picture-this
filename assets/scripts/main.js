@@ -50,3 +50,33 @@ if (window.location.pathname === "/settings.php") {
 
     readImgURL(reader, chooseAvatar, previewAvatar);
 }
+
+const showMoreForm = document.querySelector(".show-more__form");
+
+showMoreForm.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const formData = new FormData(showMoreForm);
+
+    fetch("app/posts/show-more.php", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => response.json())
+        .then(post => {
+            const showMoreDescription = showMoreForm.parentNode.children[0];
+            const showMoreButton = showMoreForm.querySelector("button");
+
+            if (showMoreDescription.textContent.length > 100) {
+                showMoreDescription.innerHTML = post.description.substring(
+                    0,
+                    100
+                );
+
+                showMoreButton.textContent = "Show more";
+            } else {
+                showMoreDescription.innerHTML = post.description;
+                showMoreButton.textContent = "Show less";
+            }
+        });
+});

@@ -123,13 +123,13 @@
 
 .post__information {
   padding: 3%;
-  height: 22vh;
+  min-height: 22vh;
 }
 
 .post__information--holder,
 .post__edit {
   width: 100%;
-  height: 100%;
+  min-height: 20vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -146,7 +146,7 @@
 .like__form p {
   margin: 2.5% 0;
   font-size: 0.7em;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .like__button {
@@ -175,11 +175,22 @@
 
 .post__details--description p {
   margin: 0;
+  padding: 0 2%;
+  white-space: pre-wrap;
 }
 
 .post__details--time p {
   font-size: 0.6em;
   font-weight: 200;
+  padding: 0 2%;
+}
+
+.show-more__button {
+  border: none;
+  background-color: white;
+  font-weight: 600;
+  color: #fa90a0;
+  font-size: 0.9em;
 }
 
 .edit__form {
@@ -225,5 +236,13 @@
 
   .delete-post__overlay {
     width: 40%;
+  }
+
+  .post__details--description {
+    padding-top: 0;
+  }
+
+  .show-more__button {
+    font-size: 0.7em;
   }
 }

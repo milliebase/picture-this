@@ -58,7 +58,15 @@
                     <!--/post__likes-->
 
                     <div class="post__details--description">
-                        <p><?php echo $post['description']; ?></p>
+                        <?php if (strlen($post['description']) > 100) : ?>
+                            <p><?php echo substr($post['description'], 0, 100); ?>...</p>
+                            <form method="post" class="show-more__form">
+                                <input type="hidden" name="id" value="<?php echo $post['id'] ?>">
+                                <button type="submit" name="save" class="show-more__button">Show more</button>
+                            </form>
+                        <?php else : ?>
+                            <p><?php echo $post['description']; ?></p>
+                        <?php endif; ?>
                     </div>
                     <!--/post__description-->
 
