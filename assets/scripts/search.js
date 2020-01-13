@@ -76,8 +76,6 @@ if (typeof searchButton != "undefined" && searchButton != null) {
         })
             .then(response => response.json())
             .then(users => {
-                console.log(users);
-
                 foundUsers.innerHTML = "";
 
                 if (users !== "No users") {

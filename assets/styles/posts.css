@@ -54,7 +54,7 @@
   height: 90%;
 }
 
-.settings--overlay {
+.settings__overlay {
   width: 94%;
   height: 20%;
   background-color: #ffffff;
@@ -67,8 +67,42 @@
   padding: 2% 5%;
 }
 
-.settings--overlay .button {
+.settings__overlay .button {
   padding: 4%;
+}
+
+.delete-post__overlay {
+  background-color: rgba(0, 0, 0, 0.432);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  backdrop-filter: blur(4px);
+  width: 94%;
+  height: 75%;
+  position: absolute;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-post__overlay label {
+  font-size: 1em;
+  font-weight: 800;
+}
+
+.delete-post__overlay label,
+.delete-post__overlay p {
+  color: white;
+}
+
+.delete-post__overlay .button {
+  width: 50%;
+}
+
+.delete-post__overlay .delete__form__buttons {
+  display: flex;
+  justify-content: center;
 }
 
 .post__image {
@@ -176,9 +210,10 @@
 
 /****MEDIA QUERIES FOR DESKTOP****/
 @media (min-width: 1024px) {
-  .settings--overlay {
+  .settings__overlay {
     width: 40%;
-    margin-top: 3%;
+    height: 25%;
+    margin-top: 4%;
     padding: 2%;
   }
 }

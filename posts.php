@@ -18,11 +18,22 @@
             </div>
             <!--/post__user-->
 
-            <div class="settings--overlay hidden">
+            <div class="settings__overlay hidden">
                 <button class="button">Edit post</button>
 
-                <form action="app/posts/delete.php?post_id=<?php echo $post['id']; ?>" method="post" class="delete__form">
-                    <button type="submit" name="delete" class="delete__button button">Delete post</button>
+                <button class="delete__button button">Delete post</button>
+            </div>
+
+            <div class="delete-post__overlay hidden">
+                <form action="app/posts/delete.php?post_id=<?php echo $post['id']; ?>" method="post" class="delete-post__form">
+                    <div class="form__group">
+                        <label>Are you sure you want to delete your post?</label>
+                        <div class="delete__form__buttons">
+                            <button type="submit" name="delete" class="button">Yes</button>
+                            <p class="delete__cancel">Cancel</p>
+                        </div>
+                    </div>
+                    <!--/form__group-->
                 </form>
             </div>
 

@@ -68,12 +68,6 @@
   color: black;
 }
 
-.delete-account__form__buttons {
-  width: 100%;
-  display: flex;
-  margin-top: 5%;
-}
-
 .delete-account__form p {
   width: 40%;
 }
@@ -81,14 +75,6 @@
 .delete-account__button {
   margin-top: 0;
   background-color: #b40021d0;
-}
-
-.delete-account__form .form__group .button {
-  background-color: #b40021d0;
-  width: 35%;
-  margin-top: 0;
-  margin-right: 5%;
-  padding: 4% 10%;
 }
 
 .logout {

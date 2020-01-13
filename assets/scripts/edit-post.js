@@ -3,8 +3,8 @@ const posts = document.querySelectorAll(".post");
 //Loop through all posts and handle edit form.
 posts.forEach(post => {
     const userSettingsButton = post.querySelector(".post__user--settings");
-    const settingsOverlay = post.querySelector(".settings--overlay");
-    const editPostButton = post.querySelector(".settings--overlay button");
+    const settingsOverlay = post.querySelector(".settings__overlay");
+    const editPostButton = post.querySelector(".settings__overlay button");
 
     const informationHolder = post.querySelector(".post__information--holder");
     const description = post.querySelector(".post__details--description p");
@@ -56,4 +56,20 @@ posts.forEach(post => {
             userSettingsButton.classList.toggle("hidden");
         });
     }
+
+    const deletePostButton = post.querySelector(".delete__button");
+    const deletePostOverlay = post.querySelector(".delete-post__overlay");
+
+    deletePostButton.addEventListener("click", () => {
+        deletePostOverlay.classList.toggle("hidden");
+        settingsOverlay.classList.toggle("hidden");
+    });
+
+    const deletePostCancel = post.querySelector(
+        ".delete-post__overlay .delete__cancel"
+    );
+
+    deletePostCancel.addEventListener("click", () => {
+        deletePostOverlay.classList.toggle("hidden");
+    });
 });

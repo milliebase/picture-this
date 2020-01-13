@@ -129,6 +129,20 @@ textarea {
   font-size: 0.7em;
 }
 
+.delete__form__buttons {
+  width: 100%;
+  display: flex;
+  margin-top: 5%;
+}
+
+.delete__form__buttons .button {
+  background-color: #9b001c;
+  width: 35%;
+  margin-top: 0;
+  margin-right: 5%;
+  padding: 4% 10%;
+}
+
 /****MEDIA QUERIES FOR DESKTOP****/
 @media (min-width: 1024px) {
   .section {

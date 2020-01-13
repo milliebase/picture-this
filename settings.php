@@ -125,9 +125,9 @@ $user = authenticateUser($pdo);
                         <div class="form__group">
                             <label>Are you sure you want to delete your account?</label>
 
-                            <div class="delete-account__form__buttons">
+                            <div class="delete__form__buttons">
                                 <button type="submit" name="delete-account" class="button">Yes</button>
-                                <p class="delete-account__cancel">Cancel</p>
+                                <p class="delete__cancel">Cancel</p>
                             </div>
                         </div>
                         <!--/form__group-->
