@@ -9,8 +9,10 @@
 
 .nav__header {
   display: flex;
+  align-items: center;
   padding: 3% 5%;
   top: 0;
+  height: 8vh;
 }
 
 .nav__bar {
@@ -18,7 +20,7 @@
 }
 
 .nav__header h1 {
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .nav__header img {
@@ -69,6 +71,10 @@
     padding: 1% 5%;
     position: initial;
     width: 30%;
+  }
+
+  .nav__header h1 {
+    font-size: 1em;
   }
 
   .nav__bar {
