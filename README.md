@@ -77,7 +77,8 @@ Betsy Alva Soplin
 16th january 2020
 
 ## Tested by
-__TBA__
+<a href="https://github.com/jesperlndqvst">Jesper Lundqvist</a>
+<a href="https://github.com/mikaelaalu">Mikaela Lundsgård</a>
 
 ## Code review
 __TBA__
