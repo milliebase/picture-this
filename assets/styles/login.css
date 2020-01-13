@@ -51,16 +51,21 @@
   padding: 5%;
 }
 
-.login__form .error__text {
+.login__form .message {
   height: 20%;
 }
 
 .login__form .error__text p {
-  color: #fca1af;
+  color: #fa90a0;
 }
 
 .login__form__input-holder {
   height: 60%;
   justify-content: space-evenly;
   margin-bottom: 15%;
+}
+
+.login .message {
+  padding: 3% 5%;
+  margin-bottom: 5%;
 }

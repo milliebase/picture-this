@@ -4,15 +4,14 @@ $user = authenticateUser($pdo);
 
 ?>
 
-<section class="search section">
+<section class="search">
 
     <form method="post" class="form search__form">
         <div class="form__group">
-            <label for="search">Search</label>
             <input type="text" name="search" id="search" required>
         </div><!-- /form-group -->
 
-        <button type="submit" class="button ">Search</button>
+        <button type="submit" class="button "></button>
     </form>
 
     <div class="found__users">

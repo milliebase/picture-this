@@ -55,7 +55,7 @@
   margin-bottom: 5%;
 }
 
-.settings button {
+.settings button:not(.delete-account__button) {
   margin-top: 5%;
 }
 
@@ -65,6 +65,7 @@
 
 .delete-account__button {
   margin-top: 0;
+  background-color: #b40021d0;
 }
 
 .logout {

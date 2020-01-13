@@ -80,7 +80,7 @@
 }
 
 .profile__header--details h2 {
-  color: #fca1af;
+  color: #fa90a0;
 }
 
 .profile__header--details > p:first-of-type {
@@ -97,7 +97,7 @@
 
 .follow__button--unfollow {
   background-color: rgb(243, 243, 243);
-  color: #fca1af;
+  color: #fa90a0;
 }
 
 .profile__feed {

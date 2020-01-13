@@ -27,7 +27,7 @@
             </div>
 
             <div class="post__image">
-                <img src="uploads/<?php echo $post['image']; ?>" alt="<?php echo $post['description']; ?>" class="<?php echo $post['filter']; ?>" loading="lazy class=" post__image">
+                <img src="uploads/<?php echo $post['image']; ?>" alt="<?php echo $post['description']; ?>" class="<?php echo $post['filter']; ?>" loading="lazy" class=" post__image">
             </div>
 
             <div class="post__information">
