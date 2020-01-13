@@ -4,7 +4,9 @@
     <section class="navigation">
         <nav class="nav__header">
             <img src="/assets/images/logo_pink.svg" alt="Picture this icon">
-            <h1><?php echo $config['title']; ?></h1>
+            <a href="index.php">
+                <h1><?php echo $config['title']; ?></h1>
+            </a>
         </nav>
 
         <nav class="nav__bar">

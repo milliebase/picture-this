@@ -43,6 +43,27 @@ $user = authenticateUser($pdo);
             </div>
         </article>
 
+        <article class="settings__menu__item change-username">
+            <h2>Change username</h2>
+
+            <div class="settings__menu__item--active change-username--active hidden">
+
+                <div class="message hidden">
+                    <p></p>
+                </div>
+
+                <p>Current username: <?php echo $user['username']; ?></p>
+
+                <form action="app/users/username.php" method="post" class="form change-username__form">
+                    <div class="form__group">
+                        <input type="text" name="username" placeholder="Type in your new username" required>
+                    </div><!-- /form__group -->
+
+                    <button type="submit" class="button">Save</button>
+                </form>
+            </div>
+        </article>
+
         <article class="settings__menu__item change-email">
             <h2>Change email</h2>
 
@@ -103,11 +124,14 @@ $user = authenticateUser($pdo);
                     <form action="app/users/delete-account.php" method="post" class="form delete-account__form">
                         <div class="form__group">
                             <label>Are you sure you want to delete your account?</label>
-                            <button type="submit" name="delete-account" class="button">Yes</button>
+
+                            <div class="delete-account__form__buttons">
+                                <button type="submit" name="delete-account" class="button">Yes</button>
+                                <p class="delete-account__cancel">Cancel</p>
+                            </div>
                         </div>
                         <!--/form__group-->
                     </form>
-                    <button class="button delete-account__cancel">Cancel</button>
                 </div>
             </div>
         </article>

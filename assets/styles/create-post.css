@@ -97,3 +97,10 @@
 [type="radio"]:checked + .filter__button {
   border: 5px solid rgb(85, 46, 75);
 }
+
+/****MEDIA QUERIES FOR DESKTOP****/
+@media (min-width: 1024px) {
+  .post__preview img {
+    height: 300px;
+  }
+}

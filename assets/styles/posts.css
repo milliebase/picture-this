@@ -83,7 +83,7 @@
 
 .post__information {
   padding: 3%;
-  height: 30%;
+  height: 22vh;
 }
 
 .post__information--holder,
@@ -172,4 +172,13 @@
 .edit__form p {
   width: 20%;
   margin: 0;
+}
+
+/****MEDIA QUERIES FOR DESKTOP****/
+@media (min-width: 1024px) {
+  .settings--overlay {
+    width: 40%;
+    margin-top: 3%;
+    padding: 2%;
+  }
 }

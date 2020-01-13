@@ -53,7 +53,7 @@ if (isset($_SESSION['user']['id'])) {
             </div>
             <!--/form__group-->
 
-            <button type="submit" class="button button--disabled">Sign up</button>
+            <button type="submit" class="button">Sign up</button>
         </form>
     </div>
 </section>

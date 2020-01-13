@@ -4,7 +4,7 @@ const foundUsers = document.querySelector(".found__users");
 
 const appendUsers = function(user, isAvatar) {
     let username = user.username;
-    let name = user.first_name + " " + user.last_name;
+    let name = user.name;
 
     let avatar;
 
@@ -44,6 +44,8 @@ if (typeof searchInput != "undefined" && searchInput != null) {
             .then(response => response.json())
             .then(users => {
                 foundUsers.innerHTML = "";
+
+                console.log(users);
 
                 if (users !== "No users") {
                     users.forEach(user => {

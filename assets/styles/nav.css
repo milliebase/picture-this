@@ -47,3 +47,42 @@
 .menu__icon {
   width: 60%;
 }
+
+/****MEDIA QUERIES FOR DESKTOP****/
+@media (min-width: 1024px) {
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: white;
+    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    z-index: 99;
+  }
+
+  .nav__header,
+  .nav__bar {
+    box-shadow: none;
+  }
+
+  .nav__header {
+    padding: 1% 5%;
+    position: initial;
+    width: 30%;
+  }
+
+  .nav__bar {
+    position: initial;
+    display: flex;
+    align-items: center;
+    width: 25%;
+  }
+
+  .menu {
+    margin: 0;
+  }
+
+  .menu li:first-of-type {
+    display: none;
+  }
+}

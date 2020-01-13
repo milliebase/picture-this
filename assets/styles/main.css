@@ -128,3 +128,44 @@ textarea {
   font-weight: 600;
   font-size: 0.7em;
 }
+
+/****MEDIA QUERIES FOR DESKTOP****/
+@media (min-width: 1024px) {
+  .section {
+    padding: 8% 30%;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  h2 {
+    font-size: 0.95em;
+  }
+
+  h3 {
+    font-size: 0.85em;
+  }
+
+  p {
+    font-size: 0.7em;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  input[type="file"] {
+    padding: 8px 5px;
+    line-height: 15px;
+    font-size: 0.8em;
+  }
+
+  .button {
+    padding: 3% 5%;
+    width: 100%;
+  }
+
+  .message p {
+    font-size: 0.65em;
+  }
+}

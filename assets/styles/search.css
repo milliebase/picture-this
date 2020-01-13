@@ -90,3 +90,33 @@
 .no__users p {
   margin: 0;
 }
+
+/****MEDIA QUERIES FOR DESKTOP****/
+@media (min-width: 1024px) {
+  .search__form {
+    margin: 5% 0 0;
+    padding: 2% 30%;
+  }
+
+  .search__form .form__group {
+    width: 95%;
+  }
+
+  .search__form input[type="text"] {
+    padding: 15px 5px;
+    margin-right: 2%;
+  }
+
+  .search__form .button {
+    width: 8%;
+  }
+
+  .found__users {
+    padding: 2% 30% 0;
+    margin: 0;
+  }
+
+  .user {
+    margin-bottom: 2%;
+  }
+}

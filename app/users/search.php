@@ -10,8 +10,8 @@ if (isset($_POST['search'])) {
     if (!empty($search)) {
         $search = "%$search%";
 
-        $statement = $pdo->query("SELECT username, first_name, last_name, avatar
-        FROM users WHERE username LIKE ? OR first_name LIKE ?");
+        $statement = $pdo->query("SELECT username, (first_name || \" \" || last_name) AS name, avatar
+        FROM users WHERE username LIKE ? OR name LIKE ?");
 
         $statement->execute([$search, $search]);
 

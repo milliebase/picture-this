@@ -115,3 +115,45 @@
 .profile .posts__empty {
   margin-top: 0;
 }
+
+/****MEDIA QUERIES FOR DESKTOP****/
+@media (min-width: 1024px) {
+  .profile__header {
+    margin: 5% 5% 0;
+    padding: 2% 30%;
+    height: 40vh;
+  }
+
+  .profile__header--stats,
+  .profile__header--details {
+    height: 30%;
+  }
+
+  .profile__header--stats img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .profile__header--details > p:first-of-type {
+    padding-bottom: 2%;
+  }
+
+  .follow {
+    height: 7vh;
+  }
+
+  .profile__feed {
+    padding: 5% 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile .button {
+    padding: 2% 5%;
+  }
+
+  .profile__empty {
+    top: 50px;
+  }
+}

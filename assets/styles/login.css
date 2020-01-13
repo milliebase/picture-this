@@ -69,3 +69,40 @@
   padding: 3% 5%;
   margin-bottom: 5%;
 }
+
+/****MEDIA QUERIES FOR DESKTOP****/
+@media (min-width: 1024px) {
+  .login {
+    padding: 5% 30%;
+  }
+
+  .login__header img {
+    width: 15%;
+  }
+
+  .login__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login__form .message {
+    width: 100%;
+  }
+
+  .login__form__input-holder {
+    width: 100%;
+    margin-bottom: 5%;
+    height: 20vh;
+  }
+
+  .login__form input[type="email"],
+  .login__form input[type="password"] {
+    padding: 10px 5px;
+    line-height: 20px;
+  }
+
+  .login__form .button {
+    width: 50%;
+  }
+}
