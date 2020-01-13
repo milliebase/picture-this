@@ -4,7 +4,7 @@ $user = authenticateUser($pdo);
 
 ?>
 
-<section class="search">
+<section class="search section">
 
     <form method="post" class="form search__form">
         <div class="form__group">

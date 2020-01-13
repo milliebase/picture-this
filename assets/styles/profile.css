@@ -33,8 +33,9 @@
 }
 
 .profile__header--stats img {
-  width: 27%;
-  height: 27%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
   border-radius: 100%;
 }
 

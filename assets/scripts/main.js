@@ -9,8 +9,9 @@ const readImgURL = function(reader, chosenImage, preview) {
 
         const filterHolder = document.querySelector(".filter__holder");
 
-        filterHolder.classList.remove("hidden");
-
+        if (typeof filterHolder != "undefined" && filterHolder != null) {
+            filterHolder.classList.remove("hidden");
+        }
         const filterButtons = document.querySelectorAll(".filter__button");
 
         filterButtons.forEach(filterButton => {

@@ -7,6 +7,7 @@
 <script src="/assets/scripts/likes.js"></script>
 <script src="/assets/scripts/follow.js"></script>
 <script src="/assets/scripts/delete-account.js"></script>
+<script src="/assets/scripts/settings.js"></script>
 </body>
 
 </html>

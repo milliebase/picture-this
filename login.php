@@ -7,7 +7,7 @@ if (isset($_SESSION['user']['id'])) {
 
 ?>
 
-<section class="login">
+<section class="login section">
 
     <div class="login__header">
         <img src="/assets/images/logo_white.svg" alt="Picture this logo">

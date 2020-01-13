@@ -3,7 +3,7 @@
 $user = authenticateUser($pdo);
 ?>
 
-<section class="create-post">
+<section class="create-post section">
     <div class="error__text">
         <p><?php showErrors(); ?></p>
     </div>

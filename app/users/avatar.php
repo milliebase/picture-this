@@ -18,7 +18,6 @@ if (isset($_FILES['avatar'])) {
     //Always be sure to give a user the same name to their avatar image, so it gets overwritten instead of saving each one.
     if ($currentAvatar === null) {
         $uniqId = uniqid();
-
         $newAvatar = "$uniqId-$userId.$newFileEnd";
     } else {
         $currentAvatarArray = explode('.', $currentAvatar);
@@ -26,7 +25,21 @@ if (isset($_FILES['avatar'])) {
         $newAvatar = "$avatarId.$newFileEnd";
     }
 
-    handleImageErrors($avatar, '2097152', 'settings.php');
+    if ($avatar['type'] !== 'image/png' && $avatar['type'] !== 'image/jpeg') {
+        $message = ['error' => 'The filetype must be a .jpg, .jpeg or .png.'];
+
+        header('Content-Type: application/json');
+        echo json_encode($message);
+        exit;
+    }
+
+    if ($avatar['size'] >= 2097152) {
+        $message = ['error' => 'The file can\'t exceed 2 MB.'];
+
+        header('Content-Type: application/json');
+        echo json_encode($message);
+        exit;
+    }
 
     unlink(__DIR__ . "/../../uploads/avatars/$currentAvatar");
 
@@ -39,5 +52,8 @@ if (isset($_FILES['avatar'])) {
         ':id' => $_SESSION['user']['id'],
     ]);
 
-    redirect('/settings.php');
+    $message = ['success' => 'Your profile picture is updated.'];
+
+    header('Content-Type: application/json');
+    echo json_encode($message);
 }

@@ -14,5 +14,8 @@ if (isset($_POST['biography'])) {
         ':id' => $_SESSION['user']['id'],
     ]);
 
-    redirect('/settings.php');
+    $message[] = ["success" => "Your biography is updated!"];
+
+    header('Content-Type: application/json');
+    echo json_encode($message);
 }

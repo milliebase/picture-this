@@ -11,21 +11,21 @@ if (typeof followForm != "undefined" && followForm != null) {
             body: formData
         })
             .then(response => response.json())
-            .then(follows => {
+            .then(followers => {
                 const followButton = document.querySelector(".follow__button");
 
                 const followersNumber = document.querySelector(
                     ".followers__number"
                 );
 
-                if (follows > Number(followersNumber.textContent)) {
+                if (followers > Number(followersNumber.textContent)) {
                     followButton.textContent = "Unfollow";
                     followButton.classList.add("follow__button--unfollow");
-                    followersNumber.textContent = follows;
-                } else if (follows < Number(followersNumber.textContent)) {
+                    followersNumber.textContent = followers;
+                } else if (followers < Number(followersNumber.textContent)) {
                     followButton.textContent = "Follow";
                     followButton.classList.remove("follow__button--unfollow");
-                    followersNumber.textContent = follows;
+                    followersNumber.textContent = followers;
                 }
             });
     });

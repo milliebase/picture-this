@@ -8,10 +8,11 @@ if (isset($_POST['email'])) {
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['errors'] = [];
+        $message = ['error' => 'The email is not a valid emailadress.'];
 
-        $_SESSION['errors'][] = 'The email is not a valid emailadress.';
-        redirect('/settings.php');
+        header('Content-Type: application/json');
+        echo json_encode($message);
+        exit;
     }
 
     $statement = $pdo->prepare('UPDATE users SET email = :email WHERE id = :id');
@@ -21,5 +22,8 @@ if (isset($_POST['email'])) {
         ':id' => $_SESSION['user']['id'],
     ]);
 
-    redirect('/settings.php');
+    $message = ['success' => 'Your email is updated!', "email" => $email];
+
+    header('Content-Type: application/json');
+    echo json_encode($message);
 }

@@ -51,8 +51,8 @@
   margin: 0;
 }
 
-.button--disabled {
+/* .button--disabled {
   color: #8d8d8d;
   background-color: rgb(204, 204, 204);
   pointer-events: none;
-}
+} */

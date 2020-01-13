@@ -12,7 +12,7 @@ if (isset($_GET['username'])) {
 <section class="profile">
 
     <?php if (!$profile) : ?>
-        <article class="profile__empty">
+        <article class="profile__empty empty">
             <p>Sorry, the user does not exist.</p>
         </article>
     <?php else : ?>

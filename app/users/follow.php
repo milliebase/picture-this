@@ -24,7 +24,8 @@ if (isset($_POST['profile-id'])) {
 
             $followers = getAmountFollowers($pdo, $profileId);
 
-            echo json_encode((int) $followers);
+            echo json_encode($followers);
+            exit;
         } else {
             $statement = $pdo->prepare('DELETE FROM user_follows
             WHERE user_id = :user_id AND follow_id = :follow_id');
@@ -39,6 +40,7 @@ if (isset($_POST['profile-id'])) {
             $followers = getAmountFollowers($pdo, $profileId);
 
             echo json_encode($followers);
+            exit;
         }
     }
 }

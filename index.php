@@ -4,11 +4,11 @@ $user = authenticateUser($pdo);
 
 ?>
 
-<section class="main__feed">
+<section class="main__feed section">
     <?php $posts = getMainFeedPosts($pdo, $user['id']); ?>
 
     <?php if (empty($posts)) : ?>
-        <div class="posts__empty">
+        <div class="posts__empty empty">
             <p>There are no posts to show yet.</p>
             <p>Post your own content</p>
             <p>and start to follow your friends.</p>

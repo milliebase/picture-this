@@ -3,8 +3,8 @@
         <div class="post">
             <div class="post__user">
                 <div class="post__user--username">
-                    <img src="<?php echo ($post['avatar'] !== null) ? "/uploads/avatars/" . $post['avatar'] : 'assets/images/avatar.png'; ?>" alt="<?php echo $post['username']; ?>'s profile picture">
                     <a href="profile.php?username=<?php echo $post['username'] ?>">
+                        <img src="<?php echo ($post['avatar'] !== null) ? "/uploads/avatars/" . $post['avatar'] : 'assets/images/avatar.png'; ?>" alt="<?php echo $post['username']; ?>'s profile picture">
                         <p><?php echo $post['username']; ?></p>
                     </a>
                 </div>

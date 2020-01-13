@@ -7,12 +7,12 @@ if (isset($_SESSION['user']['id'])) {
 
 ?>
 
-<section class="register">
+<section class="register section">
     <h1>Register</h1>
 
 
     <div class="register__holder">
-        <div class="error__text <?php echo (isset($_SESSION['errors'])) ? 'error__text--background' : ''; ?>">
+        <div class="message <?php echo (isset($_SESSION['errors'])) ? 'message__error--color' : ''; ?>">
             <p><?php showErrors(); ?></p>
         </div>
 

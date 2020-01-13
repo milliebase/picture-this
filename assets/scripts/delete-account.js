@@ -1,6 +1,6 @@
 const deleteAccountButton = document.querySelector(".delete-account__button");
 
-if (typeof followForm != "undefined" && followForm != null) {
+if (typeof deleteAccountButton != "undefined" && deleteAccountButton != null) {
     deleteAccountButton.addEventListener("click", () => {
         const deleteAccountModal = document.querySelector(
             ".delete-account__modal"
