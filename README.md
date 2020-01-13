@@ -91,3 +91,24 @@ __TBA__
 
 ## License
 MIT
+
+## Credits
+* "Search" icon by Besticons from <a href="https://thenounproject.com/">the Noun Project</a>
+
+* "Home" icon by Satisfactory from <a href="https://thenounproject.com/">the Noun Project</a>
+
+* "Heart" icon by Vicons Design from <a href="https://thenounproject.com/">the Noun Project</a>
+
+* "like" icon by Amelia from <a href="https://thenounproject.com/">the Noun Project</a>
+
+* "Image" icon by iconsphere from <a href="https://thenounproject.com/">the Noun Project</a>
+
+* "Photography" icon by Lima Studio from <a href="https://thenounproject.com/">the Noun Project</a>
+
+* "users" icon by Mundo from <a href="https://thenounproject.com/">the Noun Project</a>
+
+* "User" icon by Rainbow Designs from <a href="https://thenounproject.com/">the Noun Project</a>
+
+* "Plus" icon by scott desmond from <a href="https://thenounproject.com/">the Noun Project</a>
+
+* "Settings" icon by Graphic Tigers from <a href="https://thenounproject.com/">the Noun Project</a>
