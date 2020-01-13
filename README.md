@@ -84,7 +84,7 @@ Betsy Alva Soplin
 - [x] Brave
 - [x] Google Chrome
 - [x] Firefox
-- [x] Safar
+- [x] Safari
 
 ## Code review
 __TBA__
