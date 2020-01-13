@@ -51,7 +51,7 @@ __Extra features:__
 - [x] As a user I'm able to search for other users.
 
 ## Installation
-1. To be able to play this game, clone this repository to your directory through the terminal.
+1. To be able try this Instagram rip-off, clone this repository to your directory through the terminal.
 ```
 $ git clone https://github.com/milliebase/picture-this.git
 ```
@@ -65,7 +65,7 @@ $ cd picture-this
 $ php -S localhost:8000
 ```
 
-__OR___
+__OR__
 
 Visit this link:
 TBA
@@ -79,6 +79,12 @@ Betsy Alva Soplin
 ## Tested by
 * <a href="https://github.com/jesperlndqvst">Jesper Lundqvist</a>
 * <a href="https://github.com/mikaelaalu">Mikaela Lundsgård</a>
+
+### Browsers:
+- [x] Brave
+- [x] Google Chrome
+- [x] Firefox
+
 
 ## Code review
 __TBA__
