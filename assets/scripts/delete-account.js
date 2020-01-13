@@ -8,9 +8,7 @@ if (typeof deleteAccountButton != "undefined" && deleteAccountButton != null) {
         deleteAccountButton.classList.toggle("hidden");
     });
 
-    const deleteAccountCancel = document.querySelector(
-        ".delete-account__cancel"
-    );
+    const deleteAccountCancel = document.querySelector(".delete__cancel");
 
     deleteAccountCancel.addEventListener("click", () => {
         deleteAccountModal.classList.toggle("hidden");
