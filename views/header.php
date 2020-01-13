@@ -11,8 +11,8 @@ require __DIR__ . '/../app/autoload.php';
 
     <title><?php echo $config['title']; ?></title>
 
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon-32x32.png" />
     <link rel="stylesheet" href="https://unpkg.com/sanitize.css">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Concert+One|Libre+Franklin:100,300,400,600,700,800&display=swap">
     <link rel="stylesheet" href="/assets/styles/main.css">
     <link rel="stylesheet" href="/assets/styles/login.css">
