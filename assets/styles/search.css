@@ -13,7 +13,7 @@
 }
 
 .search__form {
-  margin-top: 17%;
+  margin-top: 14%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,7 +38,7 @@
 }
 
 .found__users {
-  margin: 5% 0 17%;
+  margin: 0 0 17%;
   padding: 5%;
   min-height: 60vh;
 }
@@ -94,7 +94,7 @@
 /****MEDIA QUERIES FOR DESKTOP****/
 @media (min-width: 1024px) {
   .search__form {
-    margin: 5% 0 0;
+    margin: 4% 0 0;
     padding: 2% 30%;
   }
 

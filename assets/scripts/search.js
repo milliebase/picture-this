@@ -34,31 +34,35 @@ const appendUsers = function(user, isAvatar) {
 };
 
 if (typeof searchInput != "undefined" && searchInput != null) {
-    searchInput.addEventListener("keyup", () => {
-        const formData = new FormData(searchForm);
+    searchInput.addEventListener("keyup", e => {
+        if (e.keyCode !== 13) {
+            foundUsers.innerHTML = "";
 
-        fetch("app/users/search.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.json())
-            .then(users => {
-                foundUsers.innerHTML = "";
+            if (e.target.value.length >= 3) {
+                const formData = new FormData(searchForm);
 
-                console.log(users);
+                fetch("app/users/search.php", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(users => {
+                        foundUsers.innerHTML = "";
 
-                if (users !== "No users") {
-                    users.forEach(user => {
-                        if (user.avatar === null) {
-                            let isAvatar = false;
-                            appendUsers(user, isAvatar);
-                        } else {
-                            let isAvatar = true;
-                            appendUsers(user, isAvatar);
+                        if (users !== "No users") {
+                            users.forEach(user => {
+                                if (user.avatar === null) {
+                                    let isAvatar = false;
+                                    appendUsers(user, isAvatar);
+                                } else {
+                                    let isAvatar = true;
+                                    appendUsers(user, isAvatar);
+                                }
+                            });
                         }
                     });
-                }
-            });
+            }
+        }
     });
 }
 

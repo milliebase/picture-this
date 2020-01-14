@@ -11,7 +11,7 @@ if (isset($_POST['search'])) {
         $search = "%$search%";
 
         $statement = $pdo->query("SELECT username, (first_name || \" \" || last_name) AS name, avatar
-        FROM users WHERE username LIKE ? OR name LIKE ?");
+        FROM users WHERE username LIKE ? OR name LIKE ? LIMIT 15");
 
         $statement->execute([$search, $search]);
 

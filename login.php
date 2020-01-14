@@ -24,11 +24,11 @@ if (isset($_SESSION['user']['id'])) {
 
             <div class="login__form__input-holder">
                 <div class="form__group">
-                    <input class="form__input" type="email" name="email" placeholder="email" required>
+                    <input class="form__input" type="email" name="email" autocomplete="email" placeholder="email" required>
                 </div><!-- /form__group -->
 
                 <div class="form__group">
-                    <input class="form__input" type="password" name="password" placeholder="password" required>
+                    <input class="form__input" type="password" name="password" autocomplete="current-password" placeholder="password" required>
                 </div><!-- /form__group -->
             </div>
             <!--/login__form__input-holder-->
