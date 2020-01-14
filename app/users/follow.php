@@ -13,12 +13,9 @@ if (isset($_POST['profile-id'])) {
 
         if (!$isFollowing) {
             $statement = $pdo->prepare('INSERT INTO user_follows (user_id, follow_id)
-            VALUES (:user_id, :follow_id)');
+            VALUES (?, ?)');
 
-            $statement->execute([
-                ':user_id' => $userId,
-                ':follow_id' => $profileId,
-            ]);
+            $statement->execute([$userId, $profileId]);
 
             header('Content-Type: application/json');
 
@@ -28,12 +25,9 @@ if (isset($_POST['profile-id'])) {
             exit;
         } else {
             $statement = $pdo->prepare('DELETE FROM user_follows
-            WHERE user_id = :user_id AND follow_id = :follow_id');
+            WHERE user_id = ? AND follow_id = ?');
 
-            $statement->execute([
-                ':user_id' => $userId,
-                ':follow_id' => $profileId,
-            ]);
+            $statement->execute([$userId, $profileId]);
 
             header('Content-Type: application/json');
 

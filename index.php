@@ -5,7 +5,7 @@ $user = authenticateUser($pdo);
 ?>
 
 <section class="main__feed section">
-    <?php $posts = getMainFeedPosts($pdo, $user['id']); ?>
+    <?php $posts = getMainFeedPosts($pdo, (int) $user['id']); ?>
 
     <?php if (empty($posts)) : ?>
         <div class="posts__empty empty">

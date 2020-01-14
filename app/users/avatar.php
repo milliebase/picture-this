@@ -5,7 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (isset($_FILES['avatar'])) {
-    $user = fetchUser($pdo, $_SESSION['user']['id']);
+    $user = getUser($pdo, (int) $_SESSION['user']['id']);
 
     $avatar = $_FILES['avatar'];
     $userId = $user['id'];
@@ -45,12 +45,9 @@ if (isset($_FILES['avatar'])) {
 
     move_uploaded_file($avatar['tmp_name'], __DIR__ . "/../../uploads/avatars/$newAvatar");
 
-    $statement = $pdo->prepare('UPDATE users SET avatar = :avatar WHERE id = :id');
+    $statement = $pdo->prepare('UPDATE users SET avatar = ? WHERE id = ?');
 
-    $statement->execute([
-        ':avatar' => $newAvatar,
-        ':id' => $_SESSION['user']['id'],
-    ]);
+    $statement->execute([$newAvatar, $userId]);
 
     $message = ['success' => 'Your profile picture is updated.'];
 

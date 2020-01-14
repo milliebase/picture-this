@@ -40,7 +40,7 @@ posts.forEach(post => {
             })
                 .then(response => response.json())
                 .then(post => {
-                    description.textContent = post.description;
+                    description.innerHTML = post.description;
                 });
 
             informationHolder.classList.toggle("hidden");

@@ -5,8 +5,8 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (isset($_POST['liked-post-id'])) {
-    $likerId = $_SESSION['user']['id'];
-    $likedPostId = $_POST['liked-post-id'];
+    $likerId = (int) $_SESSION['user']['id'];
+    $likedPostId = (int) $_POST['liked-post-id'];
 
     $isLiked = isLiked($pdo, $likerId, $likedPostId);
 

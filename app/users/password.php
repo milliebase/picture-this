@@ -9,7 +9,7 @@ if (isset($_POST['current-password'], $_POST['new-password'], $_POST['confirm-pa
     $newPassword = $_POST['new-password'];
     $confirmPassword = $_POST['confirm-password'];
 
-    $user = fetchUser($pdo, $_SESSION['user']['id']);
+    $user = getUser($pdo, (int) $_SESSION['user']['id']);
 
     if (!password_verify($currentPassword, $user['password'])) {
         $message = ['error' => 'The password was incorrect.'];
@@ -42,12 +42,9 @@ if (isset($_POST['current-password'], $_POST['new-password'], $_POST['confirm-pa
 
     $hash = password_hash($newPassword, PASSWORD_DEFAULT);
 
-    $statement = $pdo->prepare('UPDATE users SET password = :password WHERE id = :id');
+    $statement = $pdo->prepare('UPDATE users SET password = ? WHERE id = ?');
 
-    $statement->execute([
-        ':password' => $hash,
-        ':id' => $_SESSION['user']['id'],
-    ]);
+    $statement->execute([$hash, $_SESSION['user']['id']]);
 
     $message = ['success' => 'Your password is updated!'];
 

@@ -129,6 +129,13 @@ if (typeof usernameMessage != "undefined" && usernameMessage != null) {
                     );
 
                     currentUsername.textContent = `Current username: ${message.username}`;
+
+                    //Change search of href on profile icon.
+                    const profileIcon = document.querySelector(
+                        ".menu__icon--profile"
+                    );
+
+                    profileIcon.search = `?username=${message.username}`;
                 }
             });
     });

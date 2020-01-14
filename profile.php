@@ -4,7 +4,7 @@ $user = authenticateUser($pdo);
 
 if (isset($_GET['username'])) {
     $username = trim(filter_var($_GET['username'], FILTER_SANITIZE_STRING));
-    $profile = fetchUserByUsername($pdo, $username);
+    $profile = getUserByUsername($pdo, $username);
 }
 
 ?>
@@ -54,7 +54,7 @@ if (isset($_GET['username'])) {
         </article>
 
         <article class="profile__feed">
-            <?php $posts = getImagePosts($pdo, $profile['id']); ?>
+            <?php $posts = getUserPosts($pdo, $profile['id']); ?>
 
             <?php if (empty($posts)) : ?>
                 <div class="posts__empty">

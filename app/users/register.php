@@ -20,24 +20,24 @@ $_POST['confirm-password'])) {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
 
-    $statement = $pdo->prepare('SELECT email FROM users WHERE email = :email');
+    $statement = $pdo->prepare('SELECT email FROM users WHERE email = ?');
 
-    $emailExists = checkIfExists($statement, ':email', $email);
+    $emailExists = checkIfExists($statement, $email);
 
     //Check if given email is valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $isEmailValid = false;
     };
 
-    $statement = $pdo->prepare('SELECT username FROM users WHERE username = :username');
+    $statement = $pdo->prepare('SELECT username FROM users WHERE username = ?');
 
-    $usernameExists = checkIfExists($statement, ':username', $username);
+    $usernameExists = checkIfExists($statement, $username);
 
     $usernamePatternMatches = preg_match('/^[a-z0-9_\.]{5,}$/', $username);
 
-    $isFirstNameEmpty = isEmpty($firstName);
-    $isLastNameEmpty = isEmpty($lastName);
-    $isEmailEmpty = isEmpty($email);
+    $isFirstNameEmpty = empty($firstName);
+    $isLastNameEmpty = empty($lastName);
+    $isEmailEmpty = empty($email);
 
     $_SESSION['register'] = [];
 

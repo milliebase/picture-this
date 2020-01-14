@@ -15,12 +15,9 @@ if (isset($_POST['email'])) {
         exit;
     }
 
-    $statement = $pdo->prepare('UPDATE users SET email = :email WHERE id = :id');
+    $statement = $pdo->prepare('UPDATE users SET email = ? WHERE id = ?');
 
-    $statement->execute([
-        ':email' => $email,
-        ':id' => $_SESSION['user']['id'],
-    ]);
+    $statement->execute([$email, $_SESSION['user']['id']]);
 
     $message = ['success' => 'Your email is updated!', "email" => $email];
 

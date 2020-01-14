@@ -7,9 +7,9 @@ require __DIR__ . '/../autoload.php';
 if (isset($_POST['email'], $_POST['password'])) {
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
 
-    $statement = $pdo->prepare("SELECT id, email, password FROM users WHERE email = :email");
+    $statement = $pdo->prepare("SELECT id, email, password FROM users WHERE email = ?");
 
-    $user = checkIfExists($statement, ':email', $email);
+    $user = checkIfExists($statement, $email);
 
     if (!$user || !password_verify($_POST['password'], $user['password'])) {
         $_SESSION['errors'] = [];

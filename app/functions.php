@@ -16,18 +16,32 @@ function redirect(string $path)
 }
 
 /**
+ * Check if user is logged in.
+ *
+ * @param PDO $pdo
+ * @return void
+ */
+function authenticateUser(PDO $pdo)
+{
+    if (isset($_SESSION['user']['id'])) {
+        $user = getUser($pdo, (int) $_SESSION['user']['id']);
+
+        return $user;
+    } else {
+        redirect('/login.php');
+    }
+}
+
+/**
  * Checks if users input already exists in database
  *
  * @param PDOStatement $statement
- * @param string $type
- * @param string $
+ * @param string $userInput
  * @return void
  */
-function checkIfExists(PDOStatement $statement, string $type, string $userInput)
+function checkIfExists(PDOStatement $statement, string $userInput)
 {
-    $statement->execute([
-        "$type" => $userInput,
-    ]);
+    $statement->execute([$userInput]);
 
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
@@ -43,6 +57,11 @@ function unsetRegister()
         unset($_SESSION['register']);
 }
 
+/**
+ * Print out error and then unsets the error from session.
+ *
+ * @return void
+ */
 function showErrors()
 {
     if (isset($_SESSION['errors'])) {
@@ -53,7 +72,14 @@ function showErrors()
     }
 }
 
-function handlePasswordErrors($password, $confirmPassword)
+/**
+ * Errorhandling if password doesn't match criteria.
+ *
+ * @param string $password
+ * @param string $confirmPassword
+ * @return void
+ */
+function handlePasswordErrors(string $password, string $confirmPassword)
 {
     $_SESSION['errors'] = [];
 
@@ -66,36 +92,32 @@ function handlePasswordErrors($password, $confirmPassword)
     }
 }
 
-function handleImageErrors($image, $imageSize, $file)
+
+/**
+ * Errorhandling if image is not of valid filetype or too big.
+ *
+ * @param array $image
+ * @param integer $imageSize
+ * @param string $file
+ * @return void
+ */
+function handleImageErrors(array $imageFile, int $imageSize, string $file)
 {
     $_SESSION['errors'] = [];
 
-    if ($image['type'] !== 'image/png' && $image['type'] !== 'image/jpeg') {
+    if ($imageFile['type'] !== 'image/png' && $imageFile['type'] !== 'image/jpeg') {
         $_SESSION['errors'][] = 'The filetype must be a .jpg, .jpeg or .png.';
         redirect("/$file");
     }
 
-    if ($image['size'] >= $imageSize) {
+    if ($imageFile['size'] >= $imageSize) {
         $_SESSION['errors'][] = 'The file can\'t exceed 2 MB.';
         redirect("/$file");
     }
 }
 
 /**
- * Check if string is empty.
- *
- * @param string $string
- * @return boolean
- */
-function isEmpty(string $string)
-{
-    if ($string === '') {
-        return true;
-    }
-}
-
-/**
- * Fetch the input type from the register form.
+ * Fetch the stored input type from user.
  *
  * @param string $inputType
  * @return void
@@ -108,73 +130,82 @@ function getInput(string $inputType)
 }
 
 /**
- * Check if user is logged in.
+ * Fetch user information by id.
  *
+ * @param PDO $pdo
+ * @param integer $id
  * @return void
  */
-function authenticateUser($pdo)
+function getUser(PDO $pdo, int $id)
 {
-    if (isset($_SESSION['user']['id'])) {
-        $user = fetchUser($pdo, $_SESSION['user']['id']);
+    $statement = $pdo->prepare('SELECT * FROM users WHERE id = ?');
 
-        return $user;
-    } else {
-        redirect('/login.php');
-    }
-}
-
-function fetchUser($pdo, $id)
-{
-    $statement = $pdo->prepare('SELECT * FROM users WHERE id = :id');
-
-    $statement->execute([
-        ':id' => $id,
-    ]);
+    $statement->execute([$id]);
 
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
-
-function fetchUserByUsername($pdo, $username)
+/**
+ * Fetch user information by username.
+ *
+ * @param PDO $pdo
+ * @param string $username
+ * @return void
+ */
+function getUserByUsername(PDO $pdo, string $username)
 {
     $statement = $pdo->prepare('SELECT id, first_name, last_name, avatar, biography, username
-        FROM users WHERE username = :username');
+        FROM users WHERE username = ?');
 
-    $statement->execute([
-        ':username' => $username,
-    ]);
+    $statement->execute([$username]);
 
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
 
 /*************************POSTS********************/
-function getImagePosts($pdo, $id)
+/**
+ * Callback function for sorting items in descending order.
+ *
+ * @param array $a
+ * @param array $b
+ * @return void
+ */
+function sortByDate(array $a, array $b)
+{
+    return ($a['id'] < $b['id']);
+}
+
+/**
+ * Fetch users posts.
+ *
+ * @param PDO $pdo
+ * @param integer $id
+ * @return void
+ */
+function getUserPosts(PDO $pdo, int $id)
 {
     $statement = $pdo->prepare('SELECT posts.id, user_id, image, description, date, filter, username, avatar
         FROM posts
         INNER JOIN users
         ON posts.user_id = users.id
-        WHERE users.id = :id
+        WHERE users.id = ?
         ORDER by posts.id DESC');
 
 
-    $statement->execute([
-        ':id' => $id,
-    ]);
+    $statement->execute([$id]);
 
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
-function sortByDate($a, $b)
-{
-    return ($a['id'] < $b['id']);
-}
-
-
-
-function getMainFeedPosts($pdo, $userId)
+/**
+ * Fetch all posts from user and user followings.
+ *
+ * @param PDO $pdo
+ * @param int $userId
+ * @return void
+ */
+function getMainFeedPosts(PDO $pdo, int $userId)
 {
     $statement = $pdo->prepare('SELECT DISTINCT follow_id
         FROM user_follows
@@ -211,51 +242,72 @@ function getMainFeedPosts($pdo, $userId)
     return $allPosts;
 }
 
-function getAmountLikes($pdo, $postId)
+/**
+ * Fetch all likes for a certain post.
+ *
+ * @param PDO $pdo
+ * @param int $postId
+ * @return void
+ */
+function getAmountLikes(PDO $pdo, int $postId)
 {
     $statement = $pdo->prepare('SELECT COUNT(post_likes.post_id)
         FROM posts
         INNER JOIN post_likes
         ON posts.id = post_likes.post_id
-        WHERE post_likes.post_id = :post_id');
+        WHERE post_likes.post_id = ?');
 
-    $statement->execute([
-        ':post_id' => $postId,
-    ]);
+    $statement->execute([$postId]);
 
     return $statement->fetchAll(PDO::FETCH_COLUMN);
 }
 
-
-function isLiked($pdo, $userId, $postId)
+/**
+ * See if user has liked post.
+ *
+ * @param PDO $pdo
+ * @param integer $userId
+ * @param integer $postId
+ * @return void
+ */
+function isLiked(PDO $pdo, int $userId, int $postId)
 {
     $statement = $pdo->prepare('SELECT *
         FROM post_likes
-        WHERE user_id = :user_id
-        AND post_id = :post_id');
+        WHERE user_id = ?
+        AND post_id = ?');
 
-    $statement->execute([
-        ':user_id' => $userId,
-        ':post_id' => $postId,
-    ]);
+    $statement->execute([$userId, $postId]);
 
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
 /*************************FOLLOWING/USERS********************/
-function isFollowing($pdo, $userId, $followId)
+/**
+ * See if user is following a user.
+ *
+ * @param PDO $pdo
+ * @param integer $userId
+ * @param integer $followId
+ * @return void
+ */
+function isFollowing(PDO $pdo, int $userId, int $followId)
 {
-    $statement = $pdo->prepare('SELECT * FROM user_follows WHERE user_id = :user_id AND follow_id = :follow_id');
+    $statement = $pdo->prepare('SELECT * FROM user_follows WHERE user_id = ? AND follow_id = ?');
 
-    $statement->execute([
-        ':user_id' => $userId,
-        ':follow_id' => $followId
-    ]);
+    $statement->execute([$userId, $followId]);
 
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
-function getAmountFollowings($pdo, $userId)
+/**
+ * Fetch user followings.
+ *
+ * @param PDO $pdo
+ * @param integer $userId
+ * @return void
+ */
+function getAmountFollowings(PDO $pdo, int $userId)
 {
     $statement = $pdo->prepare('SELECT COUNT(user_id)
         FROM user_follows
@@ -268,7 +320,14 @@ function getAmountFollowings($pdo, $userId)
     return $following;
 }
 
-function getAmountFollowers($pdo, $userId)
+/**
+ * Fetch user followers.
+ *
+ * @param PDO $pdo
+ * @param integer $userId
+ * @return void
+ */
+function getAmountFollowers(PDO $pdo, int $userId)
 {
     $statement = $pdo->prepare('SELECT COUNT(follow_id)
         FROM user_follows
@@ -283,20 +342,17 @@ function getAmountFollowers($pdo, $userId)
 
 
 /***********************FILTERS*************/
-function getFilters($pdo)
+/**
+ * Fetch all filters
+ *
+ * @param PDO $pdo
+ * @return void
+ */
+function getFilters(PDO $pdo)
 {
     $statement = $pdo->prepare('SELECT * FROM filters');
 
     $statement->execute();
 
     return $statement->fetchAll(PDO::FETCH_ASSOC);
-}
-
-
-/*********************EXECUTE*************/
-function executeWithId($statement, $id)
-{
-    $statement->execute([
-        'id' => $id,
-    ]);
 }

@@ -1,5 +1,5 @@
 <?php if (isset($_SESSION['user']['id'])) : ?>
-    <?php $user = fetchUser($pdo, $_SESSION['user']['id']); ?>
+    <?php $user = getUser($pdo, (int) $_SESSION['user']['id']); ?>
 
     <section class="navigation">
         <nav class="nav__header">
@@ -24,7 +24,7 @@
                 </li><!-- /nav-item -->
 
                 <li class="menu__item">
-                    <a href="/profile.php?username=<?php echo $user['username']; ?>"><img src="/assets/images/user.svg" alt="User icon" class="menu__icon"></a>
+                    <a href="/profile.php?username=<?php echo $user['username']; ?>" class="menu__icon--profile"><img src="/assets/images/user.svg" alt="User icon" class="menu__icon"></a>
                 </li><!-- /nav-item -->
             </ul><!-- /navbar-nav -->
         </nav><!-- /navbar -->

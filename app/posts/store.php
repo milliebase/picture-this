@@ -6,7 +6,7 @@ require __DIR__ . '/../autoload.php';
 
 // In this file we store/insert new posts in the database.
 if (isset($_FILES['post-image'], $_POST['filter'], $_POST['description'])) {
-    $user = fetchUser($pdo, $_SESSION['user']['id']);
+    $user = getUser($pdo, (int) $_SESSION['user']['id']);
     $userId = $user['id'];
 
     $postImage = $_FILES['post-image'];
@@ -18,7 +18,7 @@ if (isset($_FILES['post-image'], $_POST['filter'], $_POST['description'])) {
     date_default_timezone_set('Europe/Berlin');
     $date = date('H:i j M, Y');
 
-    handleImageErrors($postImage, '10485760', 'create-post.php');
+    handleImageErrors($postImage, 10485760, 'create-post.php');
     unset($_SESSION['errors']);
 
     $uniqId = uniqid();

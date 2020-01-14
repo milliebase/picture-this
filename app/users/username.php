@@ -7,9 +7,9 @@ require __DIR__ . '/../autoload.php';
 if (isset($_POST['username'])) {
     $username = trim(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
 
-    $statement = $pdo->prepare('SELECT username FROM users WHERE username = :username');
+    $statement = $pdo->prepare('SELECT username FROM users WHERE username = ?');
 
-    $usernameExists = checkIfExists($statement, ':username', $username);
+    $usernameExists = checkIfExists($statement, $username);
 
     $usernamePatternMatches = preg_match('/^[a-z0-9_\.]{5,}$/', $username);
 

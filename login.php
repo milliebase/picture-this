@@ -17,7 +17,7 @@ if (isset($_SESSION['user']['id'])) {
 
     <div class="login__holder">
         <form action="app/users/login.php" method="post" class="form login__form">
-            <div class="<?php echo ($_SESSION['errors']) ? "message message__error--color" : "message"; ?>">
+            <div class="<?php echo (isset($_SESSION['errors'])) ? "message message__error--color" : "message"; ?>">
                 <p><?php showErrors(); ?></p>
             </div>
             <!--/error__text-->
