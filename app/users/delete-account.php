@@ -19,9 +19,6 @@ if (isset($_POST['delete-account'])) {
     if (!empty($posts)) {
         foreach ($posts as $post) {
             unlink(__DIR__ . "/../../uploads/" . $post['image']);
-        }
-
-        foreach ($posts as $post) {
             $statement->execute([$post['id']]);
         }
     }
