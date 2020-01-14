@@ -5,13 +5,13 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 // In this file we store/insert new posts in the database.
-if (isset($_FILES['post-image'], $_POST['filter'], $_POST['description'])) {
+if (isset($_FILES['post-image'])) {
     $user = getUser($pdo, (int) $_SESSION['user']['id']);
     $userId = $user['id'];
 
     $postImage = $_FILES['post-image'];
     $fileName = $postImage['name'];
-    $filter = trim(filter_var($_POST['filter'], FILTER_SANITIZE_STRING));
+
     $description = trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING));
 
     //Only works for this timezone at the moment.
@@ -29,16 +29,30 @@ if (isset($_FILES['post-image'], $_POST['filter'], $_POST['description'])) {
         __DIR__ . "/../../uploads/$postImageName"
     );
 
-    $statement = $pdo->prepare('INSERT INTO posts (user_id, image, description, date, filter)
-    VALUES (:user_id, :image, :description, :date, :filter)');
+    if (isset($_POST['filter'])) {
+        $filter = trim(filter_var($_POST['filter'], FILTER_SANITIZE_STRING));
 
-    $statement->execute([
-        'user_id' => $userId,
-        'image' => $postImageName,
-        'description' => $description,
-        'date' => $date,
-        'filter' => $filter,
-    ]);
+        $statement = $pdo->prepare('INSERT INTO posts (user_id, image, description, date, filter)
+        VALUES (:user_id, :image, :description, :date, :filter)');
+
+        $statement->execute([
+            'user_id' => $userId,
+            'image' => $postImageName,
+            'description' => $description,
+            'date' => $date,
+            'filter' => $filter,
+        ]);
+    } else {
+        $statement = $pdo->prepare('INSERT INTO posts (user_id, image, description, date)
+        VALUES (:user_id, :image, :description, :date)');
+
+        $statement->execute([
+            'user_id' => $userId,
+            'image' => $postImageName,
+            'description' => $description,
+            'date' => $date,
+        ]);
+    }
 
     redirect('/profile.php?username=' . $user['username']);
 }

@@ -37,8 +37,8 @@
                 </form>
             </div>
 
-            <div class="post__image">
-                <img src="uploads/<?php echo $post['image']; ?>" alt="<?php echo $post['description']; ?>" class="post__image <?php echo $post['filter'] ?>" loading="lazy">
+            <div class="post__image <?php echo $post['filter'] ?>">
+                <img src="uploads/<?php echo $post['image']; ?>" alt="<?php echo $post['description']; ?>" loading="lazy">
             </div>
 
             <div class="post__information">

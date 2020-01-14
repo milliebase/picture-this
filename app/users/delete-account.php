@@ -5,22 +5,29 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 
 if (isset($_POST['delete-account'])) {
-    $userId = (int) $_SESSION['user']['id'];
+    $user = getUser($pdo, (int) $_SESSION['user']['id']);
+    $userId = $user['id'];
+
+    $posts = [];
 
     //Fetch all post ids from user
-    $statement = $pdo->prepare('SELECT id FROM posts WHERE user_id = ?');
+    $statement = $pdo->prepare('SELECT id, image FROM posts WHERE user_id = ?');
     $statement->execute([$userId]);
 
-    $posts = $statement->fetch(PDO::FETCH_ASSOC);
-
-    //Delete all likes for posts from user
-    $statement = $pdo->prepare('DELETE FROM post_likes WHERE post_id = ?');
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     if (!empty($posts)) {
         foreach ($posts as $post) {
-            $statement->execute([$userId]);
+            unlink(__DIR__ . "/../../uploads/" . $post['image']);
+        }
+
+        foreach ($posts as $post) {
+            $statement->execute([$post['id']]);
         }
     }
+
+    //Delete all likes for posts from user
+    $statement = $pdo->prepare('DELETE FROM post_likes WHERE post_id = ?');
 
     //Delete all likes done by user
     $statement = $pdo->prepare('DELETE FROM post_likes WHERE user_id = ?');
@@ -33,6 +40,10 @@ if (isset($_POST['delete-account'])) {
     //Delete all followings
     $statement = $pdo->prepare('DELETE FROM user_follows WHERE user_id = :id OR follow_id = ?');
     $statement->execute([$userId]);
+
+    if ($user['avatar'] !== null) {
+        unlink(__DIR__ . "/../../uploads/avatars/" . $user['avatar']);
+    }
 
     //Deletes user
     $statement = $pdo->prepare('DELETE FROM users WHERE id = ?');

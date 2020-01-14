@@ -41,7 +41,9 @@ if (isset($_FILES['avatar'])) {
         exit;
     }
 
-    unlink(__DIR__ . "/../../uploads/avatars/$currentAvatar");
+    if ($currentAvatar !== null) {
+        unlink(__DIR__ . "/../../uploads/avatars/$currentAvatar");
+    }
 
     move_uploaded_file($avatar['tmp_name'], __DIR__ . "/../../uploads/avatars/$newAvatar");
 

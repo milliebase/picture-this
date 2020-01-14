@@ -13,15 +13,16 @@ const readImgURL = function(reader, chosenImage, preview) {
             filterHolder.classList.remove("hidden");
         }
         const filterButtons = document.querySelectorAll(".filter__button");
+        const postPreview = document.querySelector(".post__preview");
 
         filterButtons.forEach(filterButton => {
             filterButton.style.backgroundImage = `url('${e.target.result}')`;
 
             filterButton.addEventListener("click", e => {
-                if (preview.classList.length > 0) {
-                    preview.classList.remove(preview.classList[0]);
+                if (postPreview.classList.length > 0) {
+                    postPreview.classList.remove(postPreview.classList[1]);
                 }
-                preview.classList.toggle(e.currentTarget.classList[1]);
+                postPreview.classList.toggle(e.currentTarget.classList[1]);
             });
         });
     };
