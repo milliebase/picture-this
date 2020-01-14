@@ -15,7 +15,7 @@ $_POST['confirm-password'])) {
     $firstName = trim(filter_var($_POST['first-name'], FILTER_SANITIZE_STRING));
     $lastName = trim(filter_var($_POST['last-name'], FILTER_SANITIZE_STRING));
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
-    $username = trim(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
+    $username = trim(strtolower(filter_var($_POST['username'], FILTER_SANITIZE_STRING)));
 
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
