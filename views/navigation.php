@@ -3,8 +3,8 @@
 
     <section class="navigation">
         <nav class="nav__header">
-            <img src="/assets/images/logo_pink.svg" alt="Picture this icon">
             <a href="index.php">
+                <img src="/assets/images/logo_pink.svg" alt="Picture this icon">
                 <h1><?php echo $config['title']; ?></h1>
             </a>
         </nav>

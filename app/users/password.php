@@ -21,10 +21,10 @@ if (isset($_POST['current-password'], $_POST['new-password'], $_POST['confirm-pa
 
     if (
         $newPassword !== $confirmPassword ||
-        strlen($newPassword) < 8
+        strlen($newPassword) < 6
     ) {
-        if (strlen($newPassword) < 8) {
-            $message = ['error' => 'The password should at least be 8 characters long.'];
+        if (strlen($newPassword) < 6) {
+            $message = ['error' => 'The password should at least be 6 characters long.'];
 
             header('Content-Type: application/json');
             echo json_encode($message);

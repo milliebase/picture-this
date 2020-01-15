@@ -15,6 +15,17 @@ if (isset($_POST['email'])) {
         exit;
     }
 
+    $statement = $pdo->prepare('SELECT email FROM users WHERE email = ?');
+    $emailExists = checkIfExists($statement, $email);
+
+    if ($emailExists) {
+        $message = ['error' => 'The email is already registered.'];
+
+        header('Content-Type: application/json');
+        echo json_encode($message);
+        exit;
+    }
+
     $statement = $pdo->prepare('UPDATE users SET email = ? WHERE id = ?');
 
     $statement->execute([$email, $_SESSION['user']['id']]);

@@ -43,7 +43,7 @@ if (isset($_SESSION['user']['id'])) {
 
             <div class=" form__group">
                 <label for="password">Password*</label>
-                <input type="password" id="register__password" name="password" placeholder="Minimum of 8 characters" required>
+                <input type="password" id="register__password" name="password" placeholder="Minimum of 6 characters" required>
             </div>
             <!--/form__group-->
 

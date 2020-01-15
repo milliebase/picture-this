@@ -83,8 +83,8 @@ function handlePasswordErrors(string $password, string $confirmPassword)
 {
     $_SESSION['errors'] = [];
 
-    if (strlen($password) < 8) {
-        $_SESSION['errors'][] = 'The password should at least be 8 characters long.';
+    if (strlen($password) < 6) {
+        $_SESSION['errors'][] = 'The password should at least be 6 characters long.';
     } else if ($password !== $confirmPassword) {
         $_SESSION['errors'][] = 'The passwords do not match.';
     } else {

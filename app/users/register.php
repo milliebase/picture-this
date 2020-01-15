@@ -33,7 +33,7 @@ $_POST['confirm-password'])) {
 
     $usernameExists = checkIfExists($statement, $username);
 
-    $usernamePatternMatches = preg_match('/^[a-z0-9_\.]{5,}$/', $username);
+    $usernamePatternMatches = preg_match('/^[a-z0-9_\.]{4,}$/', $username);
 
     $isFirstNameEmpty = empty($firstName);
     $isLastNameEmpty = empty($lastName);
@@ -58,7 +58,7 @@ $_POST['confirm-password'])) {
         $isLastNameEmpty ||
         $isEmailEmpty ||
         $password !== $confirmPassword ||
-        strlen($password) < 8
+        strlen($password) < 6
     ) {
         $_SESSION['errors'] = [];
 
@@ -78,7 +78,7 @@ $_POST['confirm-password'])) {
             $_SESSION['errors'][] = 'The username is already taken.';
             redirect('/register.php');
         } else if ($usernamePatternMatches === 0) {
-            $_SESSION['errors'][] = 'Usernames can only contain letters, numbers, underscores and periods. The username should be at least 5 characters long.';
+            $_SESSION['errors'][] = 'Usernames can only contain letters, numbers, underscores and periods. The username should be at least 4 characters long.';
             redirect('/register.php');
         } else {
             unset($_SESSION['errors']);

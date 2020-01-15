@@ -15,6 +15,12 @@
   height: 8vh;
 }
 
+.nav__header a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
 .nav__bar {
   bottom: 0;
 }
