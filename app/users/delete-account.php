@@ -10,11 +10,13 @@ if (isset($_POST['delete-account'])) {
 
     $posts = [];
 
-    //Fetch all post ids from user
     $statement = $pdo->prepare('SELECT id, image FROM posts WHERE user_id = ?');
     $statement->execute([$userId]);
 
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    //Deletes users posts
+    $statement = $pdo->prepare('DELETE FROM posts WHERE id = ?');
 
     if (!empty($posts)) {
         foreach ($posts as $post) {
@@ -30,14 +32,11 @@ if (isset($_POST['delete-account'])) {
     $statement = $pdo->prepare('DELETE FROM post_likes WHERE user_id = ?');
     $statement->execute([$userId]);
 
-    //Deletes users posts
-    $statement = $pdo->prepare('DELETE FROM posts WHERE user_id = ?');
-    $statement->execute([$userId]);
-
     //Delete all followings
     $statement = $pdo->prepare('DELETE FROM user_follows WHERE user_id = :id OR follow_id = ?');
     $statement->execute([$userId]);
 
+    //Deletes users avatar
     if ($user['avatar'] !== null) {
         unlink(__DIR__ . "/../../uploads/avatars/" . $user['avatar']);
     }
