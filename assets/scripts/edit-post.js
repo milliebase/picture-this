@@ -4,7 +4,7 @@ const posts = document.querySelectorAll(".post");
 posts.forEach(post => {
     const userSettingsButton = post.querySelector(".post__user--settings");
     const settingsOverlay = post.querySelector(".settings__overlay");
-    const editPostButton = post.querySelector(".settings__overlay button");
+    const editPostButton = post.querySelector(".settings__overlay > button");
 
     const informationHolder = post.querySelector(".post__information--holder");
     const description = post.querySelector(".post__details--description p");
@@ -30,23 +30,23 @@ posts.forEach(post => {
         informationHolder.classList.toggle("hidden");
 
         postEdit.classList.toggle("hidden");
+    });
 
-        editForm.addEventListener("submit", event => {
-            event.preventDefault();
-            const formData = new FormData(editForm);
-            fetch("app/posts/update.php", {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.json())
-                .then(post => {
-                    description.innerHTML = post.description;
-                });
+    editForm.addEventListener("submit", event => {
+        event.preventDefault();
+        const formData = new FormData(editForm);
+        fetch("app/posts/update.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json())
+            .then(post => {
+                description.innerHTML = post.description;
+            });
 
-            informationHolder.classList.toggle("hidden");
-            postEdit.classList.toggle("hidden");
-            userSettingsButton.classList.toggle("hidden");
-        });
+        informationHolder.classList.toggle("hidden");
+        postEdit.classList.toggle("hidden");
+        userSettingsButton.classList.toggle("hidden");
     });
 
     if (typeof editCancelButton != "undefined" && editCancelButton != null) {
