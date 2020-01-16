@@ -65,15 +65,10 @@ $ cd picture-this
 $ php -S localhost:8000
 ```
 
-__OR__
-
-Visit this link:
-TBA
-
 ## Authors
 Betsy Alva Soplin
 
-### Will be deployed and published
+### Published
 16th january 2020
 
 ## Tested by
