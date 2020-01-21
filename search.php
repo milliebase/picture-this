@@ -11,11 +11,14 @@ $user = authenticateUser($pdo);
             <input type="text" name="search" id="search" autocomplete="off" required>
         </div><!-- /form-group -->
 
-        <button type="submit" class="button "></button>
+        <button type="submit" class="button"></button>
+        <button type="submit" class="button">Search posts</button>
     </form>
 
     <div class="found__users">
     </div>
+
+
 
 </section>
 

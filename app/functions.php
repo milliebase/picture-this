@@ -356,3 +356,71 @@ function getFilters(PDO $pdo)
 
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
+
+/**
+ * Get comments for a certain post.
+ *
+ * @param PDO $pdo
+ * @param string $postId
+ * @return array
+ */
+function getComments(PDO $pdo, string $postId)
+{
+    $query = "SELECT comments.id, comments.comment FROM comments
+    WHERE comments.post_id = :id ORDER BY comments.id DESC";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':id', $postId, PDO::PARAM_STR);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Create comments for a certain post.
+ *
+ * @param PDO $pdo
+ * @param string $postId
+ * @return array
+ */
+function createComment(PDO $pdo, string $postId)
+{
+    $query = "SELECT comments.id, comments.comment FROM comments
+    WHERE comments.post_id = :id ORDER BY comments.id DESC";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':id', $postId, PDO::PARAM_STR);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Update comments for a certain post.
+ *
+ * @param PDO $pdo
+ * @param string $postId
+ * @return array
+ */
+function updateComment(PDO $pdo, string $postId)
+{
+    $query = "SELECT comments.id, comments.comment FROM comments
+    WHERE comments.post_id = :id ORDER BY comments.id DESC";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':id', $postId, PDO::PARAM_STR);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Delete comments for a certain post.
+ *
+ * @param PDO $pdo
+ * @param string $postId
+ * @return array
+ */
+function deleteComment(PDO $pdo, string $postId)
+{
+    $query = "SELECT comments.id, comments.comment FROM comments
+    WHERE comments.post_id = :id ORDER BY comments.id DESC";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':id', $postId, PDO::PARAM_STR);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
