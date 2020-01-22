@@ -82,7 +82,21 @@ Betsy Alva Soplin
 - [x] Safari
 
 ## Code review
-__TBA__
+
+* <a href="https://github.com/Vpuke">Viktor Puke</a>
+
+* You can use Lazy loading to your images (all)
+
+* In your functions to make it more clear what it returns in addition to your comments after declaring the function. example: function authenticateUser(PDO $pdo) ```:void```
+
+* In email.php l.11, settings.js l.175 and settings.php l.75, l.79 you spelled address wrong (don’t shoot me)
+
+* You forgot to remove a comment in register.css, l. 36.
+
+* Edit post javascript, it saves new information first time. second time it saves but it doesn’t show (not certain where in code though)
+
+* Overall you Rock! 
+
 
 ## License
 MIT
