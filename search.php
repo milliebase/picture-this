@@ -12,7 +12,7 @@ $user = authenticateUser($pdo);
         </div><!-- /form-group -->
 
         <button type="submit" class="button"></button>
-        <button type="submit" class="button">Search posts</button>
+        <!-- <button type="submit" class="button">Search posts</button> -->
     </form>
 
     <div class="found__users">

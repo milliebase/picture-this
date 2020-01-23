@@ -11,11 +11,17 @@ if (isset($_POST['search'])) {
         $search = "%$search%";
 
         $statement = $pdo->query("SELECT username, (first_name || \" \" || last_name) AS name, avatar
-FROM users WHERE username LIKE ? OR name LIKE ? LIMIT 15");
+        FROM users WHERE username LIKE ? OR name LIKE ? LIMIT 15");
 
         $statement->execute([$search, $search]);
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $query = "SELECT * FROM posts WHERE description LIKE :search";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':search', $search, PDO::PARAM_STR);
+        $statement->execute();
+        $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     } else {
         $result = "No users";
     }
@@ -26,5 +32,5 @@ FROM users WHERE username LIKE ? OR name LIKE ? LIMIT 15");
 
     header('Content-Type: application/json');
 
-    echo json_encode($result);
+    echo json_encode($posts);
 }

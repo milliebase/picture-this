@@ -15,13 +15,21 @@ if (isset($_POST['search'])) {
 
         $statement->execute([$search, $search]);
 
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-    } else {
-        $result = "No users";
-    }
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    if (empty($result)) {
-        $result = "No users";
+        $query = "SELECT * FROM posts WHERE description LIKE :search";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':search', $search, PDO::PARAM_STR);
+        $statement->execute();
+
+        $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+
+        $result[] = [
+            'users' => $users,
+            'posts' => $posts
+        ];
     }
 
     header('Content-Type: application/json');
