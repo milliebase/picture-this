@@ -366,7 +366,7 @@ function getFilters(PDO $pdo)
  */
 function getComments(PDO $pdo, string $postId)
 {
-    $query = "SELECT comments.id, comments.comment FROM comments
+    $query = "SELECT id, post_id, comment FROM comments
     WHERE comments.post_id = :id ORDER BY comments.id DESC";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':id', $postId, PDO::PARAM_STR);
@@ -381,14 +381,15 @@ function getComments(PDO $pdo, string $postId)
  * @param string $postId
  * @return array
  */
-function createComment(PDO $pdo, string $postId)
+function createComment(PDO $pdo, string $postId, string $id, string $comment)
 {
-    $query = "SELECT comments.id, comments.comment FROM comments
-    WHERE comments.post_id = :id ORDER BY comments.id DESC";
+    $query = "INSERT INTO comments ('post_id', 'user_id', 'comment') VALUES (:pid, :id, :comment)";
     $statement = $pdo->prepare($query);
-    $statement->bindParam(':id', $postId, PDO::PARAM_STR);
+    $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
+    $statement->bindParam(':id', $id, PDO::PARAM_STR);
+    $statement->bindParam(':comment', $comment, PDO::PARAM_STR);
     $statement->execute();
-    return $statement->fetchAll(PDO::FETCH_ASSOC);
+    // return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /**
@@ -400,8 +401,8 @@ function createComment(PDO $pdo, string $postId)
  */
 function updateComment(PDO $pdo, string $postId)
 {
-    $query = "SELECT comments.id, comments.comment FROM comments
-    WHERE comments.post_id = :id ORDER BY comments.id DESC";
+    $query = "SELECT id, comment FROM comments
+    WHERE post_id = :id ORDER BY id DESC";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':id', $postId, PDO::PARAM_STR);
     $statement->execute();
@@ -417,8 +418,8 @@ function updateComment(PDO $pdo, string $postId)
  */
 function deleteComment(PDO $pdo, string $postId)
 {
-    $query = "SELECT comments.id, comments.comment FROM comments
-    WHERE comments.post_id = :id ORDER BY comments.id DESC";
+    $query = "SELECT id, comment FROM comments
+    WHERE post_id = :id ORDER BY id DESC";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':id', $postId, PDO::PARAM_STR);
     $statement->execute();
