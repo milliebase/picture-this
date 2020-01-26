@@ -364,7 +364,7 @@ function getFilters(PDO $pdo)
  * @param string $postId
  * @return array
  */
-function getComments(PDO $pdo, string $postId)
+function getComments(PDO $pdo, string $postId): array
 {
     $query = "SELECT id, post_id, comment FROM comments
     WHERE comments.post_id = :id ORDER BY comments.id DESC";
@@ -375,53 +375,49 @@ function getComments(PDO $pdo, string $postId)
 }
 
 /**
- * Create comments for a certain post.
+ * Create comment for a certain post.
  *
  * @param PDO $pdo
  * @param string $postId
- * @return array
+ * @return void
  */
-function createComment(PDO $pdo, string $postId, string $id, string $comment)
+function createComment(PDO $pdo, string $postId, string $userID, string $comment): void
 {
     $query = "INSERT INTO comments ('post_id', 'user_id', 'comment') VALUES (:pid, :id, :comment)";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
-    $statement->bindParam(':id', $id, PDO::PARAM_STR);
+    $statement->bindParam(':id', $userID, PDO::PARAM_STR);
     $statement->bindParam(':comment', $comment, PDO::PARAM_STR);
     $statement->execute();
-    // return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /**
- * Update comments for a certain post.
+ * Update comment for a certain post.
  *
  * @param PDO $pdo
  * @param string $postId
- * @return array
+ * @return void
  */
-function updateComment(PDO $pdo, string $postId)
+function updateComment(PDO $pdo, string $comment, string $commentId): void
 {
-    $query = "SELECT id, comment FROM comments
-    WHERE post_id = :id ORDER BY id DESC";
+    $query = "UPDATE comments SET comment = :comment WHERE id = :cid";
     $statement = $pdo->prepare($query);
-    $statement->bindParam(':id', $postId, PDO::PARAM_STR);
+    $statement->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $statement->bindParam(':cid', $commentId, PDO::PARAM_STR);
     $statement->execute();
-    return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /**
- * Delete comments for a certain post.
+ * Delete comment for a certain post.
  *
  * @param PDO $pdo
- * @param string $postId
- * @return array
+ * @param string $commentId
+ * @return void
  */
-function deleteComment(PDO $pdo, string $postId)
+function deleteComment(PDO $pdo, string $commentId): void
 {
-    $query = "SELECT id, comment FROM comments
-    WHERE post_id = :id ORDER BY id DESC";
+    $query = "DELETE FROM comments WHERE id = :id";
     $statement = $pdo->prepare($query);
-    $statement->bindParam(':id', $postId, PDO::PARAM_STR);
+    $statement->bindParam(':id', $commentId, PDO::PARAM_STR);
     $statement->execute();
-    return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
