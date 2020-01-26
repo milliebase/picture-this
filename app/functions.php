@@ -366,7 +366,7 @@ function getFilters(PDO $pdo)
  */
 function getComments(PDO $pdo, string $postId): array
 {
-    $query = "SELECT id, post_id, comment FROM comments
+    $query = "SELECT * FROM comments
     WHERE comments.post_id = :id ORDER BY comments.id DESC";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':id', $postId, PDO::PARAM_STR);
@@ -381,12 +381,12 @@ function getComments(PDO $pdo, string $postId): array
  * @param string $postId
  * @return void
  */
-function createComment(PDO $pdo, string $postId, string $userID, string $comment): void
+function createComment(PDO $pdo, string $postId, string $userId, string $comment): void
 {
     $query = "INSERT INTO comments ('post_id', 'user_id', 'comment') VALUES (:pid, :id, :comment)";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
-    $statement->bindParam(':id', $userID, PDO::PARAM_STR);
+    $statement->bindParam(':id', $userId, PDO::PARAM_STR);
     $statement->bindParam(':comment', $comment, PDO::PARAM_STR);
     $statement->execute();
 }
@@ -398,12 +398,13 @@ function createComment(PDO $pdo, string $postId, string $userID, string $comment
  * @param string $postId
  * @return void
  */
-function updateComment(PDO $pdo, string $comment, string $commentId): void
+function updateComment(PDO $pdo, string $comment, string $commentId, string $userId): void
 {
-    $query = "UPDATE comments SET comment = :comment WHERE id = :cid";
+    $query = "UPDATE comments SET comment = :comment WHERE id = :cid AND user_id = :uid";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':comment', $comment, PDO::PARAM_STR);
     $statement->bindParam(':cid', $commentId, PDO::PARAM_STR);
+    $statement->bindParam(':uid', $userId, PDO::PARAM_STR);
     $statement->execute();
 }
 
@@ -414,10 +415,11 @@ function updateComment(PDO $pdo, string $comment, string $commentId): void
  * @param string $commentId
  * @return void
  */
-function deleteComment(PDO $pdo, string $commentId): void
+function deleteComment(PDO $pdo, string $commentId, string $userId): void
 {
-    $query = "DELETE FROM comments WHERE id = :id";
+    $query = "DELETE FROM comments WHERE id = :id AND user_id = :uid";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':id', $commentId, PDO::PARAM_STR);
+    $statement->bindParam(':uid', $userId, PDO::PARAM_STR);
     $statement->execute();
 }
