@@ -227,6 +227,57 @@
   margin: 0;
 }
 
+.comment {
+  position: relative;
+}
+
+.comment-form {
+  display: none;
+  padding: 20px 0 0 0;
+}
+
+.comment-form label {
+  font-size: 0.9em;
+  padding-top: 5%;
+  font-weight: 700;
+}
+
+.comment-form button {
+  border-radius: 10px;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 4px;
+  border-top-color: initial;
+  border-right-color: initial;
+  border-bottom-color: initial;
+  border-left-color: initial;
+  color: rgb(255, 255, 255);
+  background-color: rgb(113, 5, 21);
+  width: 100%;
+  font-weight: 600;
+  font-size: 0.7em;
+  padding: 4%;
+  margin: 5% 0 3%;
+}
+
+.comment-form.show {
+  display: block;
+}
+
+.edit {
+  position: absolute;
+  right: 25px;
+  cursor: pointer;
+}
+
+.edit img {
+  height: 23px;
+}
+
+.update-comment-textarea {
+  width: 99%;
+}
+
 /****MEDIA QUERIES FOR DESKTOP****/
 @media (min-width: 1024px) {
   .settings__overlay {

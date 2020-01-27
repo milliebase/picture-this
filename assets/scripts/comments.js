@@ -7,13 +7,16 @@ const commentButton = document.querySelector(".comment-button");
 
 const appendComments = comment => {
     const div = document.createElement("div");
-
+    // <div class="post__user--settings">
+    //     <img src="/assets/images/kebab.svg" alt="Kebab menu icon">
+    // </div>
     template = `
         <div class="comment">
             <div class="comment__name">
                 <p>${comment.comment}</p>
+                <span class="edit"><img src="/assets/images/kebab.svg" alt="Kebab menu icon"></span>
             </div>
-            <form>
+            <form class="comment-form">
                 <label for="update-comment">Update Comment</label>
                 <textarea data-number="${comment.id}" name="update-comment" class="update-comment-textarea" cols="50" rows="10" placeholder="Update comment"></textarea>
                 <button class="update-comment-button">Save</button>
@@ -21,6 +24,14 @@ const appendComments = comment => {
             </form>
         </div>
     `;
+
+    //     template2 = `
+    //     <div class="comment">
+    //         <div class="comment__name">
+    //             <p>${comment.comment}</p>
+    //         </div>
+    //     </div>
+    // `;
 
     div.innerHTML = template;
 
@@ -49,16 +60,23 @@ const getComments = async () => {
             const updateCommentTextarea = comment.querySelector(
                 ".update-comment-textarea"
             );
-            console.log(updateCommentTextarea);
 
             const updateCommentButton = comment.querySelector(
                 ".update-comment-button"
             );
-            console.log(updateCommentButton);
+
             const deleteCommentButton = comment.querySelector(
                 ".delete-comment-button"
             );
-            console.log(deleteCommentButton);
+
+            const commentForm = comment.querySelector(".comment-form");
+
+            const editButton = comment.querySelector(".edit");
+
+            editButton.addEventListener("click", event => {
+                event.preventDefault();
+                commentForm.classList.toggle("show");
+            });
 
             deleteCommentButton.addEventListener("click", event => {
                 event.preventDefault();
