@@ -227,13 +227,17 @@
   margin: 0;
 }
 
+.comments {
+  padding: 0 0 0 10px;
+}
+
 .comment {
   position: relative;
 }
 
 .comment-form {
   display: none;
-  padding: 20px 0 0 0;
+  padding: 20px;
 }
 
 .comment-form label {

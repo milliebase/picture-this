@@ -73,7 +73,7 @@
                     <div class="post__details--time">
                         <p><?php echo $post['date']; ?></p>
                     </div>
-                    <a href="/post.php/?id=<?php echo $post['id'] ?>">Comments</a>
+                    <div class="comments"><a href="/post.php/?id=<?php echo $post['id'] ?>">Comments</a></div>
                 </div>
 
                 <?php if ($post['user_id'] === $user['id']) : ?>
