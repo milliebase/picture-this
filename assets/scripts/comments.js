@@ -7,13 +7,11 @@ const commentButton = document.querySelector(".comment-button");
 
 const appendComments = comment => {
     const div = document.createElement("div");
-    // <div class="post__user--settings">
-    //     <img src="/assets/images/kebab.svg" alt="Kebab menu icon">
-    // </div>
+
     template = `
         <div class="comment">
             <div class="comment__name">
-                <p>${comment.comment}</p>
+                <span>${comment.comment}</span>
                 <span class="edit"><img src="/assets/images/kebab.svg" alt="Kebab menu icon"></span>
             </div>
             <form class="comment-form">
@@ -24,14 +22,6 @@ const appendComments = comment => {
             </form>
         </div>
     `;
-
-    //     template2 = `
-    //     <div class="comment">
-    //         <div class="comment__name">
-    //             <p>${comment.comment}</p>
-    //         </div>
-    //     </div>
-    // `;
 
     div.innerHTML = template;
 

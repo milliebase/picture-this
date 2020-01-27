@@ -367,7 +367,7 @@ function getFilters(PDO $pdo)
 function getComments(PDO $pdo, string $postId): array
 {
     $query = "SELECT * FROM comments
-    WHERE comments.post_id = :id ORDER BY comments.id DESC";
+    WHERE comments.post_id = :id";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':id', $postId, PDO::PARAM_STR);
     $statement->execute();

@@ -227,7 +227,7 @@
   margin: 0;
 }
 
-.comments {
+.comments a {
   padding: 0 0 0 10px;
 }
 
@@ -255,8 +255,8 @@
   border-right-color: initial;
   border-bottom-color: initial;
   border-left-color: initial;
-  color: rgb(255, 255, 255);
-  background-color: rgb(113, 5, 21);
+  color: #ffffff;
+  background-color: #fa90a0;
   width: 100%;
   font-weight: 600;
   font-size: 0.7em;
