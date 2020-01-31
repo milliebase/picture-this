@@ -50,6 +50,19 @@ __Extra features:__
 
 - [x] As a user I'm able to search for other users.
 
+## Picture that / Extra features by another student
+
+Our second assignment with picture this was to create a pull request with two additional features on a another students project.
+
+<a href="https://github.com/milliebase/picture-this/pull/1">See the pull request here</a>
+
+__Extra features__
+
+* As a user I should be able to add, edit, delete comments on posts.
+* When searching you also get search hits of posts with the same post description.
+
+added by <a href="https://github.com/deinnielle">Mark Dela Cruz</a>
+
 ## Installation
 1. To be able try this Instagram rip-off, clone this repository to your directory through the terminal.
 ```
