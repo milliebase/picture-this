@@ -356,3 +356,70 @@ function getFilters(PDO $pdo)
 
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
+
+/**
+ * Get comments for a certain post.
+ *
+ * @param PDO $pdo
+ * @param string $postId
+ * @return array
+ */
+function getComments(PDO $pdo, string $postId): array
+{
+    $query = "SELECT * FROM comments
+    WHERE comments.post_id = :id";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':id', $postId, PDO::PARAM_STR);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Create comment for a certain post.
+ *
+ * @param PDO $pdo
+ * @param string $postId
+ * @return void
+ */
+function createComment(PDO $pdo, string $postId, string $userId, string $comment): void
+{
+    $query = "INSERT INTO comments ('post_id', 'user_id', 'comment') VALUES (:pid, :id, :comment)";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
+    $statement->bindParam(':id', $userId, PDO::PARAM_STR);
+    $statement->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $statement->execute();
+}
+
+/**
+ * Update comment for a certain post.
+ *
+ * @param PDO $pdo
+ * @param string $postId
+ * @return void
+ */
+function updateComment(PDO $pdo, string $comment, string $commentId, string $userId): void
+{
+    $query = "UPDATE comments SET comment = :comment WHERE id = :cid AND user_id = :uid";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $statement->bindParam(':cid', $commentId, PDO::PARAM_STR);
+    $statement->bindParam(':uid', $userId, PDO::PARAM_STR);
+    $statement->execute();
+}
+
+/**
+ * Delete comment for a certain post.
+ *
+ * @param PDO $pdo
+ * @param string $commentId
+ * @return void
+ */
+function deleteComment(PDO $pdo, string $commentId, string $userId): void
+{
+    $query = "DELETE FROM comments WHERE id = :id AND user_id = :uid";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':id', $commentId, PDO::PARAM_STR);
+    $statement->bindParam(':uid', $userId, PDO::PARAM_STR);
+    $statement->execute();
+}

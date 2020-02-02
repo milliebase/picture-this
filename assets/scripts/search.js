@@ -33,6 +33,26 @@ const appendUsers = function(user, isAvatar) {
     foundUsers.appendChild(div);
 };
 
+const appendPosts = post => {
+    const div = document.createElement("div");
+
+    template = `
+        <div class="user">
+            <a>
+                <img src="uploads/${post.image}" alt="${post.description}">
+                <div class="user__name">
+                    <p>${post.description}</p>
+                    <p>${post.date}</p>
+                </div>
+            </a>
+        </div>
+    `;
+
+    div.innerHTML = template;
+
+    foundUsers.appendChild(div);
+};
+
 if (typeof searchInput != "undefined" && searchInput != null) {
     searchInput.addEventListener("keyup", e => {
         if (e.keyCode !== 13) {
@@ -41,15 +61,19 @@ if (typeof searchInput != "undefined" && searchInput != null) {
             if (e.target.value.length >= 3) {
                 const formData = new FormData(searchForm);
 
-                fetch("app/users/search.php", {
+                fetch("app/search/search.php", {
                     method: "POST",
                     body: formData
                 })
                     .then(response => response.json())
-                    .then(users => {
+                    .then(data => {
                         foundUsers.innerHTML = "";
+                        console.log(data[0].users);
+                        console.log(data[0].posts);
+                        const users = data[0].users;
+                        const posts = data[0].posts;
 
-                        if (users !== "No users") {
+                        if (users) {
                             users.forEach(user => {
                                 if (user.avatar === null) {
                                     let isAvatar = false;
@@ -58,6 +82,12 @@ if (typeof searchInput != "undefined" && searchInput != null) {
                                     let isAvatar = true;
                                     appendUsers(user, isAvatar);
                                 }
+                            });
+                        }
+
+                        if (posts) {
+                            posts.forEach(post => {
+                                appendPosts(post);
                             });
                         }
                     });
@@ -74,16 +104,24 @@ if (typeof searchButton != "undefined" && searchButton != null) {
 
         const formData = new FormData(searchForm);
 
-        fetch("app/users/search.php", {
+        fetch("app/search/search.php", {
             method: "POST",
             body: formData
         })
             .then(response => response.json())
-            .then(users => {
+            .then(data => {
+                console.log(data[0].users);
+                console.log(data[0].posts);
+
                 foundUsers.innerHTML = "";
 
-                if (users !== "No users") {
+                const users = data[0].users;
+                const posts = data[0].posts;
+
+                if (users) {
                     users.forEach(user => {
+                        console.log(user);
+
                         if (user.avatar === null) {
                             let isAvatar = false;
                             appendUsers(user, isAvatar);
@@ -92,12 +130,20 @@ if (typeof searchButton != "undefined" && searchButton != null) {
                             appendUsers(user, isAvatar);
                         }
                     });
-                } else {
+                }
+
+                if (posts) {
+                    posts.forEach(post => {
+                        appendPosts(post);
+                    });
+                }
+
+                if (users.length === 0 && posts.length === 0) {
                     const div = document.createElement("div");
 
                     template = `
                         <img src="/assets/images/users.svg" alt="Icon of users">
-                        <p>No users found</p>
+                        <p>No users or posts found</p>
                     `;
 
                     div.innerHTML = template;

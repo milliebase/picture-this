@@ -227,6 +227,61 @@
   margin: 0;
 }
 
+.comments a {
+  padding: 0 0 0 10px;
+}
+
+.comment {
+  position: relative;
+}
+
+.comment-form {
+  display: none;
+  padding: 20px;
+}
+
+.comment-form label {
+  font-size: 0.9em;
+  padding-top: 5%;
+  font-weight: 700;
+}
+
+.comment-form button {
+  border-radius: 10px;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 4px;
+  border-top-color: initial;
+  border-right-color: initial;
+  border-bottom-color: initial;
+  border-left-color: initial;
+  color: #ffffff;
+  background-color: #fa90a0;
+  width: 100%;
+  font-weight: 600;
+  font-size: 0.7em;
+  padding: 4%;
+  margin: 5% 0 3%;
+}
+
+.comment-form.show {
+  display: block;
+}
+
+.edit {
+  position: absolute;
+  right: 25px;
+  cursor: pointer;
+}
+
+.edit img {
+  height: 23px;
+}
+
+.update-comment-textarea {
+  width: 99%;
+}
+
 /****MEDIA QUERIES FOR DESKTOP****/
 @media (min-width: 1024px) {
   .settings__overlay {
